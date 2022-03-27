@@ -3,9 +3,11 @@ import React, { useRef } from 'react'
 import tw from 'twrnc';
 import { BlurView } from 'expo-blur'
 import RBSheet from 'react-native-raw-bottom-sheet'
+import { useNavigation } from '@react-navigation/native';
 
 const Auth = () => {
     const refRBSheet = useRef()
+    const navigation = useNavigation();
     return (
         <ImageBackground
             source={require('../../images/login-bg.jpg')}
@@ -42,6 +44,7 @@ const Auth = () => {
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={tw`w-full bg-pink-500 p-3 items-center rounded-lg mt-3`}
+                            onPress={() => navigation.navigate('HomeStack')}
                         >
                             <Text style={tw`text-white font-bold`}>
                                 Login
