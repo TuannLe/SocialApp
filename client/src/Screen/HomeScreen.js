@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { Text, View, SafeAreaView, TouchableOpacity, Image, Animated } from 'react-native';
 import tw from 'twrnc';
-import { AntDesign, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 import Post from '../Components/Home/Post'
 
 const Home = () => {
@@ -67,7 +67,7 @@ const Home = () => {
     return (
         <SafeAreaView style={tw`flex flex-col h-full bg-white -mt-1.5`}>
             <View style={tw`w-full h-full pt-7 px-3`}>
-                <View style={tw`flex flex-row justify-between items-center py-3`}>
+                <View style={tw`flex flex-row justify-between items-center py-1`}>
                     {/* <View style={tw`flex flex-row items-center border border-pink-500 rounded-2xl px-2 py-[1px]`}>
                         <MaterialCommunityIcons name="gender-male" style={tw`text-xl text-pink-500`} />
                         <Text style={tw`text-black text-xl`}>TuanLe</Text>
@@ -79,10 +79,10 @@ const Home = () => {
                     </View>
                     <View style={tw`flex flex-row`}>
                         <TouchableOpacity>
-                            <Feather name="plus-square" size={28} color="black" />
+                            <Ionicons name="ios-notifications-outline" size={26} color="black" />
                         </TouchableOpacity>
                         <TouchableOpacity style={tw`ml-5`}>
-                            <AntDesign name="message1" size={28} color="black" />
+                            <AntDesign name="message1" size={25} color="black" />
                         </TouchableOpacity>
                     </View>
                 </View>

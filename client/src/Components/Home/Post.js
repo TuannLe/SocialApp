@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react'
 import { View, Text, Image, Dimensions, TouchableOpacity, FlatList, Animated } from 'react-native'
 import tw from 'twrnc';
-import { AntDesign, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign, Feather, MaterialCommunityIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { TapGestureHandler } from 'react-native-gesture-handler';
 import Paginator from './Paginator';
 import ImageItem from './ImageItem'
+import { BlurView } from 'expo-blur';
 
 const Post = (props) => {
     const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -35,7 +36,7 @@ const Post = (props) => {
                     />
                     <View>
                         <Text style={tw`text-base ml-3`}>TuanLe</Text>
-                        <Text style={tw`text-base ml-3`}>TuanLe</Text>
+                        <Text style={tw`text-sm ml-3 text-gray-400`}>2 giờ trước</Text>
                     </View>
                 </View>
                 <MaterialCommunityIcons name="dots-horizontal" size={26} color="black" />
@@ -69,46 +70,39 @@ const Post = (props) => {
                     >
                     </FlatList>
                 </TapGestureHandler>
-
+                <View style={tw`absolute right-2 top-50`}>
+                    <BlurView
+                        intensity={50}
+                        tint="light"
+                        style={tw`rounded-xl px-3 py-2`}
+                    >
+                        <View style={tw`flex flex-col`}>
+                            <TouchableOpacity
+                                style={tw`flex flex-col items-center justify-center`}
+                            >
+                                <Ionicons name="ios-heart" size={22} style={tw`text-white`} />
+                                <Text style={tw`text-white`}>234</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={tw`pt-3 pb-5`}
+                            >
+                                <Ionicons name="chatbubble-ellipses" size={22} style={tw`text-white`} />
+                            </TouchableOpacity>
+                            <TouchableOpacity>
+                                <FontAwesome name="send" size={22} style={tw`text-white`} />
+                            </TouchableOpacity>
+                        </View>
+                    </BlurView>
+                </View>
             </View>
-            <View style={tw`absolute bottom-15 inset-x-2`}>
+            <View style={tw`absolute bottom-1 inset-x-2`}>
                 {(post.item.images.length > 1) ? (
                     <Paginator data={post.item.images} scrollX={scrollX} />
                 ) : (
                     <></>
                 )}
             </View>
-            <View style={tw`absolute bottom-0 inset-x-0`}>
-                <View
-                    style={tw`flex flex-row justify-between px-2 py-4 rounded-tl-full bg-white shadow-2xl opacity-75`}
-                >
-                    <View style={tw`flex flex-row ml-5`}>
-                        <TouchableOpacity
-                            style={tw`flex flex-row items-center`}
-                        >
-                            <AntDesign name="hearto" size={26} style={tw`text-black mr-2`} />
-                            <Text>234</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={tw`flex flex-row items-center mx-5`}
-                        >
-                            <Feather name="message-circle" size={26} style={tw`text-black mr-1`} />
-                            <Text>234</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={tw`flex flex-row items-center`}
-                        >
-                            <Feather name="send" size={26} style={tw`text-black mr-2`} />
-                            <Text>234</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View>
-                        <TouchableOpacity>
-                            <Feather name="bookmark" size={26} style={tw`text-black mr-2`} />
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </View>
+
         </View>
     )
 }

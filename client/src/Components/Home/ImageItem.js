@@ -11,7 +11,7 @@ const ImageItem = (props) => {
         <View>
             <Image
                 source={{ uri: image }}
-                style={[styles.image, tw`h-full rounded-2xl`]}
+                style={[styles.image, tw`h-full`]}
                 resizeMode='cover'
             />
         </View>
