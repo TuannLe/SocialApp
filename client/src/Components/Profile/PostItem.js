@@ -4,7 +4,7 @@ import tw from 'twrnc';
 
 const PostItem = ({ item }) => {
     return (
-        <View style={tw`flex-1 h-66 overflow-hidden`}>
+        <View style={tw`flex-1 h-40 `}>
             <TouchableOpacity
                 activeOpacity={.7}
             >

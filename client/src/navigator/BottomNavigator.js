@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+import { View, Text } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import tw from 'twrnc';
-import { AntDesign, Feather, Ionicons } from '@expo/vector-icons';
+import { AntDesign, Ionicons, Feather } from '@expo/vector-icons';
 import HomeScreen from '../Screen/HomeScreen'
 import SearchScreen from '../Screen/SearchScreen'
 import PostScreen from '../Screen/PostScreen'
 import ProfileScreen from '../Screen/ProfileScreen';
-import HeartScreen from '../Screen/HeartScreen'
+import MenuScreen from '../Screen/MenuScreen'
 import SvgHomeOutline from '../images/icons/home_icon_184326.svg'
 
 const Tab = createBottomTabNavigator()
@@ -42,9 +43,9 @@ export class BottomNavigator extends Component {
                         tabBarIcon: (({ focused }) =>
                             <>
                                 {focused ? (
-                                    <Ionicons name="ios-search-outline" size={24} style={tw`text-pink-500`} />
+                                    <Ionicons name="ios-search-outline" style={tw`text-2xl text-pink-500`} />
                                 ) : (
-                                    <Ionicons name="ios-search-outline" size={24} color="black" />
+                                    <Ionicons name="ios-search-outline" style={tw`text-2xl text-black`} />
                                 )}
                             </>
                         ),
@@ -58,25 +59,9 @@ export class BottomNavigator extends Component {
                         headerShown: false,
                         tabBarShowLabel: false,
                         tabBarIcon: (() =>
-                            <AntDesign name="plus" size={24} style={tw`text-white p-1 rounded-lg bg-pink-500`} />
-                        ),
-                        tabBarStyle: [tw`bg-[#F5F7FA]`],
-                    }}
-                />
-                <Tab.Screen
-                    name='Heart'
-                    component={HeartScreen}
-                    options={{
-                        headerShown: false,
-                        tabBarShowLabel: false,
-                        tabBarIcon: (({ focused }) =>
-                            <>
-                                {focused ? (
-                                    <AntDesign name="hearto" size={24} style={tw`text-pink-500`} />
-                                ) : (
-                                    <AntDesign name="hearto" size={24} color="black" />
-                                )}
-                            </>
+                            <View style={tw`p-1 rounded-lg bg-pink-500`}>
+                                <AntDesign name="plus" size={24} style={tw`text-white`} />
+                            </View>
                         ),
                         tabBarStyle: [tw`bg-[#F5F7FA]`],
                     }}
@@ -90,9 +75,27 @@ export class BottomNavigator extends Component {
                         tabBarIcon: (({ focused }) =>
                             <>
                                 {focused ? (
-                                    <Ionicons name="ios-person-outline" size={24} style={tw`text-pink-500`} />
+                                    <Ionicons name="ios-person-outline" style={tw`text-2xl text-pink-500`} />
                                 ) : (
-                                    <Ionicons name="ios-person-outline" size={24} color="black" />
+                                    <Ionicons name="ios-person-outline" style={tw`text-2xl text-black`} />
+                                )}
+                            </>
+                        ),
+                        tabBarStyle: [tw`bg-[#F5F7FA]`],
+                    }}
+                />
+                <Tab.Screen
+                    name='Menu'
+                    component={MenuScreen}
+                    options={{
+                        headerShown: false,
+                        tabBarShowLabel: false,
+                        tabBarIcon: (({ focused }) =>
+                            <>
+                                {focused ? (
+                                    <Feather name="menu" style={tw`text-2xl text-pink-500`} />
+                                ) : (
+                                    <Feather name="menu" style={tw`text-2xl text-black`} />
                                 )}
                             </>
                         ),

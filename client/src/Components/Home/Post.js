@@ -9,7 +9,7 @@ import { BlurView } from 'expo-blur';
 
 const Post = (props) => {
     const { width: SCREEN_WIDTH } = Dimensions.get('window');
-    const FRAMESIZE_W = SCREEN_WIDTH - 24;
+    const FRAMESIZE_W = SCREEN_WIDTH;
     const FRAMESIZE_H = SCREEN_WIDTH / 2 * 3;
     const { post } = props;
     const slidesRef = useRef(null);
@@ -27,26 +27,26 @@ const Post = (props) => {
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
     return (
-        <View style={[tw`bg-white mt-3 overflow-hidden border-b border-gray-200`, { width: FRAMESIZE_W, height: FRAMESIZE_H }]}>
-            <View style={tw`flex flex-row justify-between items-center`}>
+        <View style={[tw`bg-white mt-3 overflow-hidden`, { width: FRAMESIZE_W, height: FRAMESIZE_H }]}>
+            <View style={tw`flex flex-row justify-between items-center px-3`}>
                 <View style={tw`flex flex-row items-center`}>
                     <Image
-                        style={tw`w-12 h-12 rounded-full`}
+                        style={tw`w-12 h-12 rounded-full mr-2.5`}
                         source={require('../../images/avatar.jpeg')}
                     />
                     <View>
-                        <Text style={tw`text-base ml-3`}>TuanLe</Text>
-                        <Text style={tw`text-sm ml-3 text-gray-400`}>2 giờ trước</Text>
+                        <Text style={tw`text-base font-medium`}>TuanLe</Text>
+                        <Text style={tw`text-xs text-gray-400`}>2 giờ trước</Text>
                     </View>
                 </View>
-                <MaterialCommunityIcons name="dots-horizontal" size={26} color="black" />
+                <MaterialCommunityIcons name="dots-horizontal" style={tw`text-2xl text-black`} />
             </View>
-            <View style={tw`my-2`}>
+            <View style={tw`my-2 px-3`}>
                 <Text style={tw`font-normal`}>Một ngày nào đó, bạn sẽ tha thứ cho tất cả những người đã làm tổn thương mình.</Text>
             </View>
             <View style={tw`relative`}>
                 <TapGestureHandler
-                    style={tw` w-full h-full mb-5`}
+                    style={tw` w-full h-full`}
                     numberOfTaps={2}
                     onActivated={handlePressHeart}
                 >
@@ -72,16 +72,16 @@ const Post = (props) => {
                 </TapGestureHandler>
                 <View style={tw`absolute right-2 top-50`}>
                     <BlurView
-                        intensity={50}
+                        intensity={30}
                         tint="light"
-                        style={tw`rounded-xl px-3 py-2`}
+                        style={tw`rounded-lg px-3 py-2 overflow-hidden`}
                     >
                         <View style={tw`flex flex-col`}>
                             <TouchableOpacity
                                 style={tw`flex flex-col items-center justify-center`}
                             >
                                 <Ionicons name="ios-heart" size={22} style={tw`text-white`} />
-                                <Text style={tw`text-white`}>234</Text>
+                                <Text style={tw`text-white text-xs`}>234</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={tw`pt-3 pb-5`}
@@ -89,7 +89,7 @@ const Post = (props) => {
                                 <Ionicons name="chatbubble-ellipses" size={22} style={tw`text-white`} />
                             </TouchableOpacity>
                             <TouchableOpacity>
-                                <FontAwesome name="send" size={22} style={tw`text-white`} />
+                                <FontAwesome name="send" size={18} style={tw`text-white`} />
                             </TouchableOpacity>
                         </View>
                     </BlurView>

@@ -65,9 +65,9 @@ const Home = () => {
 
 
     return (
-        <SafeAreaView style={tw`flex flex-col h-full bg-white -mt-1.5`}>
-            <View style={tw`w-full h-full pt-7 px-3`}>
-                <View style={tw`flex flex-row justify-between items-center py-1`}>
+        <SafeAreaView style={tw`flex flex-col h-full bg-white`}>
+            <View style={tw`w-full h-full`}>
+                <View style={tw`flex flex-row justify-between items-center px-3`}>
                     {/* <View style={tw`flex flex-row items-center border border-pink-500 rounded-2xl px-2 py-[1px]`}>
                         <MaterialCommunityIcons name="gender-male" style={tw`text-xl text-pink-500`} />
                         <Text style={tw`text-black text-xl`}>TuanLe</Text>
@@ -77,12 +77,12 @@ const Home = () => {
                             source={require('../images/LogoApp.png')}
                         />
                     </View>
-                    <View style={tw`flex flex-row`}>
+                    <View style={tw`flex flex-row items-center`}>
                         <TouchableOpacity>
-                            <Ionicons name="ios-notifications-outline" size={26} color="black" />
+                            <Ionicons name="ios-notifications-outline" size={24} color="black" />
                         </TouchableOpacity>
                         <TouchableOpacity style={tw`ml-5`}>
-                            <AntDesign name="message1" size={25} color="black" />
+                            <AntDesign name="message1" size={22} color="black" />
                         </TouchableOpacity>
                     </View>
                 </View>

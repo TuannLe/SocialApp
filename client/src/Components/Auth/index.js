@@ -46,7 +46,7 @@ const Auth = () => {
                             style={tw`w-full bg-pink-500 p-3 items-center rounded-lg mt-3`}
                             onPress={() => navigation.navigate('HomeStack')}
                         >
-                            <Text style={tw`text-white font-bold`}>
+                            <Text style={tw`text-white font-medium`}>
                                 Login
                             </Text>
                         </TouchableOpacity>
@@ -64,7 +64,7 @@ const Auth = () => {
                                 style={tw`w-6 h-6`}
                                 source={require('../../images/google_icon.png')}
                             />
-                            <Text style={tw`flex-1 text-center font-bold`}>Continue with Google</Text>
+                            <Text style={tw`flex-1 text-center font-medium`}>Continue with Google</Text>
                         </TouchableOpacity>
                     </BlurView>
                     <View style={tw`flex flex-row items-center mt-3 ml-3`}>
@@ -73,7 +73,7 @@ const Auth = () => {
                             style={tw` px-2`}
                             onPress={() => refRBSheet.current.open()}
                         >
-                            <Text style={tw`text-pink-500 font-bold`}> Sign up</Text>
+                            <Text style={tw`text-pink-500 font-medium`}> Sign up</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -83,12 +83,12 @@ const Auth = () => {
                     closeOnDragDown={true}
                     closeOnPressMask={true}
                     closeOnPressBack={true}
-                    openDuration={250}
+                    openDuration={300}
                     customStyles={{
                         container: tw`flex rounded-t-xl px-5`
                     }}
                 >
-                    <Text style={tw`text-2xl text-pink-500 font-bold mb-5`}>Create Account</Text>
+                    <Text style={tw`text-2xl text-pink-500 font-medium mb-5`}>Create Account</Text>
                     <View style={tw`flex flex-row`}>
                         <TextInput
                             style={tw`flex-1 p-2 rounded-lg bg-[#F3F0F6] `}
@@ -120,7 +120,7 @@ const Auth = () => {
                     <TouchableOpacity
                         style={tw`w-full bg-pink-500 p-3 items-center rounded-lg mt-5`}
                     >
-                        <Text style={tw`text-white font-bold`}>
+                        <Text style={tw`text-white font-medium`}>
                             Login
                         </Text>
                     </TouchableOpacity>

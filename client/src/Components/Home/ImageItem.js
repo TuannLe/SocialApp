@@ -22,6 +22,7 @@ export default ImageItem
 
 const styles = StyleSheet.create({
     image: {
-        width: width - 24, // 24 ~ p-3
+        width: width,
+        // width - 24 ~ p-3
     },
 })
