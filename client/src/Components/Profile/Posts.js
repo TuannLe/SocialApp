@@ -43,7 +43,7 @@ const data = [
 
 const Posts = () => {
     return (
-        <View style={tw`bg-white`}>
+        <View style={tw`flex-1 bg-white`}>
             {
                 data.length
                     ? (

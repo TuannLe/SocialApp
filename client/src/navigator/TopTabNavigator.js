@@ -1,8 +1,7 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import tw from 'twrnc';
-import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import Posts from '../Components/Profile/Posts'
 import Hearts from '../Components/Profile/Hearts'
 import PostsHide from '../Components/Profile/PostsHide'

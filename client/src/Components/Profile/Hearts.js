@@ -44,7 +44,7 @@ const data = [
 
 const Images = () => {
     return (
-        <View>
+        <View style={tw`flex-1`}>
             <FlatGrid
                 data={data}
                 itemDimension={100}

@@ -44,7 +44,7 @@ const data = [
 
 const Events = () => {
     return (
-        <View style={tw`w-full h-full bg-white`}>
+        <View style={tw`flex-1 bg-white`}>
             {
                 data.length
                     ? (

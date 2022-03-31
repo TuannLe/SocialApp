@@ -75,9 +75,9 @@ export class BottomNavigator extends Component {
                         tabBarIcon: (({ focused }) =>
                             <>
                                 {focused ? (
-                                    <Ionicons name="ios-person-outline" style={tw`text-2xl text-pink-500`} />
+                                    <Feather name="user" style={tw`text-2xl text-pink-500`} />
                                 ) : (
-                                    <Ionicons name="ios-person-outline" style={tw`text-2xl text-black`} />
+                                    <Feather name="user" style={tw`text-2xl text-black`} />
                                 )}
                             </>
                         ),
