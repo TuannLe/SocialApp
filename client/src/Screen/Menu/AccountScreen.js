@@ -1,9 +1,20 @@
 import { View, TouchableOpacity, Text, SafeAreaView } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import tw from 'twrnc';
 import { FontAwesome, Ionicons, Feather } from '@expo/vector-icons';
+import Info from '../../Components/Menu/Info'
+import Password from '../../Components/Menu/Password'
 
-const AccountScreen = () => {
+const AccountScreen = ({ navigation }) => {
+    const [infoModalVisible, setInfoModalVisible] = useState(false)
+    const [passwordModalVisible, setPasswordModalVisible] = useState(false)
+    const handleInfoModalVisible = () => {
+        setInfoModalVisible(!infoModalVisible)
+    }
+    const handlePasswordModalVisible = () => {
+        setPasswordModalVisible(!passwordModalVisible)
+    }
+
     return (
         <SafeAreaView style={tw`bg-white flex flex-1`}>
             <View>
@@ -20,15 +31,17 @@ const AccountScreen = () => {
                     <View style={tw`h-full py-2`}>
                         <TouchableOpacity
                             style={tw`flex flex-row items-center`}
+                            onPress={handleInfoModalVisible}
                         >
                             <Feather name="user" style={tw` text-2xl w-10`} />
                             <Text style={tw`text-base flex-1`}>Personal information</Text>
-                            <FontAwesome name="angle-right" style={tw`text-gray-300 text-2xl`} />
                         </TouchableOpacity>
-                        <TouchableOpacity style={tw`flex flex-row items-center mt-2`}>
+                        <TouchableOpacity
+                            onPress={handlePasswordModalVisible}
+                            style={tw`flex flex-row items-center mt-2`}
+                        >
                             <Ionicons name="md-key-outline" style={tw` text-2xl w-10`} />
                             <Text style={tw`text-base flex-1`}>Password</Text>
-                            <FontAwesome name="angle-right" style={tw`text-gray-300 text-2xl`} />
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={tw`p-2.5 mt-5 bg-pink-500 rounded-lg`}
@@ -36,9 +49,17 @@ const AccountScreen = () => {
                             <Text style={tw`text-white font-medium text-center text-base`}>Logout</Text>
                         </TouchableOpacity>
                     </View>
-
                 </View>
             </View>
+
+            <Info
+                visible={infoModalVisible}
+                handleVisible={handleInfoModalVisible}
+            />
+            <Password
+                visible={passwordModalVisible}
+                handleVisible={handlePasswordModalVisible}
+            />
         </SafeAreaView>
     )
 }

@@ -1,9 +1,9 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image, FlatList, TextInput } from 'react-native'
+import { View, Text, SafeAreaView, TextInput, TouchableOpacity, FlatList } from 'react-native'
 import React from 'react'
 import tw from 'twrnc';
-import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import BlockedItem from '../../Components/Menu/BlockedItem'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import FollowingItem from './FollowingItem';
 
 const data = [
     {
@@ -26,29 +26,31 @@ const data = [
     }
 ]
 
-const BlockedAccountScreen = ({ navigation }) => {
+const Following = () => {
     return (
         <SafeAreaView style={tw`flex flex-1 bg-white`}>
-            <View style={tw`flex flex-1`}>
-                <View style={tw`relative flex flex-row  border-b border-gray-200 p-3`}>
-                    <TouchableOpacity
-                        style={tw`absolute top-0 left-0`}
-                        onPress={() => navigation.goBack()}
-                    >
-                        <Text style={tw`py-2 pl-4 pr-8`}><FontAwesome name="angle-left" style={tw`text-black text-2xl`} /></Text>
-                    </TouchableOpacity>
-                    <Text style={tw`flex-1 text-base font-bold text-center`}>Blocked accounts</Text>
-                </View>
-                <View style={tw`flex flex-row items-center m-3 bg-[#F3F0F6] rounded-lg`}>
+            <View style={tw`flex-1 p-3`}>
+                <View style={tw`flex flex-row items-center bg-[#F3F0F6] rounded-lg`}>
                     <Ionicons name="ios-search-outline" style={tw`text-xl text-gray-400 px-1.5`} />
                     <TextInput
                         style={tw`flex-1 py-2.5 `}
                         placeholder="Search..."
                     />
                 </View>
+                <View style={tw`flex flex-row items-center justify-between mt-3`}>
+                    <View style={tw`flex flex-row`}>
+                        <Text style={tw`text-base`}>Sort by</Text>
+                        <Text style={tw`text-base font-medium ml-1.5`}>Default</Text>
+                    </View>
+                    <TouchableOpacity
+                        style={tw`py-2 pl-5`}
+                    >
+                        <MaterialCommunityIcons name="arrow-up-down" size={20} color="black" />
+                    </TouchableOpacity>
+                </View>
                 <FlatList
                     data={data}
-                    renderItem={(item) => (<BlockedItem item={item} />)}
+                    renderItem={(item) => (<FollowingItem item={item} />)}
                     keyExtractor={(item) => item.id}
                 />
             </View>
@@ -56,4 +58,4 @@ const BlockedAccountScreen = ({ navigation }) => {
     )
 }
 
-export default BlockedAccountScreen
+export default Following

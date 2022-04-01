@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import tw from 'twrnc';
 import { Ionicons, Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import Privacy from '../Components/Menu/Privacy/Privacy'
 
 const HeartScreen = () => {
     const navigation = useNavigation()

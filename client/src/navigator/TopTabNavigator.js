@@ -5,9 +5,12 @@ import { Ionicons } from '@expo/vector-icons';
 import Posts from '../Components/Profile/Posts'
 import Hearts from '../Components/Profile/Hearts'
 import PostsHide from '../Components/Profile/PostsHide'
+import Followers from '../Components/Menu/Followers';
+import Following from '../Components/Menu/Following';
+import { Text } from 'react-native';
 
-const TopTabNavigator = () => {
-    const Tab = createMaterialTopTabNavigator();
+const Tab = createMaterialTopTabNavigator();
+export const TopTabNavigator = () => {
     return (
         <Tab.Navigator
             screenOptions={{
@@ -67,4 +70,34 @@ const TopTabNavigator = () => {
     )
 }
 
-export default TopTabNavigator
+export const FollowNavigator = () => {
+    return (
+        <Tab.Navigator
+            screenOptions={{
+                tabBarStyle: tw`h-12`,
+                tabBarIndicatorStyle: tw`bg-pink-500`,
+                tabBarShowLabel: true,
+                tabBarShowIcon: false,
+            }}
+        >
+            <Tab.Screen
+                name='FollowersTab'
+                component={Followers}
+                options={{
+                    tabBarLabel: (({ focused }) =>
+                        <Text style={focused ? tw`text-pink-500 font-bold` : tw`text-gray-400 font-bold`}>10 Followers</Text>
+                    ),
+                }}
+            />
+            <Tab.Screen
+                name='FollowingTab'
+                component={Following}
+                options={{
+                    tabBarLabel: (({ focused }) =>
+                        <Text style={focused ? tw`text-pink-500 font-bold` : tw`text-gray-400 font-bold`}>100 Following</Text>
+                    ),
+                }}
+            />
+        </Tab.Navigator>
+    )
+}
