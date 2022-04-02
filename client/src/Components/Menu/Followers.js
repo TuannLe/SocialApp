@@ -18,7 +18,7 @@ const Followers = () => {
                     <View style={tw`my-4 p-6 border-2 border-gray-400 rounded-full`}>
                         <SimpleLineIcons name="user-follow" style={tw`text-5xl text-gray-400`} />
                     </View>
-                    <Text style={tw`text-3xl font-bold`}>Followers</Text>
+                    <Text style={tw`text-3xl font-medium`}>Followers</Text>
                     <Text style={tw`text-base text-gray-400 mt-2`}>You'll see all the people who follow you here</Text>
                 </View>
             </View>

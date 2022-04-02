@@ -1,13 +1,17 @@
 import React, { useRef, useState } from 'react'
 import { View, Text, Image, Dimensions, TouchableOpacity, FlatList, Animated } from 'react-native'
 import tw from 'twrnc';
-import { AntDesign, Feather, MaterialCommunityIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { TapGestureHandler } from 'react-native-gesture-handler';
+import { BlurView } from 'expo-blur';
+import { LinearGradient } from 'expo-linear-gradient';
 import Paginator from './Paginator';
 import ImageItem from './ImageItem'
-import { BlurView } from 'expo-blur';
+import { useNavigation } from '@react-navigation/native';
 
 const Post = (props) => {
+    const navigation = useNavigation()
+
     const { width: SCREEN_WIDTH } = Dimensions.get('window');
     const FRAMESIZE_W = SCREEN_WIDTH;
     const FRAMESIZE_H = SCREEN_WIDTH / 2 * 3;
@@ -15,9 +19,10 @@ const Post = (props) => {
     const slidesRef = useRef(null);
     const scrollX = useRef(new Animated.Value(0)).current;
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [heart, setHeart] = useState(false);
 
     const handlePressHeart = () => {
-
+        setHeart(!heart);
     }
 
     const viewableItemsChanged = useRef(({ viewableItems }) => {
@@ -43,6 +48,11 @@ const Post = (props) => {
             </View>
             <View style={tw`my-2 px-3`}>
                 <Text style={tw`font-normal`}>Một ngày nào đó, bạn sẽ tha thứ cho tất cả những người đã làm tổn thương mình.</Text>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('DetailStack')} s
+                >
+                    <Text style={tw`text-gray-400  mt-1`}>Xem thêm</Text>
+                </TouchableOpacity>
             </View>
             <View style={tw`relative`}>
                 <TapGestureHandler
@@ -78,10 +88,11 @@ const Post = (props) => {
                     >
                         <View style={tw`flex flex-col`}>
                             <TouchableOpacity
+                                onPress={() => setHeart(!heart)}
                                 style={tw`flex flex-col items-center justify-center`}
                             >
-                                <Ionicons name="ios-heart" size={22} style={tw`text-white`} />
-                                <Text style={tw`text-white text-xs`}>234</Text>
+                                <Ionicons name="ios-heart" size={22} style={heart ? tw`text-red-500` : tw`text-white`} />
+                                <Text style={tw`text-white text-xs`}>140</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={tw`pt-3 pb-5`}
@@ -94,6 +105,10 @@ const Post = (props) => {
                         </View>
                     </BlurView>
                 </View>
+                <LinearGradient
+                    colors={['rgba(0, 0, 0, 0.0003)', 'rgba(0, 0, 0, 0.75)']}
+                    style={tw`w-full h-55 absolute bottom-0 inset-x-0`}
+                />
             </View>
             <View style={tw`absolute bottom-1 inset-x-2`}>
                 {(post.item.images.length > 1) ? (

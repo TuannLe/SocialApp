@@ -7,7 +7,7 @@ import HomeScreen from '../Screen/HomeScreen'
 import SearchScreen from '../Screen/SearchScreen'
 import PostScreen from '../Screen/PostScreen'
 import ProfileScreen from '../Screen/ProfileScreen';
-import MenuScreen from '../Screen/MenuScreen'
+import NotificationScreen from '../Screen/NotificationScreen'
 import SvgHomeOutline from '../images/icons/home_icon_184326.svg'
 
 const Tab = createBottomTabNavigator()
@@ -67,6 +67,24 @@ export class BottomNavigator extends Component {
                     }}
                 />
                 <Tab.Screen
+                    name='Notification'
+                    component={NotificationScreen}
+                    options={{
+                        headerShown: false,
+                        tabBarShowLabel: false,
+                        tabBarIcon: (({ focused }) =>
+                            <>
+                                {focused ? (
+                                    <Ionicons name="heart-outline" style={tw`text-2xl text-pink-500`} />
+                                ) : (
+                                    <Ionicons name="heart-outline" style={tw`text-2xl text-black`} />
+                                )}
+                            </>
+                        ),
+                        tabBarStyle: [tw`bg-[#F5F7FA]`],
+                    }}
+                />
+                <Tab.Screen
                     name='Profile'
                     component={ProfileScreen}
                     options={{
@@ -84,24 +102,7 @@ export class BottomNavigator extends Component {
                         tabBarStyle: [tw`bg-[#F5F7FA]`],
                     }}
                 />
-                <Tab.Screen
-                    name='Menu'
-                    component={MenuScreen}
-                    options={{
-                        headerShown: false,
-                        tabBarShowLabel: false,
-                        tabBarIcon: (({ focused }) =>
-                            <>
-                                {focused ? (
-                                    <Feather name="menu" style={tw`text-2xl text-pink-500`} />
-                                ) : (
-                                    <Feather name="menu" style={tw`text-2xl text-black`} />
-                                )}
-                            </>
-                        ),
-                        tabBarStyle: [tw`bg-[#F5F7FA]`],
-                    }}
-                />
+
             </Tab.Navigator>
         )
     }

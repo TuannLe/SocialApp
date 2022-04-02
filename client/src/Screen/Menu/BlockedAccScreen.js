@@ -37,7 +37,7 @@ const BlockedAccountScreen = ({ navigation }) => {
                     >
                         <Text style={tw`py-2 pl-4 pr-8`}><FontAwesome name="angle-left" style={tw`text-black text-2xl`} /></Text>
                     </TouchableOpacity>
-                    <Text style={tw`flex-1 text-base font-bold text-center`}>Blocked accounts</Text>
+                    <Text style={tw`flex-1 text-lg font-bold text-center`}>Blocked accounts</Text>
                 </View>
                 <View style={tw`flex flex-row items-center m-3 bg-[#F3F0F6] rounded-lg`}>
                     <Ionicons name="ios-search-outline" style={tw`text-xl text-gray-400 px-1.5`} />

@@ -85,7 +85,7 @@ export const FollowNavigator = () => {
                 component={Followers}
                 options={{
                     tabBarLabel: (({ focused }) =>
-                        <Text style={focused ? tw`text-pink-500 font-bold` : tw`text-gray-400 font-bold`}>10 Followers</Text>
+                        <Text style={focused ? tw`text-pink-500 font-bold` : tw`text-gray-400 font-bold`}>0 Followers</Text>
                     ),
                 }}
             />

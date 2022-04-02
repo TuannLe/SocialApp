@@ -17,7 +17,7 @@ const PrivacyScreen = () => {
                     >
                         <Text style={tw`py-2 pl-4 pr-8`}><FontAwesome name="angle-left" style={tw`text-black text-2xl`} /></Text>
                     </TouchableOpacity>
-                    <Text style={tw`flex-1 text-base font-bold text-center`}>Privacy</Text>
+                    <Text style={tw`flex-1 text-lg font-bold text-center`}>Privacy</Text>
                 </View>
                 <View style={tw`px-3`}>
                     <View style={tw`py-3 border-b border-gray-200`}>

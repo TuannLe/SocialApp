@@ -25,7 +25,7 @@ const AccountScreen = ({ navigation }) => {
                     >
                         <Text style={tw`py-2 pl-4 pr-8`}><FontAwesome name="angle-left" style={tw`text-black text-2xl`} /></Text>
                     </TouchableOpacity>
-                    <Text style={tw`flex-1 text-base font-bold text-center`}>Account</Text>
+                    <Text style={tw`flex-1 text-lg font-bold text-center`}>Account</Text>
                 </View>
                 <View style={tw`px-3`}>
                     <View style={tw`h-full py-2`}>

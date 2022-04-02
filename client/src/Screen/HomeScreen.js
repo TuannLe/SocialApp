@@ -77,14 +77,9 @@ const Home = () => {
                             source={require('../images/LogoApp.png')}
                         />
                     </View>
-                    <View style={tw`flex flex-row items-center`}>
-                        <TouchableOpacity>
-                            <Ionicons name="ios-notifications-outline" size={24} color="black" />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={tw`ml-5`}>
-                            <AntDesign name="message1" size={22} color="black" />
-                        </TouchableOpacity>
-                    </View>
+                    <TouchableOpacity style={tw`ml-5`}>
+                        <AntDesign name="message1" size={22} color="black" />
+                    </TouchableOpacity>
                 </View>
                 <Animated.FlatList
                     data={data}
