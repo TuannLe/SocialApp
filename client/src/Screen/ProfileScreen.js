@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { StyleSheet, View, Text, SafeAreaView, PixelRatio, Image, Dimensions, TouchableOpacity } from 'react-native';
 import tw from 'twrnc';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -6,6 +6,7 @@ import { MaterialIcons, Feather, Ionicons, MaterialCommunityIcons } from '@expo/
 import RBSheet from 'react-native-raw-bottom-sheet'
 import { useNavigation } from '@react-navigation/native';
 import { TopTabNavigator } from '../navigator/TopTabNavigator'
+import EditProfile from '../Components/Profile/EditProfile'
 
 const { width } = Dimensions.get('window')
 
@@ -13,6 +14,10 @@ const ProfileScreen = () => {
     PixelRatio.getPixelSizeForLayoutSize(width);
     const refRBSheet = useRef()
     const navigation = useNavigation()
+    const [visible, setVisible] = useState(false)
+    const handleVisibleEdit = () => {
+        setVisible(!visible)
+    }
 
     return (
         <SafeAreaView style={tw`w-full h-full bg-white`}>
@@ -47,6 +52,7 @@ const ProfileScreen = () => {
                             <Text style={tw`text-sm text-gray-400`}>tuanle@gmail.com</Text>
                         </View>
                         <TouchableOpacity
+                            onPress={handleVisibleEdit}
                             style={tw`p-1 ml-5 border-2 border-pink-500 rounded-lg`}
                         >
                             <MaterialIcons name="mode-edit" size={20} style={tw`text-pink-500`} />
@@ -125,6 +131,13 @@ const ProfileScreen = () => {
                     </TouchableOpacity>
                 </View>
             </RBSheet>
+
+            <EditProfile
+                visible={visible}
+                handleVisible={handleVisibleEdit}
+            />
+
+
         </SafeAreaView>
     )
 }

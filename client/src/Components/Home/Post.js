@@ -4,12 +4,37 @@ import tw from 'twrnc';
 import { MaterialCommunityIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
 import { TapGestureHandler } from 'react-native-gesture-handler';
 import { BlurView } from 'expo-blur';
+import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
+import RBSheet from 'react-native-raw-bottom-sheet'
 import Paginator from './Paginator';
 import ImageItem from './ImageItem'
-import { useNavigation } from '@react-navigation/native';
+import CommentItem from './CommentItem';
+
+const data = [
+    {
+        id: '1',
+        image: 'https://indotech.vn/hinh-anh-cua-rose-black-pink/imager_2_12521_700.jpg',
+        name: 'Rose',
+        comment: 'hello hihih halo good morning hihi hyh hihd oshoi ohdoh hodho'
+    },
+    {
+        id: '2',
+        image: 'https://nguoinoitieng.tv/images/nnt/96/0/bbnh.jpg',
+        name: 'Cara',
+        comment: 'hello hihih halo good morning hihi hyh hihd oshoi ohdoh hodho'
+    },
+    {
+        id: '3',
+        image: 'https://1.bp.blogspot.com/-xoe-yLLhMsA/X3XmnozvxCI/AAAAAAAAPWE/Px6lNykKtiswyxWfgH_qgmqojUN__F4DwCLcBGAsYHQ/s1600/5a129327b91c191dcd7e2eed9c6b7d1d.jpg',
+        name: 'IU',
+        comment: 'hello hihih halo good morning hihi hyh hihd oshoi ohdoh hodho'
+    }
+]
+
 
 const Post = (props) => {
+    const refRBSheet = useRef()
     const navigation = useNavigation()
 
     const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -95,6 +120,7 @@ const Post = (props) => {
                                 <Text style={tw`text-white text-xs`}>140</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
+                                onPress={() => refRBSheet.current.open()}
                                 style={tw`pt-3 pb-5`}
                             >
                                 <Ionicons name="chatbubble-ellipses" size={22} style={tw`text-white`} />
@@ -117,6 +143,27 @@ const Post = (props) => {
                     <></>
                 )}
             </View>
+
+            <RBSheet
+                ref={refRBSheet}
+                height={420}
+                closeOnDragDown={true}
+                closeOnPressMask={true}
+                closeOnPressBack={true}
+                openDuration={300}
+                customStyles={{
+                    container: tw`flex rounded-t-xl px-5`
+                }}
+            >
+                <View style={tw`flex flex-1`}>
+                    <Text style={tw`text-center font-medium text-pink-500`}>200 comments</Text>
+                    <FlatList
+                        data={data}
+                        renderItem={(item) => (<CommentItem item={item} />)}
+                        keyExtractor={(item) => item.id}
+                    />
+                </View>
+            </RBSheet>
 
         </View>
     )

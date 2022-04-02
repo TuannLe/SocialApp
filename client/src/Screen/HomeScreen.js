@@ -68,10 +68,6 @@ const Home = () => {
         <SafeAreaView style={tw`flex flex-col h-full bg-white`}>
             <View style={tw`w-full h-full`}>
                 <View style={tw`flex flex-row justify-between items-center px-3`}>
-                    {/* <View style={tw`flex flex-row items-center border border-pink-500 rounded-2xl px-2 py-[1px]`}>
-                        <MaterialCommunityIcons name="gender-male" style={tw`text-xl text-pink-500`} />
-                        <Text style={tw`text-black text-xl`}>TuanLe</Text>
-                    </View> */}
                     <View>
                         <Image
                             source={require('../images/LogoApp.png')}
@@ -98,7 +94,6 @@ const Home = () => {
                     onScrollEndDrag={onScrollEndDrag}
                     scrollEventThrottle={1}
                 />
-
             </View>
         </SafeAreaView>
     )

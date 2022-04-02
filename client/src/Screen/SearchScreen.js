@@ -26,6 +26,7 @@ const data = [
 ]
 
 const SearchScreen = () => {
+
     return (
         <SafeAreaView style={tw`flex flex-1 bg-white`}>
             <View style={tw`flex flex-row items-center mx-3 mt-1.5 mb-3 bg-[#F3F0F6] rounded-lg`}>
