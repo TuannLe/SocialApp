@@ -6,6 +6,8 @@ const EditProfile = ({ visible, handleVisible }) => {
     return (
         <Modal
             visible={visible}
+            animationType="slide"
+            transparent={false}
         >
             <SafeAreaView>
                 <View>

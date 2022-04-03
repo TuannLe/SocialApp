@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { Text, View, SafeAreaView, TouchableOpacity, Image, Animated } from 'react-native';
 import tw from 'twrnc';
-import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import Post from '../Components/Home/Post'
 
 const Home = () => {
