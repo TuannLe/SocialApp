@@ -5,7 +5,7 @@ import tw from 'twrnc';
 import { AntDesign, Ionicons, Feather } from '@expo/vector-icons';
 import HomeScreen from '../Screen/HomeScreen'
 import SearchScreen from '../Screen/SearchScreen'
-import PostScreen from '../Screen/PostScreen'
+import SelectImageScreen from '../Screen/SelectImageScreen'
 import ProfileScreen from '../Screen/ProfileScreen';
 import NotificationScreen from '../Screen/NotificationScreen'
 import SvgHomeOutline from '../images/icons/home_icon_184326.svg'
@@ -54,7 +54,7 @@ export class BottomNavigator extends Component {
                 />
                 <Tab.Screen
                     name='Post'
-                    component={PostScreen}
+                    component={SelectImageScreen}
                     options={{
                         headerShown: false,
                         tabBarShowLabel: false,

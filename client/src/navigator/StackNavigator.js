@@ -7,8 +7,9 @@ import BlockedAccountScreen from '../Screen/Menu/BlockedAccScreen'
 import FollowScreen from '../Screen/Menu/FollowScreen'
 import AccountScreen from '../Screen/Menu/AccountScreen'
 import InformationScreen from '../Screen/Menu/InformationScreen'
-import DetailScreen from '../Screen/DetailScreen'
+import ChatBoxScreen from '../Screen/ChatBoxScreen'
 import ProfileGuestScreen from '../Screen/ProfileGuestScreen'
+import UploadImageScreen from '../Screen/UploadImageScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -26,8 +27,9 @@ const StackNavigator = () => {
             <Stack.Screen name="FollowStack" component={FollowScreen} />
             <Stack.Screen name="AccountStack" component={AccountScreen} />
             <Stack.Screen name="InformationStack" component={InformationScreen} />
-            <Stack.Screen name="DetailStack" component={DetailScreen} />
             <Stack.Screen name="ProfileGuestStack" component={ProfileGuestScreen} />
+            <Stack.Screen name="ChatBoxStack" component={ChatBoxScreen} />
+            <Stack.Screen name="UploadImageStack" component={UploadImageScreen} />
         </Stack.Navigator>
     )
 }

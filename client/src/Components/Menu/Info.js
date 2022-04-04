@@ -16,7 +16,7 @@ const Info = ({ visible, handleVisible }) => {
             transparent={false}
         >
             <SafeAreaView>
-                <View>
+                <View style={tw`bg-white`}>
                     <View style={tw`relative flex flex-row  border-b border-gray-200 p-2`}>
                         <TouchableOpacity
                             style={tw`absolute top-0 left-0`}
@@ -38,11 +38,17 @@ const Info = ({ visible, handleVisible }) => {
                         </Text>
                         <View style={tw`flex flex-row items-center mt-5`}>
                             <Text style={tw`w-20 font-medium text-base`}>Email</Text>
-                            <TextInput placeholder='Email...' style={tw`flex-1 text-base py-3 leading-5 border-b border-gray-200`} />
+                            <TextInput
+                                placeholder='Email...'
+                                placeholderTextColor='#ccc'
+                                style={tw`flex-1 text-base py-3 leading-5 border-b border-gray-200`} />
                         </View>
                         <View style={tw`flex flex-row items-center`}>
                             <Text style={tw`w-20 font-medium text-base`}>Phone</Text>
-                            <TextInput placeholder='Phone...' style={tw`flex-1 text-base py-3 leading-5 border-b border-gray-200`} />
+                            <TextInput
+                                placeholder='Phone...'
+                                placeholderTextColor='#ccc'
+                                style={tw`flex-1 text-base py-3 leading-5 border-b border-gray-200`} />
                         </View>
                         <View style={tw`flex flex-row items-center`}>
                             <Text style={tw`w-20 font-medium text-base`}>Gender</Text>
@@ -55,7 +61,10 @@ const Info = ({ visible, handleVisible }) => {
                         </View>
                         <View style={tw`flex flex-row items-center`}>
                             <Text style={tw`w-20 font-medium text-base`}>Birthday</Text>
-                            <TextInput placeholder='Birthday...' style={tw`flex-1 text-base py-3 leading-5 border-b border-gray-200`} />
+                            <TextInput
+                                placeholder='Birthday...'
+                                placeholderTextColor='#ccc'
+                                style={tw`flex-1 text-base py-3 leading-5 border-b border-gray-200`} />
                         </View>
                     </View>
                 </View>

@@ -26,7 +26,7 @@ const Auth = () => {
                 </View>
                 <View style={tw`w-full h-full px-8`}>
                     <BlurView
-                        intensity={80}
+                        intensity={30}
                         style={tw`w-full rounded-lg overflow-hidden p-3`}
                     >
                         <TextInput
@@ -56,7 +56,7 @@ const Auth = () => {
                         or
                     </Text>
                     <BlurView
-                        intensity={80}
+                        intensity={30}
                         style={tw`w-full rounded-lg overflow-hidden px-3 py-3 mt-1`}
                     >
                         <TouchableOpacity style={tw`flex flex-row items-center w-full px-5`}>

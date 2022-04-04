@@ -45,6 +45,7 @@ const Post = (props) => {
     const scrollX = useRef(new Animated.Value(0)).current;
     const [currentIndex, setCurrentIndex] = useState(0);
     const [heart, setHeart] = useState(false);
+    const [showMore, setShowMore] = useState(false)
 
     const handlePressHeart = () => {
         setHeart(!heart);
@@ -72,11 +73,15 @@ const Post = (props) => {
                 <MaterialCommunityIcons name="dots-horizontal" style={tw`text-2xl text-black`} />
             </View>
             <View style={tw`my-2 px-3`}>
-                <Text style={tw`font-normal`}>Một ngày nào đó, bạn sẽ tha thứ cho tất cả những người đã làm tổn thương mình.</Text>
+                <Text style={tw`font-normal `} numberOfLines={showMore ? 99 : 2} >
+                    Một ngày nào đó, bạn sẽ tha thứ cho tất cả những người
+                    đã làm tổn thương mình. Một ngày nào đó, bạn sẽ tha thứ cho tất cả những người đã làm
+                    tổn thương mình. Một ngày nào đó, bạn sẽ tha thứ cho tất cả những người đã làm tổn thương mình.
+                </Text>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('DetailStack')} s
+                    onPress={() => setShowMore(!showMore)}
                 >
-                    <Text style={tw`text-gray-400  mt-1`}>Xem thêm</Text>
+                    <Text style={tw`text-gray-400  mt-1`}>{showMore ? 'Read More' : 'Less'}</Text>
                 </TouchableOpacity>
             </View>
             <View style={tw`relative`}>
@@ -150,7 +155,7 @@ const Post = (props) => {
                 closeOnDragDown={true}
                 closeOnPressMask={true}
                 closeOnPressBack={true}
-                openDuration={300}
+                openDuration={350}
                 customStyles={{
                     container: tw`flex rounded-t-xl px-5`
                 }}

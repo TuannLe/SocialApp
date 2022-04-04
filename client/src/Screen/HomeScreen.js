@@ -2,12 +2,14 @@ import React, { useRef } from 'react'
 import { Text, View, SafeAreaView, TouchableOpacity, Image, Animated } from 'react-native';
 import tw from 'twrnc';
 import { AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import Post from '../Components/Home/Post'
 
 const Home = () => {
     const CONTAINER_HEIGHT = 45;
     const scrollY = useRef(new Animated.Value(0)).current;
     const offsetAnim = useRef(new Animated.Value(0)).current;
+    const navigation = useNavigation();
 
     const clampedScroll = Animated.diffClamp(
         Animated.add(
@@ -44,7 +46,6 @@ const Home = () => {
         }
     ]
 
-
     var scrollEndTimer = null;
     const onMomentumScrollBegin = () => {
         clearTimeout(scrollEndTimer);
@@ -67,13 +68,16 @@ const Home = () => {
     return (
         <SafeAreaView style={tw`flex flex-col h-full bg-white`}>
             <View style={tw`w-full h-full`}>
-                <View style={tw`flex flex-row justify-between items-center px-3`}>
+                <View style={tw`flex flex-row justify-between items-center p-3`}>
                     <View>
                         <Image
-                            source={require('../images/LogoApp.png')}
+                            source={require('../images/logo.png')}
                         />
                     </View>
-                    <TouchableOpacity style={tw`ml-5`}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('ChatBoxStack')}
+                        style={tw`ml-5`}
+                    >
                         <AntDesign name="message1" size={22} color="black" />
                     </TouchableOpacity>
                 </View>

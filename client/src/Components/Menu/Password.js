@@ -33,14 +33,17 @@ const Password = ({ visible, handleVisible }) => {
                         <View style={tw`flex`}>
                             <TextInput
                                 placeholder='Current password'
+                                placeholderTextColor='#ccc'
                                 style={tw`text-base py-3 border-b border-gray-200`}
                             />
                             <TextInput
                                 placeholder='New password'
+                                placeholderTextColor='#ccc'
                                 style={tw`text-base py-3 border-b border-gray-200`}
                             />
                             <TextInput
                                 placeholder='New password, again'
+                                placeholderTextColor='#ccc'
                                 style={tw`text-base py-3 border-b border-gray-200`}
                             />
                         </View>
