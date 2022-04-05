@@ -35,7 +35,7 @@ const SelectImageScreen = () => {
     return (
         <SafeAreaView style={tw`flex flex-1 bg-white`}>
             <View style={tw`p-2 border-b border-gray-200`}>
-                <Text style={tw`font-medium text-lg text-center`}>New post</Text>
+                <Text style={tw`font-medium text-lg text-center`}>Select Image</Text>
             </View>
             {image
                 ? (

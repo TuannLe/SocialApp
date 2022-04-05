@@ -14,17 +14,17 @@ const data = [
     {
         postId: '1',
         image:
-            'https://i.vietgiaitri.com/2021/2/9/cara-phuong-toi-va-noway-dang-tim-hieu-nhau-thay-cung-hoa-hop-975-5573060.jpg',
+            'https://cf.shopee.vn/file/b658a8ca3f0f77bcac1c67eab07baa3e',
         title: ''
     },
     {
         postId: '2',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Kim_Ji-soo_at_Incheon_Airport%2C_heading_to_Amsterdam_on_May_16th%2C_2019_21.png/1200px-Kim_Ji-soo_at_Incheon_Airport%2C_heading_to_Amsterdam_on_May_16th%2C_2019_21.png',
+        image: 'https://static1.bestie.vn/Mlog/ImageContent/202110/my-nhan-hoa-ngu-so-huu-ma-banh-bao-ai-du-xinh-dep-vuot-trieu-lo-tu-88d143.jpg',
         title: ''
     },
     {
         postId: '3',
-        image: 'https://2sao.vietnamnetjsc.vn/images/2022/02/20/21/00/IU-2.jpg',
+        image: 'https://photo-cms-tpo.zadn.vn/w890/uploads/2017/08/598f116c25449-view08-600x450.png',
         title: ''
     }
     ,

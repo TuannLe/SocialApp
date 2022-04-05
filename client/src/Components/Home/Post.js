@@ -81,7 +81,7 @@ const Post = (props) => {
                 <TouchableOpacity
                     onPress={() => setShowMore(!showMore)}
                 >
-                    <Text style={tw`text-gray-400  mt-1`}>{showMore ? 'Read More' : 'Less'}</Text>
+                    <Text style={tw`text-gray-400  mt-1`}>{showMore ? 'Hide' : 'See more'}</Text>
                 </TouchableOpacity>
             </View>
             <View style={tw`relative`}>
