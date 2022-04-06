@@ -1,12 +1,13 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { StyleSheet, View, Text, SafeAreaView, PixelRatio, Image, Dimensions, TouchableOpacity, FlatList } from 'react-native';
 import tw from 'twrnc';
 import { LinearGradient } from 'expo-linear-gradient';
-import { MaterialIcons, Feather, Ionicons, MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
+import { Feather, FontAwesome } from '@expo/vector-icons';
 import RBSheet from 'react-native-raw-bottom-sheet'
 import { useNavigation } from '@react-navigation/native';
 import { FlatGrid } from 'react-native-super-grid';
 import PostItem from '../Components/Profile/PostItem'
+import GuestProfileModal from '../Components/Modal/GuestProfileModal';
 
 const { width } = Dimensions.get('window')
 
@@ -86,6 +87,11 @@ const ProfileGuestScreen = () => {
     const refRBSheet = useRef()
     const navigation = useNavigation()
 
+    const [isVisibleMenuModal, setVisibleMenuModal] = useState(false)
+    const handleVisibleMenuModal = () => {
+        setVisibleMenuModal(!isVisibleMenuModal)
+    }
+
     return (
         <SafeAreaView style={tw`w-full h-full bg-white`}>
             <View style={tw`flex w-full h-full`}>
@@ -97,7 +103,7 @@ const ProfileGuestScreen = () => {
                     />
                     <TouchableOpacity
                         style={tw`absolute top-0 right-0 z-1 p-3`}
-                        onPress={() => refRBSheet.current.open()}
+                        onPress={handleVisibleMenuModal}
                     >
                         <Feather name="menu" style={tw`text-[28px] text-white`} />
                     </TouchableOpacity>
@@ -181,41 +187,10 @@ const ProfileGuestScreen = () => {
                     </View>
                 </View>
             </View>
-            <RBSheet
-                ref={refRBSheet}
-                height={220}
-                closeOnDragDown={true}
-                closeOnPressMask={true}
-                closeOnPressBack={true}
-                openDuration={300}
-                customStyles={{
-                    container: tw`flex rounded-t-xl px-3`
-                }}
-            >
-                <View style={tw`flex`}>
-                    <TouchableOpacity
-                        style={tw`w-full p-3 border-b border-gray-200`}
-                    >
-                        <Text style={tw`text-base text-center text-red-500`}>Block</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={tw`w-full p-3 border-b border-gray-200`}
-                    >
-                        <Text style={tw`text-base text-center text-red-500`}>Report</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={tw`w-full p-3 border-b border-gray-200`}
-                    >
-                        <Text style={tw`text-base text-center`}>Share this profile</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={tw`w-full p-3 border-b border-gray-200`}
-                        onPress={() => refRBSheet.current.close()}
-                    >
-                        <Text style={tw`text-base text-center`}>Cancel</Text>
-                    </TouchableOpacity>
-                </View>
-            </RBSheet>
+            <GuestProfileModal
+                handleVisible={handleVisibleMenuModal}
+                isVisible={isVisibleMenuModal}
+            />
         </SafeAreaView>
     )
 }

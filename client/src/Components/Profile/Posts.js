@@ -1,8 +1,9 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { FlatGrid } from 'react-native-super-grid';
 import PostItem from './PostItem'
 import tw from 'twrnc';
+import DeletePost from './DeletePost';
 
 const data = [
     {
@@ -42,6 +43,12 @@ const data = [
 ]
 
 const Posts = () => {
+    const [isVisibleDeleteModal, setVisibleDeleteModal] = useState(false)
+    const [isIdPostSelected, setIdPostSelected] = useState(null)
+    const handleVisibleDeleteModal = () => {
+        setVisibleDeleteModal(!isVisibleDeleteModal)
+    }
+
     return (
         <View style={tw`flex-1 bg-white`}>
             {
@@ -50,7 +57,13 @@ const Posts = () => {
                         <FlatGrid
                             data={data}
                             itemDimension={100}
-                            renderItem={(item) => <PostItem item={item} />}
+                            renderItem={(item) =>
+                                <PostItem
+                                    item={item}
+                                    handleVisible={handleVisibleDeleteModal}
+                                    setIdPostSelected={setIdPostSelected}
+                                />
+                            }
                             style={tw`pt-2 bg-white`}
                             keyExtractor={item => item.postId}
                             spacing={5}
@@ -65,6 +78,11 @@ const Posts = () => {
                         </View>
                     )
             }
+            <DeletePost
+                handleVisible={handleVisibleDeleteModal}
+                isVisible={isVisibleDeleteModal}
+                isIdPostSelected={isIdPostSelected}
+            />
         </View>
     )
 }
