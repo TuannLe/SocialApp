@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { View, Text, Image, Dimensions, TouchableOpacity, FlatList, Animated } from 'react-native'
 import tw from 'twrnc';
 import { MaterialCommunityIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
@@ -7,6 +7,9 @@ import { BlurView } from 'expo-blur';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import RBSheet from 'react-native-raw-bottom-sheet'
+import { useDispatch, useSelector } from 'react-redux'
+import * as actions from '../../redux/actions'
+import { postsState$ } from '../../redux/selectors'
 import Paginator from './Paginator';
 import ImageItem from './ImageItem'
 import CommentItem from './CommentItem';
@@ -36,6 +39,12 @@ const data = [
 const Post = (props) => {
     const refRBSheet = useRef()
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+    const data = useSelector(postsState$)
+
+    useEffect(() => {
+        dispatch(actions.getPosts.getPostsRequest())
+    }, [dispatch])
 
     const { width: SCREEN_WIDTH } = Dimensions.get('window');
     const FRAMESIZE_W = SCREEN_WIDTH;
