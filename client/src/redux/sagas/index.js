@@ -4,7 +4,6 @@ import * as api from '../../api'
 
 function* fetchPostSaga(actions) {
     const posts = yield call(api.fetchPosts)
-    console.log(posts)
     yield put(actions.getPosts.getPostsSuccess(posts.data))
 }
 
