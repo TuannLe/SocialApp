@@ -1,15 +1,25 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { Text, View, SafeAreaView, TouchableOpacity, Image, Animated } from 'react-native';
 import tw from 'twrnc';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux'
 import Post from '../Components/Home/Post'
+import * as actions from '../redux/actions'
+import { postsState$ } from '../redux/selectors'
 
 const Home = () => {
     const CONTAINER_HEIGHT = 45;
     const scrollY = useRef(new Animated.Value(0)).current;
     const offsetAnim = useRef(new Animated.Value(0)).current;
     const navigation = useNavigation();
+
+    const dispatch = useDispatch()
+    const data = useSelector(postsState$)
+    useEffect(() => {
+        dispatch(actions.getPosts.getPostsRequest())
+    }, [dispatch])
+    console.log(data)
 
     const clampedScroll = Animated.diffClamp(
         Animated.add(
@@ -26,25 +36,6 @@ const Home = () => {
     var _clampedScrollValue = 0;
     var _offsetValue = 0;
     var _scrollValue = 0;
-    const data = [
-        {
-            postId: '1',
-            images: [
-                'https://i.vietgiaitri.com/2021/2/9/cara-phuong-toi-va-noway-dang-tim-hieu-nhau-thay-cung-hoa-hop-975-5573060.jpg',
-                'https://afamilycdn.com/150157425591193600/2020/6/6/9680767027561324246145992919306575514435584o-15911578563721446424958-1591435339084164864584.jpg',
-                'https://2sao.vietnamnetjsc.vn/images/2020/12/05/13/48/cara-phuong-1.jpg',
-
-            ],
-            title: ''
-        },
-        {
-            postId: '2',
-            images: [
-                'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Kim_Ji-soo_at_Incheon_Airport%2C_heading_to_Amsterdam_on_May_16th%2C_2019_21.png/1200px-Kim_Ji-soo_at_Incheon_Airport%2C_heading_to_Amsterdam_on_May_16th%2C_2019_21.png'
-            ],
-            title: ''
-        }
-    ]
 
     var scrollEndTimer = null;
     const onMomentumScrollBegin = () => {
@@ -86,7 +77,7 @@ const Home = () => {
                     renderItem={(post) => {
                         return <Post post={post} />
                     }}
-                    keyExtractor={post => post.postId}
+                    keyExtractor={post => post._id}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
                     onScroll={Animated.event(

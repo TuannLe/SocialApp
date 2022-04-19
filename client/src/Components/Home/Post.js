@@ -7,9 +7,6 @@ import { BlurView } from 'expo-blur';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import RBSheet from 'react-native-raw-bottom-sheet'
-import { useDispatch, useSelector } from 'react-redux'
-import * as actions from '../../redux/actions'
-import { postsState$ } from '../../redux/selectors'
 import Paginator from './Paginator';
 import ImageItem from './ImageItem'
 import CommentItem from './CommentItem';
@@ -39,12 +36,6 @@ const data = [
 const Post = (props) => {
     const refRBSheet = useRef()
     const navigation = useNavigation()
-    const dispatch = useDispatch()
-    const data = useSelector(postsState$)
-
-    useEffect(() => {
-        dispatch(actions.getPosts.getPostsRequest())
-    }, [dispatch])
 
     const { width: SCREEN_WIDTH } = Dimensions.get('window');
     const FRAMESIZE_W = SCREEN_WIDTH;
@@ -75,7 +66,7 @@ const Post = (props) => {
                         source={require('../../images/avatar.jpeg')}
                     />
                     <View>
-                        <Text style={tw`text-base font-medium`}>TuanLe</Text>
+                        <Text style={tw`text-base font-medium`}>{post.item.author}</Text>
                         <Text style={tw`text-xs text-gray-400`}>2 giờ trước</Text>
                     </View>
                 </View>
@@ -83,9 +74,7 @@ const Post = (props) => {
             </View>
             <View style={tw`my-2 px-3`}>
                 <Text style={tw`font-normal `} numberOfLines={showMore ? 99 : 2} >
-                    Một ngày nào đó, bạn sẽ tha thứ cho tất cả những người
-                    đã làm tổn thương mình. Một ngày nào đó, bạn sẽ tha thứ cho tất cả những người đã làm
-                    tổn thương mình. Một ngày nào đó, bạn sẽ tha thứ cho tất cả những người đã làm tổn thương mình.
+                    {post.item.content}
                 </Text>
                 <TouchableOpacity
                     onPress={() => setShowMore(!showMore)}
@@ -100,7 +89,7 @@ const Post = (props) => {
                     onActivated={handlePressHeart}
                 >
                     <FlatList
-                        data={post.item.images}
+                        data={post.item.attachment}
                         renderItem={({ item }) => {
                             return <ImageItem image={item} />
                         }}
@@ -151,8 +140,8 @@ const Post = (props) => {
                 />
             </View>
             <View style={tw`absolute bottom-1 inset-x-2`}>
-                {(post.item.images.length > 1) ? (
-                    <Paginator data={post.item.images} scrollX={scrollX} />
+                {(post.item.attachment.length > 1) ? (
+                    <Paginator data={post.attachment} scrollX={scrollX} />
                 ) : (
                     <></>
                 )}

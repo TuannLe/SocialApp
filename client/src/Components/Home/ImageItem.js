@@ -3,8 +3,7 @@ import React from 'react'
 import tw from 'twrnc'
 const { width, height } = Dimensions.get('window')
 
-const ImageItem = (props) => {
-    const { image } = props;
+const ImageItem = ({ image }) => {
     PixelRatio.getPixelSizeForLayoutSize(width);
 
     return (
