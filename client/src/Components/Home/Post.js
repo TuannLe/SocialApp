@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useCallback } from 'react'
 import { View, Text, Image, Dimensions, TouchableOpacity, FlatList, Animated } from 'react-native'
 import tw from 'twrnc';
 import { MaterialCommunityIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
@@ -45,7 +45,9 @@ const Post = (props) => {
     const scrollX = useRef(new Animated.Value(0)).current;
     const [currentIndex, setCurrentIndex] = useState(0);
     const [heart, setHeart] = useState(false);
+
     const [showMore, setShowMore] = useState(false)
+    const [lengthMore, setLengthMore] = useState(false);
 
     const handlePressHeart = () => {
         setHeart(!heart);
@@ -56,6 +58,11 @@ const Post = (props) => {
     }).current;
 
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+
+    const onTextLayout = useCallback(e => {
+        setLengthMore(e.nativeEvent.lines.length >= 2);
+    }, []);
+
 
     return (
         <View style={[tw`bg-white mt-3 overflow-hidden`, { width: FRAMESIZE_W, height: FRAMESIZE_H }]}>
@@ -73,14 +80,22 @@ const Post = (props) => {
                 <MaterialCommunityIcons name="dots-horizontal" style={tw`text-2xl text-black`} />
             </View>
             <View style={tw`my-2 px-3`}>
-                <Text style={tw`font-normal `} numberOfLines={showMore ? 99 : 2} >
+                <Text
+                    style={tw`font-normal `}
+                    numberOfLines={showMore ? 99 : 2}
+                    onTextLayout={onTextLayout}
+                >
                     {post.item.content}
                 </Text>
-                <TouchableOpacity
-                    onPress={() => setShowMore(!showMore)}
-                >
-                    <Text style={tw`text-gray-400  mt-1`}>{showMore ? 'Hide' : 'See more'}</Text>
-                </TouchableOpacity>
+                {
+                    lengthMore ?
+                        <TouchableOpacity
+                            onPress={() => setShowMore(!showMore)}
+                        >
+                            <Text style={tw`text-gray-400  mt-1`}>{showMore ? 'Hide' : 'See more'}</Text>
+                        </TouchableOpacity>
+                        : null
+                }
             </View>
             <View style={tw`relative`}>
                 <TapGestureHandler
@@ -141,7 +156,7 @@ const Post = (props) => {
             </View>
             <View style={tw`absolute bottom-1 inset-x-2`}>
                 {(post.item.attachment.length > 1) ? (
-                    <Paginator data={post.attachment} scrollX={scrollX} />
+                    <Paginator data={post.item.attachment} scrollX={scrollX} />
                 ) : (
                     <></>
                 )}

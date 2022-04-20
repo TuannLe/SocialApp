@@ -12,13 +12,13 @@ const schema = new mongoose.Schema({
     author: {
         type: String,
         required: true,
-        default: 'Tuanle'
+        default: 'TuanLe'
     },
-    attachments: String,
+    attachment: Array,
     likeCount: {
         type: Number,
         default: 0
-    }
-}, { timestamp: true })
+    },
+}, { timestamps: true })
 
-export const PostModel = mongoose.model('Post', schema);
+export const PostModel = mongoose.model('Post', schema)
