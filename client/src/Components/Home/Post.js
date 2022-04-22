@@ -32,7 +32,6 @@ const data = [
     }
 ]
 
-
 const Post = (props) => {
     const refRBSheet = useRef()
     const navigation = useNavigation()

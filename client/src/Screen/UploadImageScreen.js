@@ -2,6 +2,7 @@ import { View, Text, SafeAreaView, TouchableOpacity, Dimensions, Image, Touchabl
 import React, { useState } from 'react'
 import tw from 'twrnc';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import FileBase64 from 'react-file-base64';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 // frame size 3:2
@@ -45,6 +46,7 @@ const UploadImageScreen = ({ navigation, route }) => {
                                 />
                             </View>
                         </TouchableWithoutFeedback>
+                        <FileBase64 accept="image/*" multiple="false" type="file" />
                     </View>
                     <View style={tw`mt-2`}>
                         <View style={tw`flex flex-row items-center h-13 justify-between bg-white p-3 rounded my-2`}>
