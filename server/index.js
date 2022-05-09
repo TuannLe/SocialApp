@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '30mb' }));
 app.use(cors());
 
 app.use('/posts', posts)
-app.use('/v1/auth', authRouter)
+app.use('/auth', authRouter)
 app.use('/v1/user', userRouter)
 
 mongoose
@@ -33,5 +33,3 @@ mongoose
     .catch((e) => {
         console.log(`err ${e.message}`)
     })
-
-    // JWT

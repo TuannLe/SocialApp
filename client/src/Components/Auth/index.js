@@ -1,13 +1,63 @@
 import { View, Text, SafeAreaView, TextInput, TouchableOpacity, Image, ImageBackground } from 'react-native'
-import React, { useRef } from 'react'
+import React, { useRef, useState, useCallback } from 'react'
 import tw from 'twrnc';
 import { BlurView } from 'expo-blur'
 import RBSheet from 'react-native-raw-bottom-sheet'
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux'
+import { login, createAccount } from '../../redux/actions/auth'
 
 const Auth = () => {
     const refRBSheet = useRef()
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [crEmail, setCrEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [crPassword, setCrPassword] = useState('');
+    const [crCfPassword, setCrCfPassword] = useState('')
+
+    const [signInWarn, setSignInWarn] = useState('');
+    const [signUpWarn, setSignUpWarn] = useState('')
+
+    const handleSignIn = () => {
+        if (!email) {
+            setSignInWarn(`Please enter your email`)
+        }
+        else if (!password) {
+            setSignInWarn(`Please enter your password`)
+        } else {
+            dispatch(login.loginStart(email, password))
+            navigation.navigate('HomeStack')
+        }
+    }
+
+    const handleSignUp = () => {
+        if (!firstName || !lastName) {
+            setSignInWarn(`Please enter your name`)
+        }
+        else if (!crEmail) {
+            setSignInWarn(`Please enter your email`)
+        }
+        else if (!phoneNumber) {
+            setSignInWarn(`Please enter your phone number`)
+        }
+        else if (!crPassword || !crCfPassword) {
+            setSignInWarn(`Please enter your password`)
+        }
+        else if (crPassword != crCfPassword) {
+            setSignInWarn(`Confirm password doesn't match`)
+        }
+        else {
+            dispatch(createAccount.createAccountRequest({ firstName, lastName, crEmail, phoneNumber, crPassword }))
+        }
+    }
+
     return (
         <ImageBackground
             source={require('../../images/login-bg.jpg')}
@@ -32,24 +82,33 @@ const Auth = () => {
                         <TextInput
                             style={tw`w-full p-2 rounded-lg bg-[#F3F0F6] items-center`}
                             placeholder='Email...'
+                            onChangeText={val => setEmail(val)}
                         />
 
                         <TextInput
                             style={tw`w-full p-2 rounded-lg bg-[#F3F0F6] items-center my-3`}
                             placeholder='Password...'
                             secureTextEntry={true}
+                            onChangeText={val => setPassword(val)}
                         />
                         <TouchableOpacity>
                             <Text style={tw`text-pink-500`}>Forgot your password?</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={tw`w-full bg-pink-500 p-3 items-center rounded-lg mt-3`}
-                            onPress={() => navigation.navigate('HomeStack')}
+                            onPress={handleSignIn}
                         >
                             <Text style={tw`text-white font-medium`}>
                                 Login
                             </Text>
                         </TouchableOpacity>
+                        {
+                            signInWarn ? (
+                                <View style={tw`h-6 justify-center px-3 mb-2`}>
+                                    <Text style={tw`font-light tracking-[.20] text-red-600`}>{signInWarn}</Text>
+                                </View>
+                            ) : <></>
+                        }
                     </BlurView>
 
                     <Text style={tw`text-center text-black`}>
@@ -93,29 +152,35 @@ const Auth = () => {
                         <TextInput
                             style={tw`flex-1 p-2 rounded-lg bg-[#F3F0F6] `}
                             placeholder='First name...'
+                            onChangeText={val => setFirstName(val)}
                         />
                         <TextInput
                             style={tw`flex-1 p-2 rounded-lg bg-[#F3F0F6] ml-2`}
                             placeholder='Last name...'
+                            onChangeText={val => setLastName(val)}
                         />
                     </View >
                     <TextInput
                         style={tw`w-full p-2 rounded-lg bg-[#F3F0F6] items-center my-2`}
                         placeholder='Phone number...'
+                        onChangeText={val => setPhoneNumber(val)}
                     />
                     <TextInput
                         style={tw`w-full p-2 rounded-lg bg-[#F3F0F6] items-center`}
                         placeholder='Email...'
+                        onChangeText={val => setEmail(val)}
                     />
                     <TextInput
                         style={tw`w-full p-2 rounded-lg bg-[#F3F0F6] items-center my-2`}
                         placeholder='Password...'
                         secureTextEntry={true}
+                        onChangeText={val => setCrPassword(val)}
                     />
                     <TextInput
                         style={tw`w-full p-2 rounded-lg bg-[#F3F0F6] items-center`}
                         placeholder='Confirm password...'
                         secureTextEntry={true}
+                        onChangeText={val => setCrCfPassword(val)}
                     />
                     <TouchableOpacity
                         style={tw`w-full bg-pink-500 p-3 items-center rounded-lg mt-5`}
