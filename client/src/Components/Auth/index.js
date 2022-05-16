@@ -32,8 +32,7 @@ const Auth = () => {
         else if (!password) {
             setSignInWarn(`Please enter your password`)
         } else {
-            dispatch(login.loginStart(email, password))
-            navigation.navigate('HomeStack')
+            dispatch(login.loginStart({ email, password }))
         }
     }
 

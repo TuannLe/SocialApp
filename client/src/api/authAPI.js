@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { login } from '../redux/actions/auth'
+import AXIOS from './index'
 
-const URL = 'https://socialapp-multiverse.herokuapp.com';
-
-export const login = (payload) => axios.post(`${URL}/auth/login`, payload)
-export const createAccount = (payload) => axios.post(`${URL}/auth/register`, payload)
+export const login = async (payload) => {
+    const res = await AXIOS.post(`/auth/login`, payload)
+    return res
+}
+// export const createAccount = (payload) => axios.post(`${URL}/auth/register`, payload)

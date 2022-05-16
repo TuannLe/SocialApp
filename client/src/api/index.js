@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-const URL = 'https://socialapp-multiverse.herokuapp.com';
+const AXIOS = axios.create({
+    baseURL: 'https://socialapp-multiverse.herokuapp.com',
+    timeout: 100000,
+    headers: { 'Content-Type': 'application/json' }
+})
 
-export const fetchPosts = () => axios.get(`${URL}/posts`)
-export const createPost = (payload) => axios.post(`${URL}/posts`, payload)
-export const updatePost = (payload) => axios.post(`${URL}/posts/update`, payload)
+export default AXIOS

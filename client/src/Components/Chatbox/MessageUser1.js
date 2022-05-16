@@ -12,11 +12,6 @@ const MessageUser1 = () => {
                     alo alo 12355
                     alo alo 12355
                     alo alo 12355
-                    alo alo 12355
-                    alo alo 12355
-                    alo alo 12355
-                    alo alo 12355
-                    alo alo 12355
                 </Text>
             </View>
         </View>
