@@ -6,11 +6,12 @@ function* fetchLoginSaga(action) {
     try {
         const login = yield call(api.login, action.payload)
         if (login.status === 200) {
-            yield put(actions.login.loginSuccess(login.data))
+            console.log('success')
+            yield put(actions.loginSuccess(login.data))
         }
     } catch (error) {
         console.log(error)
-        yield put(actions.login.loginFailure(error))
+        yield put(actions.loginError(error))
     }
 }
 
@@ -26,6 +27,6 @@ function* fetchLoginSaga(action) {
 // }
 
 export default authSaga = [
-    takeLatest(actions.login.loginStart, fetchLoginSaga),
+    takeLatest(actions.loginStart, fetchLoginSaga),
     // takeLatest(actions.createAccount.createAccountRequest, createAccountSaga)
 ]

@@ -1,11 +1,10 @@
 import { takeLatest, call, put } from 'redux-saga/effects'
 import * as actions from '../actions'
-import * as api from '../../api'
+import * as api from '../../api/postAPI'
 
 function* fetchPostSaga(action) {
     try {
         const posts = yield call(api.fetchPosts)
-        console.log(posts)
         yield put(actions.getPosts.getPostsSuccess(posts.data))
     } catch (error) {
         console.log(error)

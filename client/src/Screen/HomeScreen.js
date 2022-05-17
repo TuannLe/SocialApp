@@ -17,6 +17,7 @@ const Home = () => {
     const dispatch = useDispatch()
     const data = useSelector(postsState$)
     useEffect(() => {
+        console.log("reRender*******************************")
         dispatch(actions.getPosts.getPostsRequest())
     }, [dispatch])
     console.log(data)

@@ -9,6 +9,7 @@ export default function postsReducers(state = INIT_STATE.posts, action) {
                 isLoading: true
             }
         case getType(getPosts.getPostsSuccess):
+            console.log("get post success")
             return {
                 ...state,
                 isLoading: false,

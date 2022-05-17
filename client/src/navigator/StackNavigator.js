@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
     const auth = useSelector(authState$)
-    // console.log(auth)
+    console.log(auth)
 
     return (
         <Stack.Navigator

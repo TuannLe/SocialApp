@@ -1,11 +1,11 @@
 import { View, Text, SafeAreaView, TextInput, TouchableOpacity, Image, ImageBackground } from 'react-native'
-import React, { useRef, useState, useCallback } from 'react'
+import React, { useRef, useState, useCallback, useEffect } from 'react'
 import tw from 'twrnc';
 import { BlurView } from 'expo-blur'
 import RBSheet from 'react-native-raw-bottom-sheet'
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux'
-import { login, createAccount } from '../../redux/actions/auth'
+import * as ACTIONS from '../../redux/actions/auth'
 
 const Auth = () => {
     const refRBSheet = useRef()
@@ -32,7 +32,7 @@ const Auth = () => {
         else if (!password) {
             setSignInWarn(`Please enter your password`)
         } else {
-            dispatch(login.loginStart({ email, password }))
+            dispatch(ACTIONS.loginStart({ email, password }))
         }
     }
 
@@ -53,7 +53,7 @@ const Auth = () => {
             setSignInWarn(`Confirm password doesn't match`)
         }
         else {
-            dispatch(createAccount.createAccountRequest({ firstName, lastName, crEmail, phoneNumber, crPassword }))
+            // dispatch(createAccount.createAccountRequest({ firstName, lastName, crEmail, phoneNumber, crPassword }))
         }
     }
 
