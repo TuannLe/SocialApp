@@ -22,8 +22,20 @@ export const loginError = (error) => {
     }
 }
 
-// export const createAccount = createActions({
-//     createAccountRequest: (payload) => payload,
-//     createAccountSuccess: (payload) => payload,
-//     createAccountFailure: (err) => err
-// })
+export const registerStart = (payload) => {
+    return {
+
+    }
+}
+
+export const registerSuccess = (payload) => {
+    return {
+
+    }
+}
+
+export const registerError = (error) => {
+    return {
+
+    }
+}
