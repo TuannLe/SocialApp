@@ -6,15 +6,18 @@ import RBSheet from 'react-native-raw-bottom-sheet'
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux'
 import * as ACTIONS from '../../redux/actions/auth'
+import * as UserActions from '../../redux/actions/user'
 
 const Auth = () => {
     const refRBSheet = useRef()
     const navigation = useNavigation();
     const dispatch = useDispatch();
 
+    // login
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    // register
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [crEmail, setCrEmail] = useState('');
@@ -53,7 +56,7 @@ const Auth = () => {
             setSignInWarn(`Confirm password doesn't match`)
         }
         else {
-            // dispatch(createAccount.createAccountRequest({ firstName, lastName, crEmail, phoneNumber, crPassword }))
+            dispatch(UserActions.registerStart({ firstName, lastName, crEmail, phoneNumber, crPassword }))
         }
     }
 

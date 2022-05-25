@@ -1,22 +1,21 @@
 import { INIT_STATE } from '../constant'
-import * as TYPES from '../constants/auth'
+import * as TYPES from '../constants/user'
 
-export default function authReducers(state = INIT_STATE.auth, action) {
+export default function userReducer(state = INIT_STATE, action) {
   switch (action.type) {
-    case TYPES.LOGIN_START:
+    case TYPES.REGISTER_START:
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
       }
-    case TYPES.LOGIN_SUCCESS:
-      console.log('login success')
+    case TYPES.REGISTER_SUCCESS:
       return {
         ...state,
+        data: action.payload,
         isFetching: false,
-        currentUser: action.payload,
         error: false
       }
-    case TYPES.LOGIN_FAILURE:
+    case TYPES.REGISTER_FAILURE:
       return {
         ...state,
         isFetching: false,
@@ -25,4 +24,4 @@ export default function authReducers(state = INIT_STATE.auth, action) {
     default:
       return state
   }
-} 
+}

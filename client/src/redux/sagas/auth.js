@@ -6,7 +6,7 @@ function* fetchLoginSaga(action) {
     try {
         const login = yield call(api.login, action.payload)
         if (login.status === 200) {
-            console.log('success')
+            console.log('Login success')
             yield put(actions.loginSuccess(login.data))
         }
     } catch (error) {

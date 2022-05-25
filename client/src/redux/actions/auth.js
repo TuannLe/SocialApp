@@ -21,21 +21,3 @@ export const loginError = (error) => {
         error: error,
     }
 }
-
-export const registerStart = (payload) => {
-    return {
-
-    }
-}
-
-export const registerSuccess = (payload) => {
-    return {
-
-    }
-}
-
-export const registerError = (error) => {
-    return {
-
-    }
-}
