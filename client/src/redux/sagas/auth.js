@@ -15,18 +15,6 @@ function* fetchLoginSaga(action) {
     }
 }
 
-// function createAccountSaga(action) {
-//     try {
-//         const account = yield call(api.createAccount, action.payload)
-//         console.log(account)
-//         yield put(actions.createAccount.createAccountRequest(account.data))
-//     } catch (error) {
-//         console.log(error)
-//         yield put(actions.createAccount.createAccountFailure(error))
-//     }
-// }
-
 export default authSaga = [
     takeLatest(actions.loginStart, fetchLoginSaga),
-    // takeLatest(actions.createAccount.createAccountRequest, createAccountSaga)
 ]

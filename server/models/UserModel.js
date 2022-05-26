@@ -28,10 +28,6 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 8,
-    },
-    admin: {
-        type: Boolean,
-        default: false,
     }
 }, { timestamps: true })
 

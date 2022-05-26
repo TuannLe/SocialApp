@@ -56,6 +56,7 @@ const Auth = () => {
             setSignInWarn(`Confirm password doesn't match`)
         }
         else {
+            setSignInWarn(``)
             dispatch(UserActions.registerStart({ firstName, lastName, crEmail, phoneNumber, crPassword }))
         }
     }
@@ -106,8 +107,8 @@ const Auth = () => {
                         </TouchableOpacity>
                         {
                             signInWarn ? (
-                                <View style={tw`h-6 justify-center px-3 mb-2`}>
-                                    <Text style={tw`font-light tracking-[.20] text-red-600`}>{signInWarn}</Text>
+                                <View style={tw`justify-center mt-2`}>
+                                    <Text style={tw`text-pink-500`}>{signInWarn}</Text>
                                 </View>
                             ) : <></>
                         }
@@ -170,7 +171,7 @@ const Auth = () => {
                     <TextInput
                         style={tw`w-full p-2 rounded-lg bg-[#F3F0F6] items-center`}
                         placeholder='Email...'
-                        onChangeText={val => setEmail(val)}
+                        onChangeText={val => setCrEmail(val)}
                     />
                     <TextInput
                         style={tw`w-full p-2 rounded-lg bg-[#F3F0F6] items-center my-2`}
@@ -186,11 +187,17 @@ const Auth = () => {
                     />
                     <TouchableOpacity
                         style={tw`w-full bg-pink-500 p-3 items-center rounded-lg mt-5`}
+                        onPress={handleSignUp}
                     >
                         <Text style={tw`text-white font-medium`}>
-                            Login
+                            Register
                         </Text>
                     </TouchableOpacity>
+                    {
+                        signInWarn ? (
+                            <Text style={tw`mt-2 text-pink-500`}>{signInWarn}</Text>
+                        ) : <></>
+                    }
                 </RBSheet>
             </SafeAreaView>
         </ImageBackground>

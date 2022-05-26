@@ -10,6 +10,7 @@ export default function authReducers(state = INIT_STATE.auth, action) {
       }
     case TYPES.LOGIN_SUCCESS:
       console.log('login success')
+      console.log(action.payload)
       return {
         ...state,
         isFetching: false,

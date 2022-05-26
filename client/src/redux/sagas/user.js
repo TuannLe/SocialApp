@@ -1,20 +1,20 @@
 import { takeLatest, call, put } from 'redux-saga/effects'
-import * as ACTIONS from '../actions/user'
-import * as API from '../../api/userAPI'
+import * as actions from '../actions/user'
+import * as api from '../../api/userAPI'
 
-function* createAccountSaga(action) {
+function* RegisterSaga(action) {
     try {
-        const account = yield call(API.register, action.payload)
-        if (register.status === 200) {
-            console.log("Register success!!")
-            yield put(ACTIONS.registerSuccess(register.data))
+        const account = yield call(api.register, action.payload)
+        if (account.status === 200) {
+            yield put(actions.registerSuccess(account.data))
         }
+
     } catch (error) {
-        console.log(error)
-        yield put(ACTIONS.registerError(error))
+        // console.log(error)
+        yield put(actions.registerError(error))
     }
 }
 
 export default userSaga = [
-    takeLatest(ACTIONS.registerStart, createAccountSaga)
+    takeLatest(actions.registerStart, RegisterSaga)
 ]

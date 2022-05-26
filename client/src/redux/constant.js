@@ -10,7 +10,7 @@ export const INIT_STATE = {
     },
     register: {
         isFetching: false,
-        data: [],
+        data: null,
         error: false
     }
 }
