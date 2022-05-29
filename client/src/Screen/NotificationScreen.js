@@ -45,9 +45,10 @@ const NotificationScreen = () => {
         <SafeAreaView style={tw`flex flex-1 bg-white`}>
             <View style={tw`flex flex-1`}>
                 <TouchableOpacity
-                    style={tw`border-b border-gray-200 `}
+                    style={tw`flex flex-row items-center justify-between border-b border-gray-200 `}
                 >
                     <Text style={tw`text-base font-medium p-3`}>Follow Requests</Text>
+                    <Text style={tw`mr-5 px-1.5 py-1 text-white font-medium bg-pink-500 rounded-full`}>10</Text>
                 </TouchableOpacity>
                 <FlatList
                     data={data}

@@ -4,13 +4,8 @@ export const INIT_STATE = {
         data: []
     },
     auth: {
-        currentUser: null,
-        isFetching: false,
-        error: false
-    },
-    register: {
-        isFetching: false,
-        data: null,
+        currentUser: {},
+        isLoading: false,
         error: false
     }
 }

@@ -2,12 +2,17 @@ import { View, TouchableOpacity, Text, SafeAreaView } from 'react-native'
 import React, { useState } from 'react'
 import tw from 'twrnc';
 import { FontAwesome, Ionicons, Feather } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../../redux/actions/auth';
 import Info from '../../Components/Menu/Info'
 import Password from '../../Components/Menu/Password'
 
 const AccountScreen = ({ navigation }) => {
+    const dispatch = useDispatch()
+
     const [infoModalVisible, setInfoModalVisible] = useState(false)
     const [passwordModalVisible, setPasswordModalVisible] = useState(false)
+
     const handleInfoModalVisible = () => {
         setInfoModalVisible(!infoModalVisible)
     }
@@ -45,6 +50,9 @@ const AccountScreen = ({ navigation }) => {
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={tw`p-2.5 mt-5 bg-pink-500 rounded-lg`}
+                            onPress={() => {
+                                dispatch(logout())
+                            }}
                         >
                             <Text style={tw`text-white font-medium text-center text-base`}>Logout</Text>
                         </TouchableOpacity>

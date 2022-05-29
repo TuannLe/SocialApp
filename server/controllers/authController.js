@@ -34,7 +34,7 @@ export const authController = {
             },
             process.env.JWT_ACCESS_KEY,
             {
-                expiresIn: "60s"
+                expiresIn: "24h"
             }
         )
     },

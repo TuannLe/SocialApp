@@ -3,10 +3,14 @@ import React, { useState } from 'react'
 import tw from 'twrnc';
 import { FontAwesome, AntDesign, Feather, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
+import { useDispatch, useSelector } from 'react-redux'
 
 const PrivacyScreen = () => {
-    const [statusAccount, setStatusAccount] = useState(false)
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+
+    const [statusAccount, setStatusAccount] = useState(false)
+
     return (
         <SafeAreaView style={tw`bg-white flex flex-1`}>
             <View>

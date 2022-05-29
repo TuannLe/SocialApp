@@ -18,7 +18,7 @@ export default function App() {
     <SafeAreaProvider>
       <StatusBar
         visibility={false}
-      // hidden={true}
+        hidden={true}
       />
       <NavigationContainer>
         <Provider store={store}>

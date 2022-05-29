@@ -16,17 +16,16 @@ import { authState$ } from '../redux/selectors'
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
-    const auth = useSelector(authState$)
-    console.log(auth)
-
+    const token = useSelector((state) => state.auth.currentUser.accessToken)
     return (
         <Stack.Navigator
             screenOptions={{
                 headerShown: false,
             }}
         >
-            {auth.currentUser ? (
+            {token ? (
                 <>
+
                     <Stack.Screen name="HomeStack" component={BottomNavigator} />
                     <Stack.Screen name="PrivacyStack" component={PrivacyScreen} />
                     <Stack.Screen name="BlockedAccountStack" component={BlockedAccountScreen} />

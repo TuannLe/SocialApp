@@ -31,8 +31,6 @@ const MessageScreen = ({ navigation, route }) => {
             <ScrollView style={tw`px-5 py-2 flex-1`}>
                 <MessageUser1 />
                 <MessageUser2 />
-                <MessageUser2 />
-                <MessageUser2 />
                 <MessageUser1 />
                 <MessageUser2 />
                 <MessageUser1 />

@@ -8,9 +8,7 @@ const MessageUser2 = () => {
             <View style={tw`items-end w-6/7`}>
                 <View style={tw`rounded-lg bg-pink-400 mb-[6]`}>
                     <Text style={tw`p-2 text-white text-sm`}>
-                        alo alo 12355
-                        alo alo 12355
-                        alo
+                        hello. Chao ban, cho minh lam quen duoc khong
                     </Text>
                 </View>
             </View>

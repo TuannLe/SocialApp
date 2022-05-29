@@ -14,12 +14,32 @@ const Home = () => {
     const offsetAnim = useRef(new Animated.Value(0)).current;
     const navigation = useNavigation();
 
-    const dispatch = useDispatch()
-    const data = useSelector(postsState$)
-    useEffect(() => {
-        dispatch(actions.getPosts.getPostsRequest())
-    }, [dispatch])
-    console.log(data)
+    // const dispatch = useDispatch()
+    // const data = useSelector(postsState$)
+    // useEffect(() => {
+    //     dispatch(actions.getPosts.getPostsRequest())
+    // }, [dispatch])
+
+    const data1 = [
+        {
+            '_id': '1',
+            'attachment': [
+                'https://2sao.vietnamnetjsc.vn/images/2020/12/05/13/48/cara-phuong-1.jpg',
+                'https://nguoinoitieng.tv/images/nnt/96/2/bbnh.jpg',
+            ],
+            'author': 'Tuan Le',
+            'content': 'Hello. Good morning'
+        },
+        {
+            '_id': '2',
+            'attachment': [
+                'https://scontent.fdad2-1.fna.fbcdn.net/v/t39.30808-6/277177190_10216432238718271_6088471343420752349_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=0debeb&_nc_ohc=z0USGEuyJdEAX882erY&_nc_ht=scontent.fdad2-1.fna&oh=00_AT_WJMcJpBN07F9S9bmtSg1jhtUquM129_LXUULN-_cUow&oe=6295E2D7',
+                'https://scontent.fdad1-3.fna.fbcdn.net/v/t39.30808-6/277172033_10216432239678295_745198389531161213_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=0debeb&_nc_ohc=TtT8pGynVVUAX8r-Zpp&tn=MQOwtL0IfDfHSRKJ&_nc_ht=scontent.fdad1-3.fna&oh=00_AT_1XxaaBLv1Nb-kQwnLXaKGWwQz5M7_p3T_949WDy9tng&oe=629608A6',
+            ],
+            'author': 'Thuy',
+            'content': 'Xin chao tat ca moi nguoi'
+        }
+    ]
 
     const clampedScroll = Animated.diffClamp(
         Animated.add(
@@ -73,7 +93,7 @@ const Home = () => {
                     </TouchableOpacity>
                 </View>
                 <Animated.FlatList
-                    data={data}
+                    data={data1}
                     renderItem={(post) => {
                         return <Post post={post} />
                     }}

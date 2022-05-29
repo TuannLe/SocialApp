@@ -6,7 +6,6 @@ import RBSheet from 'react-native-raw-bottom-sheet'
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux'
 import * as ACTIONS from '../../redux/actions/auth'
-import * as UserActions from '../../redux/actions/user'
 
 const Auth = () => {
     const refRBSheet = useRef()
@@ -27,6 +26,8 @@ const Auth = () => {
 
     const [signInWarn, setSignInWarn] = useState('');
     const [signUpWarn, setSignUpWarn] = useState('')
+
+
 
     const handleSignIn = () => {
         if (!email) {
@@ -57,7 +58,7 @@ const Auth = () => {
         }
         else {
             setSignInWarn(``)
-            dispatch(UserActions.registerStart({ firstName, lastName, crEmail, phoneNumber, crPassword }))
+            dispatch(ACTIONS.registerStart({ firstName, lastName, crEmail, phoneNumber, crPassword }))
         }
     }
 
