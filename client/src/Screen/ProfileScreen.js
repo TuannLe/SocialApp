@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons, Feather, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import RBSheet from 'react-native-raw-bottom-sheet'
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux'
 import { TopTabNavigator } from '../navigator/TopTabNavigator'
 import EditProfile from '../Components/Profile/EditProfile'
 
@@ -13,8 +14,13 @@ const { width } = Dimensions.get('window')
 const ProfileScreen = () => {
     PixelRatio.getPixelSizeForLayoutSize(width);
     const refRBSheet = useRef()
+
     const navigation = useNavigation()
+    const currentUser = useSelector((state) => state.auth.currentUser)
+
+
     const [visible, setVisible] = useState(false)
+
     const handleVisibleEdit = () => {
         setVisible(!visible)
     }
@@ -48,8 +54,8 @@ const ProfileScreen = () => {
                     </View>
                     <View style={tw`flex flex-row items-center justify-end p-3`}>
                         <View style={tw`flex`}>
-                            <Text style={tw`text-base font-bold`}>Tuan Le</Text>
-                            <Text style={tw`text-sm text-gray-400`}>tuanle@gmail.com</Text>
+                            <Text style={tw`text-base font-bold`}>{currentUser.firstName + ' ' + currentUser.lastName}</Text>
+                            <Text style={tw`text-sm text-gray-400`}>{currentUser.email}</Text>
                         </View>
                         <TouchableOpacity
                             onPress={handleVisibleEdit}

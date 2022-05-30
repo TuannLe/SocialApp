@@ -18,17 +18,18 @@ const SelectImageScreen = () => {
     const handleSelectPicture = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            base64: true,
             aspect: [2, 3],
             quality: 1,
         })
 
         if (!result.cancelled) {
             console.log(result)
-            const image = {
-                uri: Platform.OS == 'ios' ? result.uri.substr(7) : result.uri,
-                name: result.fileName || result.uri.substr(result.uri.lastIndexOf('/') + 1)
-            }
-            setImage(image);
+            // const image = {
+            //     uri: Platform.OS == 'ios' ? result.uri.substr(7) : result.uri,
+            //     name: result.fileName || result.uri.substr(result.uri.lastIndexOf('/') + 1)
+            // }
+            setImage(result.base64);
         }
     }
 
@@ -41,7 +42,7 @@ const SelectImageScreen = () => {
                 ? (
                     <View style={[tw`flex-1 items-center`]}>
                         <Image
-                            source={{ uri: image.uri }}
+                            source={{ uri: `data:image/png;base64,${image}` }}
                             style={tw`w-full h-full`}
                         />
                     </View>

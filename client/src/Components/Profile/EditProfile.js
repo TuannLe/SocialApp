@@ -1,8 +1,11 @@
 import { View, Text, Modal, TouchableOpacity, SafeAreaView, Image, TextInput } from 'react-native'
 import React from 'react'
 import tw from 'twrnc';
+import { useDispatch, useSelector } from 'react-redux';
 
 const EditProfile = ({ visible, handleVisible }) => {
+    const currentUser = useSelector((state) => state.auth.currentUser)
+
     return (
         <Modal
             visible={visible}
@@ -42,7 +45,7 @@ const EditProfile = ({ visible, handleVisible }) => {
                                 First name
                             </Text>
                             <TextInput
-                                placeholder='First name'
+                                placeholder={currentUser.firstName}
                                 style={tw`border-b border-[#CCC] flex-3 py-4`}
                             />
                         </View>
@@ -51,19 +54,19 @@ const EditProfile = ({ visible, handleVisible }) => {
                                 Last name
                             </Text>
                             <TextInput
-                                placeholder='Last name'
+                                placeholder={currentUser.lastName}
                                 style={tw`border-b border-[#CCC] flex-3 py-4`}
                             />
                         </View>
                         <View style={tw` px-5 flex flex-row items-center`}>
                             <Text style={tw`font-medium flex-1`}>
-                                User name
+                                Email
                             </Text>
                             <View style={tw`border-b border-[#CCC] flex-3`}>
                                 <Text
                                     style={tw`py-4 text-black`}
                                 >
-                                    Tuanle
+                                    {currentUser.email}
                                 </Text>
                             </View>
                         </View>

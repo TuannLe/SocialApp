@@ -3,8 +3,11 @@ import React, { useRef, useState } from 'react'
 import tw from 'twrnc';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { RadioButton } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux'
 
 const Info = ({ visible, handleVisible }) => {
+    const currentUser = useSelector((state) => state.auth.currentUser)
+
     const refRBSheet = useRef()
     const [checked, setChecked] = useState(false);
 
@@ -38,17 +41,17 @@ const Info = ({ visible, handleVisible }) => {
                         </Text>
                         <View style={tw`flex flex-row items-center mt-5`}>
                             <Text style={tw`w-20 font-medium text-base`}>Email</Text>
-                            <TextInput
-                                placeholder='Email...'
-                                placeholderTextColor='#ccc'
-                                style={tw`flex-1 text-base py-3 leading-5 border-b border-gray-200`} />
+                            <Text
+                                style={tw`flex-1 text-base py-3 leading-5 border-b border-gray-200`} >
+                                {currentUser.email}
+                            </Text>
                         </View>
                         <View style={tw`flex flex-row items-center`}>
                             <Text style={tw`w-20 font-medium text-base`}>Phone</Text>
-                            <TextInput
-                                placeholder='Phone...'
-                                placeholderTextColor='#ccc'
-                                style={tw`flex-1 text-base py-3 leading-5 border-b border-gray-200`} />
+                            <Text
+                                style={tw`flex-1 text-base py-3 leading-5 border-b border-gray-200`}>
+                                {currentUser.phoneNumber}
+                            </Text>
                         </View>
                         <View style={tw`flex flex-row items-center`}>
                             <Text style={tw`w-20 font-medium text-base`}>Gender</Text>

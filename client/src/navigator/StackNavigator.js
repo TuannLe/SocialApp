@@ -11,7 +11,6 @@ import ChatBoxScreen from '../Screen/ChatBoxScreen'
 import ProfileGuestScreen from '../Screen/ProfileGuestScreen'
 import UploadImageScreen from '../Screen/UploadImageScreen'
 import MessageScreen from '../Screen/MessageScreen'
-import { authState$ } from '../redux/selectors'
 
 const Stack = createNativeStackNavigator();
 

@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const schema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true
-    },
     content: {
         type: String,
         required: true
@@ -12,12 +8,13 @@ const schema = new mongoose.Schema({
     author: {
         type: String,
         required: true,
-        default: 'TuanLe'
     },
-    attachment: Array,
-    likeCount: {
+    images: Array,
+    likes: Array,
+    comments: Object,
+    status: {
         type: Number,
-        default: 0
+        default: 0,
     },
 }, { timestamps: true })
 

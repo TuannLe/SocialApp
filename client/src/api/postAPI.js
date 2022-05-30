@@ -1,5 +1,30 @@
 import AXIOS from './index'
 
-export const fetchPosts = () => AXIOS.get(`/posts`)
-export const createPost = (payload) => AXIOS.post(`/posts`, payload)
-export const updatePost = (payload) => AXIOS.post(`/posts/update`, payload)
+const url = '/posts'
+
+export const fetchPosts = async () => {
+    try {
+        const res = await AXIOS.get(url)
+        return res
+    } catch (error) {
+        return error
+    }
+}
+
+export const createPost = async ({ token, payload }) => {
+    try {
+        const res = await post(`${url}/create`, payload)
+        return res
+    } catch (error) {
+        return error
+    }
+}
+
+export const updatePost = async ({ token, payload }) => {
+    try {
+        const res = await post(`${url}/update`, payload)
+        return res
+    } catch (error) {
+        return error
+    }
+}

@@ -2,7 +2,6 @@ import { View, Text, SafeAreaView, TouchableOpacity, Dimensions, Image, Touchabl
 import React, { useState } from 'react'
 import tw from 'twrnc';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
-import FileBase64 from 'react-file-base64';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 // frame size 3:2
@@ -15,6 +14,8 @@ const UploadImageScreen = ({ navigation, route }) => {
     const [isEnabled, setIsEnabled] = useState(true);
     const [isCaption, setCaption] = useState('')
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+    console.log('-------------------------------', image)
 
     return (
         <SafeAreaView style={tw`bg-white flex flex-1`}>
@@ -32,7 +33,7 @@ const UploadImageScreen = ({ navigation, route }) => {
                     <View style={tw`flex flex-row `}>
                         <View style={tw`shadow-lg`}>
                             <Image
-                                source={{ uri: image.uri }}
+                                source={{ uri: `data:image/png;base64,${image}` }}
                                 style={[tw`mr-2 rounded-[1]`, { width: FRAMESIZE_W / 3, height: FRAMESIZE_H / 3 }]}
                             />
                         </View>
@@ -46,7 +47,6 @@ const UploadImageScreen = ({ navigation, route }) => {
                                 />
                             </View>
                         </TouchableWithoutFeedback>
-                        <FileBase64 accept="image/*" multiple="false" type="file" />
                     </View>
                     <View style={tw`mt-2`}>
                         <View style={tw`flex flex-row items-center h-13 justify-between bg-white p-3 rounded my-2`}>

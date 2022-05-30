@@ -11,6 +11,7 @@ const Auth = () => {
     const refRBSheet = useRef()
     const navigation = useNavigation();
     const dispatch = useDispatch();
+    const message = useSelector((state) => state.auth.message)
 
     // login
     const [email, setEmail] = useState('');
@@ -197,6 +198,11 @@ const Auth = () => {
                     {
                         signInWarn ? (
                             <Text style={tw`mt-2 text-pink-500`}>{signInWarn}</Text>
+                        ) : <></>
+                    }
+                    {
+                        message ? (
+                            <Text style={tw`mt-2 text-pink-500`}>{message}</Text>
                         ) : <></>
                     }
                 </RBSheet>

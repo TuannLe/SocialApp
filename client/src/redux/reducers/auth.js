@@ -34,6 +34,7 @@ export default function authReducers(state = INIT_STATE.auth, action) {
         ...state,
         currentUser: action.payload,
         isLoading: false,
+        message: 'Đăng ký thành công',
         error: false
       }
     case TYPES.REGISTER_FAILURE:
