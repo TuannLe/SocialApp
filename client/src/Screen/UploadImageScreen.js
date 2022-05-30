@@ -2,6 +2,9 @@ import { View, Text, SafeAreaView, TouchableOpacity, Dimensions, Image, Touchabl
 import React, { useState } from 'react'
 import tw from 'twrnc';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import FormData from 'form-data';
+import { useDispatch, useSelector } from 'react-redux'
+import * as actions from '../redux/actions/post'
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 // frame size 3:2
@@ -10,12 +13,25 @@ const FRAMESIZE_H = SCREEN_WIDTH / 2 * 3;
 
 
 const UploadImageScreen = ({ navigation, route }) => {
+    const dispatch = useDispatch()
+    const token = useSelector((state) => state.auth.currentUser.accessToken)
+    const UserId = useSelector((state) => state.auth.currentUser._id)
+
     const { image } = route.params
     const [isEnabled, setIsEnabled] = useState(true);
     const [isCaption, setCaption] = useState('')
+
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
-    console.log('-------------------------------', image)
+    const handleSubmit = () => {
+        let formData = new FormData()
+        formData.append('caption', isCaption)
+        formData.append('author', UserId)
+        formData.append('files', image)
+
+        dispatch(actions.createPostStart({ formData, token }))
+        navigation.navigate('HomeStack')
+    }
 
     return (
         <SafeAreaView style={tw`bg-white flex flex-1`}>
@@ -66,6 +82,7 @@ const UploadImageScreen = ({ navigation, route }) => {
                             />
                         </View>
                         <TouchableOpacity
+                            onPress={handleSubmit}
                             style={tw`bg-pink-500 py-4 mt-2 rounded-lg `}
                         >
                             <Text style={tw`text-center font-medium text-base text-white`}>Create Post</Text>

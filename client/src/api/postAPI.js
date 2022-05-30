@@ -11,9 +11,14 @@ export const fetchPosts = async () => {
     }
 }
 
-export const createPost = async ({ token, payload }) => {
+export const createPost = async ({ token, formData }) => {
     try {
-        const res = await post(`${url}/create`, payload)
+        const res = await post(`${url}/create`, formData, {
+            headers: {
+                'token': `Bearer ${token}`,
+                'Content-Type': `multipart/form-data`,
+            }
+        })
         return res
     } catch (error) {
         return error

@@ -5,7 +5,6 @@ import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux'
 import Post from '../Components/Home/Post'
-import * as actions from '../redux/actions'
 import { postsState$ } from '../redux/selectors'
 
 const Home = () => {
