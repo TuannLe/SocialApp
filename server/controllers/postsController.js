@@ -1,4 +1,8 @@
+import multer from 'multer';
 import { PostModel } from "../models/PostModel.js"
+import fs from 'fs'
+import path from 'path';
+
 
 export const getPosts = async (req, res) => {
     try {
@@ -12,14 +16,19 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
     try {
-        const newPost = req.body
+        // const image = fs.readFileSync(req.files[0].path, { encoding: 'base64' })
+        const newPost = {
+            images: req.body.images,
+            author: req.body.author,
+            content: req.body.content
+        }
 
         const post = new PostModel(newPost)
         await post.save()
 
         res.status(200).json(post)
     } catch (error) {
-        res.status(500).json({ error: error })
+        res.status(500).json(error)
     }
 }
 

@@ -24,7 +24,6 @@ const SelectImageScreen = () => {
         })
 
         if (!result.cancelled) {
-            console.log(result)
             // const image = {
             //     uri: Platform.OS == 'ios' ? result.uri.substr(7) : result.uri,
             //     name: result.fileName || result.uri.substr(result.uri.lastIndexOf('/') + 1)
@@ -43,6 +42,7 @@ const SelectImageScreen = () => {
                     <View style={[tw`flex-1 items-center`]}>
                         <Image
                             source={{ uri: `data:image/png;base64,${image}` }}
+                            // source={{ uri: image.uri }}
                             style={tw`w-full h-full`}
                         />
                     </View>

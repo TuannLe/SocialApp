@@ -5,7 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux'
 import Post from '../Components/Home/Post'
-import { postsState$ } from '../redux/selectors'
+import * as actions from '../redux/actions/post'
 
 const Home = () => {
     const CONTAINER_HEIGHT = 45;
@@ -13,12 +13,15 @@ const Home = () => {
     const offsetAnim = useRef(new Animated.Value(0)).current;
     const navigation = useNavigation();
 
-    // const dispatch = useDispatch()
-    // const data = useSelector(postsState$)
-    // useEffect(() => {
-    //     dispatch(actions.getPosts.getPostsRequest())
-    // }, [dispatch])
+    const dispatch = useDispatch()
+    const token = useSelector((state) => state.auth.currentUser.accessToken)
+    const userId = useSelector((state) => state.auth.currentUser._id)
 
+    useEffect(() => {
+        dispatch(actions.getPostsStart({ token, userId }))
+    }, [])
+
+    const data = useSelector(state => state.posts.data)
     const data1 = [
         {
             '_id': '1',
@@ -92,7 +95,7 @@ const Home = () => {
                     </TouchableOpacity>
                 </View>
                 <Animated.FlatList
-                    data={data1}
+                    data={data}
                     renderItem={(post) => {
                         return <Post post={post} />
                     }}

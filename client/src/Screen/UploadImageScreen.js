@@ -24,13 +24,13 @@ const UploadImageScreen = ({ navigation, route }) => {
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
     const handleSubmit = () => {
-        let formData = new FormData()
-        formData.append('caption', isCaption)
+        let formData = new FormData();
+        formData.append('images', image)
+        formData.append('content', isCaption)
         formData.append('author', UserId)
-        formData.append('files', image)
 
         dispatch(actions.createPostStart({ formData, token }))
-        navigation.navigate('HomeStack')
+        // navigation.navigate('HomeStack')
     }
 
     return (
@@ -50,6 +50,7 @@ const UploadImageScreen = ({ navigation, route }) => {
                         <View style={tw`shadow-lg`}>
                             <Image
                                 source={{ uri: `data:image/png;base64,${image}` }}
+                                // source={{ uri: image.uri }}
                                 style={[tw`mr-2 rounded-[1]`, { width: FRAMESIZE_W / 3, height: FRAMESIZE_H / 3 }]}
                             />
                         </View>

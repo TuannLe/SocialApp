@@ -7,8 +7,12 @@ function* fetchPostSaga(action) {
     try {
         console.log('Fetching post running...')
 
-        const posts = yield call(api.fetchPosts)
+        const posts = yield call(api.fetchPosts, {
+            token: action.payload.token,
+            userId: action.payload.userId,
+        })
         if (posts.status == 200) {
+            console.log('getPostsSuccess')
             yield put(actions.getPostsSuccess(posts.data))
         }
     } catch (error) {
@@ -22,9 +26,11 @@ function* createPostSaga(action) {
         console.log('Creating post running...')
         const res = yield call(api.createPost, {
             token: action.payload.token,
-            formData: action.payload.formData
+            formData: action.payload.formData,
         })
-        if (res) {
+        if (res.status == 200) {
+            console.log("Post success")
+            console.log(res.data)
             yield put(actions.createPostSuccess(res.data))
         }
     } catch (error) {

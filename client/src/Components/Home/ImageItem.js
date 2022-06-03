@@ -9,7 +9,8 @@ const ImageItem = ({ image }) => {
     return (
         <View>
             <Image
-                source={{ uri: image }}
+                // source={{ uri: image }}
+                source={{ uri: `data:image/png;base64,${image}` }}
                 style={[styles.image, tw`h-full`]}
                 resizeMode='cover'
             />

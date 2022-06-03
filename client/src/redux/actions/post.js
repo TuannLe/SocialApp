@@ -1,9 +1,10 @@
 import * as TYPES from '../constants/post'
 
 // Get posts
-export const getPostsStart = () => {
+export const getPostsStart = (payload) => {
     return {
         type: TYPES.GET_POSTS_START,
+        payload: payload
     }
 }
 

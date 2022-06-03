@@ -103,7 +103,7 @@ const Post = (props) => {
                     onActivated={handlePressHeart}
                 >
                     <FlatList
-                        data={post.item.attachment}
+                        data={post.item.images}
                         renderItem={({ item }) => {
                             return <ImageItem image={item} />
                         }}
@@ -154,7 +154,7 @@ const Post = (props) => {
                 />
             </View>
             <View style={tw`absolute bottom-1 inset-x-2`}>
-                {(post.item.attachment.length > 1) ? (
+                {(post.item.images.length > 1) ? (
                     <Paginator data={post.item.attachment} scrollX={scrollX} />
                 ) : (
                     <></>
