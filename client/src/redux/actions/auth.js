@@ -51,3 +51,16 @@ export const logout = () => {
         payload: {}
     }
 }
+
+// Edit profile
+export const editProfileStart = () => {
+
+}
+
+export const editProfileSuccess = () => {
+
+}
+
+export const editProfileFailure = () => {
+
+}

@@ -50,6 +50,20 @@ export default function authReducers(state = INIT_STATE.auth, action) {
         ...state,
         currentUser: {}
       }
+
+    // Edit profile
+    case TYPES.EDIT_PROFILE_START:
+      return {
+
+      }
+    case TYPES.EDIT_PROFILE_START:
+      return {
+
+      }
+    case TYPES.EDIT_PROFILE_FAILURE:
+      return {
+
+      }
     default:
       return state
   }

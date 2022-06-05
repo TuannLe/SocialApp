@@ -31,6 +31,14 @@ function* registerSaga(action) {
     }
 }
 
+function* editProfileSaga(action) {
+    try {
+
+    } catch (error) {
+
+    }
+}
+
 export default authSaga = [
     takeLatest(TYPES.LOGIN_START, fetchLoginSaga),
     takeLatest(TYPES.REGISTER_START, registerSaga),
