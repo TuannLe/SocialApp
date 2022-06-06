@@ -28,7 +28,14 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 8,
-    }
+    },
+    avatar: {
+        type: String,
+        default: '',
+    },
+    friends: Array,
+    userBlock: Array,
+    bio: String,
 }, { timestamps: true })
 
 export const UserModel = mongoose.model('User', schema)

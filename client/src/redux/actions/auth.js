@@ -53,14 +53,45 @@ export const logout = () => {
 }
 
 // Edit profile
-export const editProfileStart = () => {
-
+export const editProfileStart = (payload) => {
+    return {
+        type: TYPES.EDIT_PROFILE_START,
+        payload: payload
+    }
 }
 
-export const editProfileSuccess = () => {
-
+export const editProfileSuccess = (payload) => {
+    return {
+        type: TYPES.EDIT_PROFILE_SUCCESS,
+        payload: payload
+    }
 }
 
-export const editProfileFailure = () => {
+export const editProfileFailure = (error) => {
+    return {
+        type: TYPES.EDIT_PROFILE_FAILURE,
+        error: error
+    }
+}
 
+// Update avatar
+export const updateAvatarStart = (payload) => {
+    return {
+        type: TYPES.UPDATE_AVATAR_START,
+        payload: payload
+    }
+}
+
+export const updateAvatarSuccess = (payload) => {
+    return {
+        type: TYPES.UPDATE_AVATAR_SUCCESS,
+        payload: payload
+    }
+}
+
+export const updateAvatarFailure = (error) => {
+    return {
+        type: TYPES.UPDATE_AVATAR_FAILURE,
+        error: error
+    }
 }

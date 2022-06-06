@@ -54,15 +54,41 @@ export default function authReducers(state = INIT_STATE.auth, action) {
     // Edit profile
     case TYPES.EDIT_PROFILE_START:
       return {
-
+        ...state,
+        isLoading: true,
       }
     case TYPES.EDIT_PROFILE_START:
       return {
-
+        ...state,
+        data: action.payload,
+        isLoading: false,
+        error: false,
       }
     case TYPES.EDIT_PROFILE_FAILURE:
       return {
+        ...state,
+        isLoading: false,
+        error: true,
+      }
 
+    // Update avatar
+    case TYPES.UPDATE_AVATAR_START:
+      return {
+        ...state,
+        isLoading: true,
+      }
+    case TYPES.UPDATE_AVATAR_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        isLoading: false,
+        error: false,
+      }
+    case TYPES.UPDATE_AVATAR_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: true
       }
     default:
       return state

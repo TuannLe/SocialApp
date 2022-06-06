@@ -8,6 +8,7 @@ export const INIT_STATE = {
         currentUser: {},
         isLoading: false,
         message: '',
+        data: {},
         error: false
     }
 }

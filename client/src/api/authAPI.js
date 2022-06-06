@@ -24,3 +24,17 @@ export const register = async (payload) => {
     }
 }
 
+export const editProfile = async ({ token, formData }) => {
+    try {
+        const res = await AXIOS.post(`v1/user/editProfile`, formData, {
+            headers: {
+                'token': `Bearer ${token}`,
+                'Content-Type': `multipart/form-data`,
+            }
+        })
+        return res
+    } catch (error) {
+        return error
+    }
+}
+

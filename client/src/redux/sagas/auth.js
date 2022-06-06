@@ -33,9 +33,16 @@ function* registerSaga(action) {
 
 function* editProfileSaga(action) {
     try {
-
+        console.log('Edit profile running...')
+        const res = yield call(api.editProfile, {
+            token: action.payload.token,
+            formData: action.payload.formData,
+        })
+        if (res.status == 200) {
+            yield put(actions.editProfileSuccess(action.payload))
+        }
     } catch (error) {
-
+        yield put(actions.editProfileError(error))
     }
 }
 

@@ -16,5 +16,24 @@ export const userController = {
         } catch (error) {
             res.status(500).json(error);
         }
+    },
+    editProfile: async (req, res) => {
+        try {
+            const data = req.body
+            console.log(data);
+            const user = await UserModel.findOneAndUpdate({ _id: data._id }, data, { new: true })
+            res.status(200).json(user)
+        } catch (error) {
+            res.status(500).json({ error: error });
+        }
+    },
+    updateAvatar: async (req, res) => {
+        try {
+            const data = req.body
+            const user = await UserModel.findOneAndUpdate({ _id: data._id }, data, { new: true })
+            res.status(200).json(user)
+        } catch (error) {
+            res.status(500).json({ error: error })
+        }
     }
 }
