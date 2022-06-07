@@ -12,10 +12,10 @@ const EditProfile = ({ visible, handleVisible }) => {
     const userId = currentUser._id
     const token = currentUser.accessToken
 
-    const { firstName, setFirstName } = useState(currentUser.firstName)
-    const { lastName, setLastName } = useState(currentUser.lastName)
-    const { bio, setBio } = useState(currentUser.bio)
-    const { avatar, setAvatar } = useState(currentUser.avatar)
+    const [firstName, setFirstName] = useState(currentUser.firstName)
+    const [lastName, setLastName] = useState(currentUser.lastName)
+    const [bio, setBio] = useState(currentUser.bio)
+    const [avatar, setAvatar] = useState(currentUser.avatar)
 
     const handleSelectPicture = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({

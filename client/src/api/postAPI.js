@@ -2,13 +2,20 @@ import AXIOS from './index'
 
 const url = '/posts'
 
-export const fetchPosts = async ({ token }) => {
+export const fetchPosts = async ({ token, userId }) => {
+    console.log(userId)
+    console.log(token)
     try {
-        const res = await AXIOS.get(url, {
-            headers: {
-                'token': `Bearer ${token}`
-            }
-        })
+        const res = await AXIOS.post(url,
+            {
+                userId: userId
+            },
+            {
+                headers: {
+                    'token': `Bearer ${token}`
+                }
+            })
+        console.log(res)
         return res
     } catch (error) {
         return error
@@ -16,7 +23,6 @@ export const fetchPosts = async ({ token }) => {
 }
 
 export const createPost = async ({ token, formData }) => {
-    console.log(formData)
     try {
         const res = await AXIOS.post(`${url}/create`, formData, {
             headers: {

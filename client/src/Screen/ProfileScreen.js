@@ -48,7 +48,7 @@ const ProfileScreen = () => {
                 <View style={tw`relative flex-1 bg-white -mt-10 rounded-t-[40px]`}>
                     <View style={tw`absolute -top-14 left-10 z-1 p-1 shadow-lg bg-white rounded-full`}>
                         <Image
-                            source={require('../images/avatarProfile.jpg')}
+                            source={currentUser.avatar ? { uri: `data:image/png;base64,${currentUser.avatar}` } : require('../images/defaultAvatar.png')}
                             style={tw`w-25 h-25 rounded-full`}
                         />
                     </View>
@@ -71,11 +71,11 @@ const ProfileScreen = () => {
                                 <Text style={tw`text-gray-400 text-xs`}>Posts</Text>
                             </View>
                             <View style={tw`flex-1 items-center`}>
-                                <Text style={tw`font-medium text-sm`}>120</Text>
+                                <Text style={tw`font-medium text-sm`}>{currentUser.followers.length}</Text>
                                 <Text style={tw`text-gray-400 text-xs`}>Followers</Text>
                             </View>
                             <View style={tw`flex-1 items-center`}>
-                                <Text style={tw`font-medium text-sm`}>50</Text>
+                                <Text style={tw`font-medium text-sm`}>{currentUser.following.length}</Text>
                                 <Text style={tw`text-gray-400 text-xs`}>Following</Text>
                             </View>
                         </View>

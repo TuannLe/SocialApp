@@ -11,6 +11,7 @@ function* fetchPostSaga(action) {
             token: action.payload.token,
             userId: action.payload.userId,
         })
+        console.log(posts)
         if (posts.status == 200) {
             console.log('getPostsSuccess')
             yield put(actions.getPostsSuccess(posts.data))

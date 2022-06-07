@@ -25,8 +25,10 @@ export const register = async (payload) => {
 }
 
 export const editProfile = async ({ token, formData }) => {
+    console.log(token)
+    console.log(formData)
     try {
-        const res = await AXIOS.post(`v1/user/editProfile`, formData, {
+        const res = await AXIOS.post(`/v1/user/editProfile`, formData, {
             headers: {
                 'token': `Bearer ${token}`,
                 'Content-Type': `multipart/form-data`,

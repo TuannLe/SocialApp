@@ -33,7 +33,8 @@ const schema = new mongoose.Schema({
         type: String,
         default: '',
     },
-    friends: Array,
+    followers: Array,
+    following: Array,
     userBlock: Array,
     bio: String,
 }, { timestamps: true })

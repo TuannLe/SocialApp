@@ -38,8 +38,10 @@ function* editProfileSaga(action) {
             token: action.payload.token,
             formData: action.payload.formData,
         })
+        console.log(res)
         if (res.status == 200) {
-            yield put(actions.editProfileSuccess(action.payload))
+            console.log('Edit profile success')
+            yield put(actions.editProfileSuccess(res.data))
         }
     } catch (error) {
         yield put(actions.editProfileError(error))
@@ -49,4 +51,5 @@ function* editProfileSaga(action) {
 export default authSaga = [
     takeLatest(TYPES.LOGIN_START, fetchLoginSaga),
     takeLatest(TYPES.REGISTER_START, registerSaga),
+    takeLatest(TYPES.EDIT_PROFILE_START, editProfileSaga),
 ]
