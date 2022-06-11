@@ -56,7 +56,6 @@ const Post = ({ post, token, userId }) => {
     const handlePressHeart = () => {
         setHeart(!heart);
         const postId = post.item._id
-        console.log(token, postId)
         dispatch(actions.likePostStart({ token, postId, userId }))
         heart ? setTotalHeart(totalHeart - 1) : setTotalHeart(totalHeart + 1)
     }

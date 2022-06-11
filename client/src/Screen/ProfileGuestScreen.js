@@ -6,6 +6,8 @@ import { Feather, FontAwesome } from '@expo/vector-icons';
 import RBSheet from 'react-native-raw-bottom-sheet'
 import { useNavigation } from '@react-navigation/native';
 import { FlatGrid } from 'react-native-super-grid';
+import { useDispatch, useSelector } from 'react-redux'
+import * as actions from '../redux/actions/user'
 import PostItem from '../Components/Profile/PostItem'
 import GuestProfileModal from '../Components/Modal/GuestProfileModal';
 
@@ -56,40 +58,31 @@ const data = [
         postId: '8',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Kim_Ji-soo_at_Incheon_Airport%2C_heading_to_Amsterdam_on_May_16th%2C_2019_21.png/1200px-Kim_Ji-soo_at_Incheon_Airport%2C_heading_to_Amsterdam_on_May_16th%2C_2019_21.png',
         title: ''
-    },
-    {
-        postId: '9',
-        image: 'https://2sao.vietnamnetjsc.vn/images/2022/02/20/21/00/IU-2.jpg',
-        title: ''
-    }
-    ,
-    {
-        postId: '10',
-        image: 'https://afamilycdn.com/150157425591193600/2021/6/8/photo-1-16229736437071881672186-16231223886751522999177.jpg',
-        title: ''
-    }
-    ,
-    {
-        postId: '11',
-        image: 'https://nguoinoitieng.tv/images/nnt/96/2/bbnh.jpg',
-        title: ''
-    }
-    ,
-    {
-        postId: '12',
-        image: 'https://thuthuatnhanh.com/wp-content/uploads/2021/06/Hinh-anh-Rose-Black-Pink-1.jpg',
-        title: ''
     }
 ]
 
-const ProfileGuestScreen = () => {
+const ProfileGuestScreen = ({ route }) => {
     PixelRatio.getPixelSizeForLayoutSize(width);
-    const refRBSheet = useRef()
+    // const refRBSheet = useRef()
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+
+    const token = useSelector((state) => state.auth.currentUser.accessToken)
+    const currentUserId = useSelector((state) => state.auth.currentUser._id)
 
     const [isVisibleMenuModal, setVisibleMenuModal] = useState(false)
+    const [totalFollowers, setTotalFollowers] = useState(route.params.totalFollowers)
+    const [isFollow, setIsFollow] = useState(false)
+
     const handleVisibleMenuModal = () => {
         setVisibleMenuModal(!isVisibleMenuModal)
+    }
+    const handleFollow = () => {
+        setIsFollow(!isFollow)
+        const userId = route.params.userId
+        isFollow
+            ? dispatch(actions.unFollowUserStart({ token, currentUserId, userId }))
+            : dispatch(actions.followUserStart({ token, currentUserId, userId }))
     }
 
     return (
@@ -123,34 +116,35 @@ const ProfileGuestScreen = () => {
                 <View style={tw`relative flex-1 bg-white -mt-10 rounded-t-[40px]`}>
                     <View style={tw`absolute -top-14 left-10 z-1 p-1 shadow-lg bg-white rounded-full`}>
                         <Image
-                            source={require('../images/avatarProfile.jpg')}
+                            source={route.params.avatar ? { uri: `data:image/png;base64,${route.params.avatar}` } : require('../images/defaultAvatar.png')}
                             style={tw`w-25 h-25 rounded-full`}
                         />
                     </View>
                     <View style={tw`flex flex-row p-3`}>
                         <Text style={tw`w-[${width / 5 * 2}px]`}></Text>
                         <View style={tw`flex flex-1`}>
-                            <Text style={tw`text-base font-bold`}>Tuan Le</Text>
-                            <Text style={tw`text-sm text-gray-400`}>tuanle@gmail.com</Text>
+                            <Text style={tw`text-base font-bold`}>{route.params.firstName + ' ' + route.params.lastName}</Text>
+                            <Text style={tw`text-sm text-gray-400`}>{route.params.email}</Text>
                         </View>
                     </View>
                     <View style={tw`px-3 flex-1`}>
                         <View style={tw`flex flex-row`}>
                             <View style={tw`flex-1 items-center`}>
-                                <Text style={tw`font-medium text-sm`}>12</Text>
+                                <Text style={tw`font-medium text-sm`}>10</Text>
                                 <Text style={tw`text-gray-400 text-xs`}>Posts</Text>
                             </View>
                             <View style={tw`flex-1 items-center`}>
-                                <Text style={tw`font-medium text-sm`}>120</Text>
+                                <Text style={tw`font-medium text-sm`}>{totalFollowers}</Text>
                                 <Text style={tw`text-gray-400 text-xs`}>Followers</Text>
                             </View>
                             <View style={tw`flex-1 items-center`}>
-                                <Text style={tw`font-medium text-sm`}>50</Text>
+                                <Text style={tw`font-medium text-sm`}>{route.params.totalFollowings}</Text>
                                 <Text style={tw`text-gray-400 text-xs`}>Following</Text>
                             </View>
                         </View>
                         <View style={tw`flex flex-row my-2 `}>
                             <TouchableOpacity
+                                onPress={handleFollow}
                                 style={tw`flex-1 py-2 rounded-lg bg-pink-500 mr-2`}
                             >
                                 <Text style={tw`text-white text-center font-medium`}>Follow</Text>

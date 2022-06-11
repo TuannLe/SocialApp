@@ -72,7 +72,7 @@ export const deletePost = async (req, res) => {
     }
 }
 
-// Like post
+// Like, dislike post
 export const likePost = async (req, res) => {
     try {
         const post = await PostModel.findById(req.params.id)

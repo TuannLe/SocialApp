@@ -44,8 +44,8 @@ function* followUserSaga(action) {
             currentUserId: action.payload.currentUserId
         })
         if (res.status == 200) {
-            console.log('Follow successfully')
-            yield put(actions.followUserSuccess(res.data))
+            console.log(res.data)
+            yield put(actions.followUserSuccess())
         }
     } catch (error) {
         yield put(actions.followUserFailure(error))
@@ -70,5 +70,7 @@ function* unFollowUserSaga(action) {
 }
 
 export default userSaga = [
-    takeLatest(TYPES.FIND_USERS_START, findUsersSaga)
+    takeLatest(TYPES.FIND_USERS_START, findUsersSaga),
+    takeLatest(TYPES.FOLLOW_USER_START, followUserSaga),
+    takeLatest(TYPES.UNFOLLOW_USER_START, unFollowUserSaga)
 ]

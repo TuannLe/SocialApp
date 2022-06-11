@@ -50,7 +50,6 @@ export default function userReducers(state = INIT_STATE.user, action) {
         case TYPES.FOLLOW_USER_SUCCESS:
             return {
                 ...state,
-                data: action.payload,
                 isLoading: false,
                 error: false
             }

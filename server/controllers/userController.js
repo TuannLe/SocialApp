@@ -35,7 +35,7 @@ export const userController = {
     findUsers: async (req, res) => {
         try {
             let user = new RegExp('^' + req.body.query)
-            const List = UserModel.find({ firstName: { $regex: user } })
+            UserModel.find({ firstName: { $regex: user } })
                 .then(users => {
                     res.json(users)
                 })
@@ -54,9 +54,25 @@ export const userController = {
             res.status(500).json(error);
         }
     },
+    checkFollow: async (req, res) => {
+        try {
+            if (req.body.userId !== req.params.id) {
+                const user = await UserModel.findById(req.params.id)
+                if (!user.followers.includes(req.body.userId)) {
+                    res.status(200).json(0)
+                } else {
+                    res.status(200).json(1)
+                }
+            } else {
+                res.status(403).json('You cant follow yourself')
+            }
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
     follow: async (req, res) => {
         try {
-            if (req.body.userId !== req.params._id) {
+            if (req.body.userId !== req.params.id) {
                 try {
                     const user = await UserModel.findById(req.params.id)
                     const currentUser = await UserModel.findById(req.body.userId)
@@ -79,7 +95,7 @@ export const userController = {
     },
     unFollow: async (req, res) => {
         try {
-            if (req.body.userId !== req.params._id) {
+            if (req.body.userId !== req.params.id) {
                 try {
                     const user = await UserModel.findById(req.params.id)
                     const currentUser = await UserModel.findById(req.body.userId)

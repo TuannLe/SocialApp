@@ -5,11 +5,22 @@ import { useNavigation } from '@react-navigation/native'
 
 const SearchItem = ({ item }) => {
     const navigation = useNavigation()
+    const handleSelect = () => {
+        navigation.navigate('ProfileGuestStack', {
+            userId: item.item._id,
+            avatar: item.item.avatar,
+            firstName: item.item.firstName,
+            lastName: item.item.lastName,
+            email: item.item.email,
+            totalFollowers: item.item.followers.length,
+            totalFollowings: item.item.following.length
+        })
+    }
 
     return (
         <View style={tw`flex px-3`}>
             <TouchableOpacity
-                onPress={() => navigation.navigate('ProfileGuestStack')}
+                onPress={handleSelect}
                 style={tw`flex flex-row items-center mb-3 `}
             >
                 <Image
