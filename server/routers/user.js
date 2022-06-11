@@ -16,6 +16,8 @@ const upload = multer({ storage: storage })
 
 router.get("/", middlewareController.verifyToken, userController.getAllUsers)
 router.post('/editProfile', upload.array("avatar"), middlewareController.verifyToken, userController.editProfile)
+router.post('/searchUsers', middlewareController.verifyToken, userController.findUsers)
+router.get('/:id/getUserById', middlewareController.verifyToken, userController.getUserById)
 router.put('/:id/follow', middlewareController.verifyToken, userController.follow)
 router.put('/:id/unFollow', middlewareController.verifyToken, userController.unFollow)
 router.delete('/:id', middlewareController.verifyTokenAndAdminAuth, userController.deleteUser)

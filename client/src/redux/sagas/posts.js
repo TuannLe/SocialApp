@@ -3,6 +3,7 @@ import * as actions from '../actions/post'
 import * as api from '../../api/postAPI'
 import * as TYPES from '../constants/post'
 
+// Get posts saga
 function* fetchPostSaga(action) {
     try {
         console.log('Fetching post running...')
@@ -11,7 +12,6 @@ function* fetchPostSaga(action) {
             token: action.payload.token,
             userId: action.payload.userId,
         })
-        console.log(posts)
         if (posts.status == 200) {
             console.log('getPostsSuccess')
             yield put(actions.getPostsSuccess(posts.data))
@@ -22,6 +22,7 @@ function* fetchPostSaga(action) {
     }
 }
 
+// Create post saga
 function* createPostSaga(action) {
     try {
         console.log('Creating post running...')
@@ -31,7 +32,6 @@ function* createPostSaga(action) {
         })
         if (res.status == 200) {
             console.log("Post success")
-            console.log(res.data)
             yield put(actions.createPostSuccess(res.data))
         }
     } catch (error) {
@@ -40,8 +40,64 @@ function* createPostSaga(action) {
     }
 }
 
+// Edit post saga
+function* editPostSaga(action) {
+    try {
+        console.log('Edit post running...')
+        const res = yield call(api.updatePost, {
+            token: action.payload.token,
+            formData: action.payload.formData
+        })
+        if (res.status == 200) {
+            console.log('Edit post succeeded')
+            yield put(actions.updatePostSuccess(res.data))
+        }
+    } catch (error) {
+        console.log(error)
+        yield put(actions.updatePostError(error))
+    }
+}
+
+// Delete post saga
+function* deletePostSager(action) {
+    try {
+        console.log('Delete post running...')
+        const res = yield call(api.deletePost, {
+            token: action.payload.token,
+            postId: action.payload.postId
+        })
+        if (res.status == 200) {
+            console.log('Delete post succeeded')
+            yield put(actions.deletePostSuccess(res.data))
+        }
+    } catch (error) {
+        console.log(error)
+        yield put(actions.deletePostError(error))
+    }
+}
+
+// Like, disLike post saga
+function* likePostSaga(action) {
+    try {
+        console.log('Like post running...')
+        const res = yield call(api.likePost, {
+            token: action.payload.token,
+            userId: action.payload.userId,
+            postId: action.payload.postId
+        })
+        if (res.status == 200) {
+            console.log(res.data)
+            yield put(actions.likePostSuccess())
+        }
+    } catch (error) {
+        console.log(error)
+        yield put(actions.likePostError(error))
+    }
+}
+
 export default postSaga = [
     takeLatest(TYPES.GET_POSTS_START, fetchPostSaga),
-    takeLatest(TYPES.CREATE_POST_START, createPostSaga)
+    takeLatest(TYPES.CREATE_POST_START, createPostSaga),
+    takeLatest(TYPES.LIKE_POST_START, likePostSaga)
 ]
 

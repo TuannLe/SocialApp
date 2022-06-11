@@ -63,6 +63,44 @@ export default function postsReducers(state = INIT_STATE.posts, action) {
         //         isLoading: false,
         //         error: true
         //     }
+
+        // Delete post 
+        case TYPES.DELETE_POST_START:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case TYPES.DELETE_POST_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                data: action.payload,
+                error: false
+            }
+        case TYPES.DELETE_POST_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: true
+            }
+        // Like post
+        case TYPES.LIKE_POST_START:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case TYPES.LIKE_POST_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                error: false
+            }
+        case TYPES.LIKE_POST_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: true
+            }
         default:
             return state
     }

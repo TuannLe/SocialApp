@@ -77,7 +77,7 @@ const Home = () => {
                 <Animated.FlatList
                     data={data}
                     renderItem={(post) => {
-                        return <Post post={post} />
+                        return <Post post={post} token={token} userId={userId} />
                     }}
                     keyExtractor={post => post._id}
                     showsHorizontalScrollIndicator={false}

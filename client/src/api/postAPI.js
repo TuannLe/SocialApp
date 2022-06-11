@@ -3,8 +3,6 @@ import AXIOS from './index'
 const url = '/posts'
 
 export const fetchPosts = async ({ token, userId }) => {
-    console.log(userId)
-    console.log(token)
     try {
         const res = await AXIOS.post(url,
             {
@@ -15,7 +13,6 @@ export const fetchPosts = async ({ token, userId }) => {
                     'token': `Bearer ${token}`
                 }
             })
-        console.log(res)
         return res
     } catch (error) {
         return error
@@ -40,6 +37,39 @@ export const createPost = async ({ token, formData }) => {
 export const updatePost = async ({ token, payload }) => {
     try {
         const res = await AXIOS.post(`${url}/update`, payload)
+        return res
+    } catch (error) {
+        return error
+    }
+}
+
+export const deletePost = async ({ token, postId }) => {
+    try {
+        const res = await AXIOS.delete(`${url}/${postId}`, {
+            headers: {
+                'token': `Bearer ${token}`,
+                'Content-Type': `multipart/form-data`,
+            }
+        })
+        return res
+    } catch (error) {
+        return error
+    }
+}
+
+export const likePost = async ({ token, postId, userId }) => {
+    try {
+        console.log(token)
+        console.log('postId', postId)
+        console.log('userId', userId)
+        const res = await AXIOS.put(`${url}/${postId}/like`,
+            {
+                userId: userId,
+            }, {
+            headers: {
+                'token': `Bearer ${token}`,
+            }
+        })
         return res
     } catch (error) {
         return error

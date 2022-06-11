@@ -7,6 +7,8 @@ import { BlurView } from 'expo-blur';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import RBSheet from 'react-native-raw-bottom-sheet'
+import { useSelector, useDispatch } from 'react-redux'
+import * as actions from '../../redux/actions/post'
 import Paginator from './Paginator';
 import ImageItem from './ImageItem'
 import CommentItem from './CommentItem';
@@ -32,24 +34,31 @@ const data = [
     }
 ]
 
-const Post = (props) => {
+const Post = ({ post, token, userId }) => {
     const refRBSheet = useRef()
     const navigation = useNavigation()
+    const dispatch = useDispatch()
 
     const { width: SCREEN_WIDTH } = Dimensions.get('window');
     const FRAMESIZE_W = SCREEN_WIDTH;
     const FRAMESIZE_H = SCREEN_WIDTH / 2 * 3;
-    const { post } = props;
+    // const { post } = props;
     const slidesRef = useRef(null);
     const scrollX = useRef(new Animated.Value(0)).current;
     const [currentIndex, setCurrentIndex] = useState(0);
+
     const [heart, setHeart] = useState(false);
+    const [totalHeart, setTotalHeart] = useState(post.item.likes.length)
 
     const [showMore, setShowMore] = useState(false)
     const [lengthMore, setLengthMore] = useState(false);
 
     const handlePressHeart = () => {
         setHeart(!heart);
+        const postId = post.item._id
+        console.log(token, postId)
+        dispatch(actions.likePostStart({ token, postId, userId }))
+        heart ? setTotalHeart(totalHeart - 1) : setTotalHeart(totalHeart + 1)
     }
 
     const viewableItemsChanged = useRef(({ viewableItems }) => {
@@ -130,11 +139,11 @@ const Post = (props) => {
                     >
                         <View style={tw`flex flex-col`}>
                             <TouchableOpacity
-                                onPress={() => setHeart(!heart)}
+                                onPress={handlePressHeart}
                                 style={tw`flex flex-col items-center justify-center`}
                             >
                                 <Ionicons name="ios-heart" size={22} style={heart ? tw`text-red-500` : tw`text-white`} />
-                                <Text style={tw`text-white text-xs`}>140</Text>
+                                <Text style={tw`text-white text-xs`}>{totalHeart}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={() => refRBSheet.current.open()}
@@ -153,13 +162,13 @@ const Post = (props) => {
                     style={tw`w-full h-55 absolute bottom-0 inset-x-0`}
                 />
             </View>
-            <View style={tw`absolute bottom-1 inset-x-2`}>
+            {/* <View style={tw`absolute bottom-1 inset-x-2`}>
                 {(post.item.images.length > 1) ? (
                     <Paginator data={post.item.attachment} scrollX={scrollX} />
                 ) : (
                     <></>
                 )}
-            </View>
+            </View> */}
 
             <RBSheet
                 ref={refRBSheet}

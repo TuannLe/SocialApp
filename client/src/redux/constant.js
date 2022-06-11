@@ -10,5 +10,11 @@ export const INIT_STATE = {
         message: '',
         data: {},
         error: false
-    }
+    },
+    user: {
+        data: {},
+        isLoading: false,
+        message: '',
+        error: false,
+    },
 }

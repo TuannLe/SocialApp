@@ -7,9 +7,9 @@ import { UserModel } from '../models/UserModel.js';
 // Create Post
 export const createPost = async (req, res) => {
     try {
-        const image = fs.readFileSync(req.files[0].path, { encoding: 'base64' })
+        // const image = fs.readFileSync(req.files[0].path, { encoding: 'base64' })
         const newPost = {
-            images: image,
+            images: req.body.images,
             author: req.body.author,
             content: req.body.content
         }

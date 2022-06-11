@@ -26,8 +26,29 @@ export const userController = {
                 bio: req.body.bio,
                 avatar: req.body.avatar,
             }
-            console.log(data);
             const user = await UserModel.findOneAndUpdate({ _id: data._id }, data, { new: true })
+            res.status(200).json(user)
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
+    findUsers: async (req, res) => {
+        try {
+            let user = new RegExp('^' + req.body.query)
+            const List = UserModel.find({ firstName: { $regex: user } })
+                .then(users => {
+                    res.json(users)
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
+    getUserById: async (req, res) => {
+        try {
+            const user = await UserModel.findById(req.params.id)
             res.status(200).json(user)
         } catch (error) {
             res.status(500).json(error);
