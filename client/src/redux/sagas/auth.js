@@ -38,7 +38,6 @@ function* editProfileSaga(action) {
             token: action.payload.token,
             formData: action.payload.formData,
         })
-        console.log(res)
         if (res.status == 200) {
             console.log('Edit profile success')
             yield put(actions.editProfileSuccess(res.data))
