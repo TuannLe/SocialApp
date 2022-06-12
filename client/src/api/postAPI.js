@@ -34,9 +34,14 @@ export const createPost = async ({ token, formData }) => {
     }
 }
 
-export const updatePost = async ({ token, payload }) => {
+export const updatePost = async ({ token, formData }) => {
     try {
-        const res = await AXIOS.post(`${url}/update`, payload)
+        const res = await AXIOS.post(`${url}/update`, formData, {
+            headers: {
+                'token': `Bearer ${token}`,
+                'Content-Type': `multipart/form-data`,
+            }
+        })
         return res
     } catch (error) {
         return error

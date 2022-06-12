@@ -99,6 +99,7 @@ function* likePostSaga(action) {
 export default postSaga = [
     takeLatest(TYPES.GET_POSTS_START, fetchPostSaga),
     takeLatest(TYPES.CREATE_POST_START, createPostSaga),
+    takeLatest(TYPES.UPDATE_POST_START, editPostSaga),
     takeLatest(TYPES.DELETE_POST_START, deletePostSaga),
     takeLatest(TYPES.LIKE_POST_START, likePostSaga)
 ]

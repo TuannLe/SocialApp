@@ -44,25 +44,25 @@ export default function postsReducers(state = INIT_STATE.posts, action) {
                 error: true
             }
 
-        // // Update post
-        // case TYPES.UPDATE_POST_START:
-        //     return {
-        //         ...state,
-        //         isLoading: true
-        //     }
-        // case TYPES.UPDATE_POST_SUCCESS:
-        //     return {
-        //         ...state,
-        //         data: action.payload,
-        //         isLoading: false,
-        //         error: false
-        //     }
-        // case TYPES.UPDATE_POST_FAILURE:
-        //     return {
-        //         ...state,
-        //         isLoading: false,
-        //         error: true
-        //     }
+        // Update post
+        case TYPES.UPDATE_POST_START:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case TYPES.UPDATE_POST_SUCCESS:
+            return {
+                ...state,
+                data: action.payload,
+                isLoading: false,
+                error: false
+            }
+        case TYPES.UPDATE_POST_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: true
+            }
 
         // Delete post 
         case TYPES.DELETE_POST_START:

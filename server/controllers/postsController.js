@@ -50,12 +50,35 @@ export const getPosts = async (req, res) => {
     }
 }
 
+// Get post by userId
+export const getPostsByUserId = (req, res) => {
+    try {
+        const currentUser = await UserModel.findById(req.body.userId);
+        const userPosts = await PostModel.find({ author: currentUser._id })
+        res.status(200).json(userPosts)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
 // Update post
 export const updatePost = async (req, res) => {
     try {
-        const updatePost = (req.body)
-        const post = await PostModel.findOneAndUpdate({ _id: updatePost._id }, updatePost, { new: true })
-        res.status(200).json(post)
+        const updatePost = {
+            _id: req.body._id,
+            images: req.body.images,
+            content: req.body.content
+        }
+        await PostModel.findOneAndUpdate({ _id: updatePost._id }, updatePost, { new: true })
+
+        const currentUser = await UserModel.findById(req.body.userId);
+        const userPosts = await PostModel.find({ author: currentUser._id })
+        const friendPosts = await Promise.all(
+            currentUser.following.map((friendId) => {
+                return PostModel.find({ author: friendId })
+            })
+        )
+        res.status(200).json(userPosts.concat(...friendPosts))
     } catch (error) {
         res.status(500).json({ error: error })
     }
@@ -65,7 +88,7 @@ export const updatePost = async (req, res) => {
 export const deletePost = async (req, res) => {
     try {
         const _id = req.params.id
-        const post = await PostModel.findByIdAndDelete(_id)
+        await PostModel.findByIdAndDelete(_id)
         res.status(200).json('The post has been deleted')
     } catch (error) {
         res.status(500).json(error)

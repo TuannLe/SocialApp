@@ -16,7 +16,7 @@ const upload = multer({ storage: storage })
 
 router.post('/', middlewareController.verifyToken, getPosts)
 router.post('/create', upload.array("images"), middlewareController.verifyToken, createPost)
-router.post('/update', middlewareController.verifyToken, updatePost)
+router.post('/update', upload.array("images"), middlewareController.verifyToken, updatePost)
 router.delete('/:id', middlewareController.verifyToken, deletePost)
 router.put('/:id/like', middlewareController.verifyToken, likePost)
 

@@ -29,6 +29,7 @@ const PostModal = ({ handleVisible, isVisible, postId, images, content }) => {
                     <View style={tw`bg-white rounded-lg my-2 overflow-hidden`}>
                         <TouchableOpacity
                             onPress={() => navigation.navigate('EditPostStack', {
+                                postId: postId,
                                 images: images,
                                 content: content
                             })}
