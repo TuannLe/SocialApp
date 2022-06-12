@@ -21,6 +21,7 @@ export const findUsersFailure = (error) => {
         error
     }
 }
+
 // Get user by id
 export const getUserByIdStart = (payload) => {
     return {
@@ -42,6 +43,29 @@ export const getUserByIdFailure = (error) => {
         error
     }
 }
+
+// Check follow user
+export const checkFollowUserStart = (payload) => {
+    return {
+        type: TYPES.CHECK_FOLLOW_USER_START,
+        payload
+    }
+}
+
+export const checkFollowUserSuccess = (payload) => {
+    return {
+        type: TYPES.CHECK_FOLLOW_USER_SUCCESS,
+        payload
+    }
+}
+
+export const checkFollowUserFailure = (error) => {
+    return {
+        type: TYPES.CHECK_FOLLOW_USER_FAILURE,
+        error
+    }
+}
+
 // Follow user
 export const followUserStart = (payload) => {
     return {
@@ -63,6 +87,7 @@ export const followUserFailure = (error) => {
         error
     }
 }
+
 // UnFollow user
 export const unFollowUserStart = (payload) => {
     return {

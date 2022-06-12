@@ -41,6 +41,25 @@ export default function userReducers(state = INIT_STATE.user, action) {
                 isLoading: false,
                 error: true
             }
+        // Check follow user
+        case TYPES.CHECK_FOLLOW_USER_START:
+            return {
+                ...state,
+                isLoading: true,
+            }
+        case TYPES.CHECK_FOLLOW_USER_SUCCESS:
+            return {
+                ...state,
+                isFollow: action.payload,
+                isLoading: false,
+                error: false
+            }
+        case TYPES.CHECK_FOLLOW_USER_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: true
+            }
         // Follow user
         case TYPES.FOLLOW_USER_START:
             return {

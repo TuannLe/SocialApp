@@ -33,6 +33,17 @@ export const getUserById = async ({ token, userId }) => {
     }
 }
 
+export const checkFollowUser = async ({ userId, currentUserId }) => {
+    try {
+        const res = await AXIOS.post(`${url}/${userId}/checkFollow`, {
+            userId: currentUserId
+        })
+        return res
+    } catch (error) {
+        return error
+    }
+}
+
 export const followUser = async ({ token, userId, currentUserId }) => {
     try {
         const res = await AXIOS.put(`${url}/${userId}/follow`,

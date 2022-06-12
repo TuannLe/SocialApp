@@ -35,6 +35,22 @@ function* getUserSaga(action) {
     }
 }
 
+function* checkFollowSaga(action) {
+    try {
+        console.log('Check follow running...')
+        const res = yield call(apis.checkFollowUser, {
+            userId: action.payload.userId,
+            currentUserId: action.payload.currentUserId
+        })
+        if (res.status == 200) {
+            console.log('Check follow successfully')
+            yield put(actions.checkFollowUserSuccess(res.data))
+        }
+    } catch (error) {
+        yield put(actions.checkFollowUserFailure(error))
+    }
+}
+
 function* followUserSaga(action) {
     try {
         console.log('Follow user running...')
@@ -71,6 +87,7 @@ function* unFollowUserSaga(action) {
 
 export default userSaga = [
     takeLatest(TYPES.FIND_USERS_START, findUsersSaga),
+    takeLatest(TYPES.CHECK_FOLLOW_USER_START, checkFollowSaga),
     takeLatest(TYPES.FOLLOW_USER_START, followUserSaga),
     takeLatest(TYPES.UNFOLLOW_USER_START, unFollowUserSaga)
 ]

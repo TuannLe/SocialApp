@@ -33,6 +33,7 @@ function* createPostSaga(action) {
         if (res.status == 200) {
             console.log("Post success")
             yield put(actions.createPostSuccess(res.data))
+            yield put(actions.getPostsStart({ userId: action.payload.UserId, token: action.payload.token }))
         }
     } catch (error) {
         console.log(error)
@@ -59,7 +60,7 @@ function* editPostSaga(action) {
 }
 
 // Delete post saga
-function* deletePostSager(action) {
+function* deletePostSaga(action) {
     try {
         console.log('Delete post running...')
         const res = yield call(api.deletePost, {
@@ -98,6 +99,7 @@ function* likePostSaga(action) {
 export default postSaga = [
     takeLatest(TYPES.GET_POSTS_START, fetchPostSaga),
     takeLatest(TYPES.CREATE_POST_START, createPostSaga),
+    takeLatest(TYPES.DELETE_POST_START, deletePostSaga),
     takeLatest(TYPES.LIKE_POST_START, likePostSaga)
 ]
 

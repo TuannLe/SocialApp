@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { StyleSheet, View, Text, SafeAreaView, PixelRatio, Image, Dimensions, TouchableOpacity, FlatList } from 'react-native';
 import tw from 'twrnc';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -69,20 +69,25 @@ const ProfileGuestScreen = ({ route }) => {
 
     const token = useSelector((state) => state.auth.currentUser.accessToken)
     const currentUserId = useSelector((state) => state.auth.currentUser._id)
+    const userId = route.params.userId
 
     const [isVisibleMenuModal, setVisibleMenuModal] = useState(false)
     const [totalFollowers, setTotalFollowers] = useState(route.params.totalFollowers)
-    const [isFollow, setIsFollow] = useState(false)
+
+    const checkFollow = useSelector((state) => state.user.isFollow)
+    const [isFollow, setIsFollow] = useState(useSelector((state) => state.user.isFollow))
+    console.log(isFollow)
 
     const handleVisibleMenuModal = () => {
         setVisibleMenuModal(!isVisibleMenuModal)
     }
     const handleFollow = () => {
         setIsFollow(!isFollow)
-        const userId = route.params.userId
-        isFollow
-            ? dispatch(actions.unFollowUserStart({ token, currentUserId, userId }))
-            : dispatch(actions.followUserStart({ token, currentUserId, userId }))
+        dispatch(actions.followUserStart({ token, currentUserId, userId }))
+    }
+    const handleUnFollow = () => {
+        setIsFollow(!isFollow)
+        dispatch(actions.unFollowUserStart({ token, currentUserId, userId }))
     }
 
     return (
@@ -143,12 +148,21 @@ const ProfileGuestScreen = ({ route }) => {
                             </View>
                         </View>
                         <View style={tw`flex flex-row my-2 `}>
-                            <TouchableOpacity
-                                onPress={handleFollow}
-                                style={tw`flex-1 py-2 rounded-lg bg-pink-500 mr-2`}
-                            >
-                                <Text style={tw`text-white text-center font-medium`}>Follow</Text>
-                            </TouchableOpacity>
+                            {isFollow ?
+                                <TouchableOpacity
+                                    onPress={handleUnFollow}
+                                    style={tw`flex-1 py-2 rounded-lg bg-pink-500 mr-2`}
+                                >
+                                    <Text style={tw`text-white text-center font-medium`}>UnFollow</Text>
+                                </TouchableOpacity>
+                                :
+                                <TouchableOpacity
+                                    onPress={handleFollow}
+                                    style={tw`flex-1 py-2 rounded-lg bg-pink-500 mr-2`}
+                                >
+                                    <Text style={tw`text-white text-center font-medium`}>Follow</Text>
+                                </TouchableOpacity>
+                            }
                             <TouchableOpacity
                                 style={tw`flex-1 py-2 rounded-lg bg-white border border-gray-300`}
                             >

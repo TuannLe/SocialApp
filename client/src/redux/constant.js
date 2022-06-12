@@ -15,6 +15,7 @@ export const INIT_STATE = {
         data: {},
         isLoading: false,
         message: '',
+        isFollow: '',
         error: false,
     },
 }

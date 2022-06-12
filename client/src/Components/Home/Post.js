@@ -10,6 +10,7 @@ import RBSheet from 'react-native-raw-bottom-sheet'
 import { useSelector, useDispatch } from 'react-redux'
 import * as actions from '../../redux/actions/post'
 import Paginator from './Paginator';
+import PostModel from '../Modal/PostModal'
 import ImageItem from './ImageItem'
 import CommentItem from './CommentItem';
 
@@ -49,9 +50,16 @@ const Post = ({ post, token, userId }) => {
 
     const [heart, setHeart] = useState(false);
     const [totalHeart, setTotalHeart] = useState(post.item.likes.length)
+    // const [totalHeart, setTotalHeart] = useState(0)
 
     const [showMore, setShowMore] = useState(false)
     const [lengthMore, setLengthMore] = useState(false);
+
+    const [isVisibleModal, setVisibleModal] = useState(false)
+
+    const handleVisibleModal = () => {
+        setVisibleModal(!isVisibleModal)
+    }
 
     const handlePressHeart = () => {
         setHeart(!heart);
@@ -84,7 +92,11 @@ const Post = ({ post, token, userId }) => {
                         <Text style={tw`text-xs text-gray-400`}>2 giờ trước</Text>
                     </View>
                 </View>
-                <MaterialCommunityIcons name="dots-horizontal" style={tw`text-2xl text-black`} />
+                <TouchableOpacity
+                    onPress={handleVisibleModal}
+                >
+                    <MaterialCommunityIcons name="dots-horizontal" style={tw`text-2xl text-black`} />
+                </TouchableOpacity>
             </View>
             <View style={tw`my-2 px-3`}>
                 <Text
@@ -189,6 +201,13 @@ const Post = ({ post, token, userId }) => {
                     />
                 </View>
             </RBSheet>
+            <PostModel
+                handleVisible={handleVisibleModal}
+                isVisible={isVisibleModal}
+                postId={post.item._id}
+                images={post.item.images}
+                content={post.item.content}
+            />
 
         </View>
     )

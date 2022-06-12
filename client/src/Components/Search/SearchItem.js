@@ -2,10 +2,16 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import tw from 'twrnc';
 import { useNavigation } from '@react-navigation/native'
+import { useSelector, useDispatch } from 'react-redux'
+import * as actions from '../../redux/actions/user'
 
 const SearchItem = ({ item }) => {
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+    const currentUserId = useSelector((state) => state.auth.currentUser._id)
+
     const handleSelect = () => {
+        dispatch(actions.checkFollowUserStart({ userId: item.item._id, currentUserId }))
         navigation.navigate('ProfileGuestStack', {
             userId: item.item._id,
             avatar: item.item.avatar,
