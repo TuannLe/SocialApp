@@ -18,10 +18,12 @@ const UploadImageScreen = ({ navigation, route }) => {
     const UserId = useSelector((state) => state.auth.currentUser._id)
 
     const { image } = route.params
-    const [isEnabled, setIsEnabled] = useState(true);
+    const [isEnabled, setIsEnabled] = useState(false);
     const [isCaption, setCaption] = useState('')
 
-    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+    const toggleSwitch = () => {
+        setIsEnabled(previousState => !previousState)
+    }
 
     const handleSubmit = () => {
         let formData = new FormData();
@@ -66,16 +68,10 @@ const UploadImageScreen = ({ navigation, route }) => {
                         </TouchableWithoutFeedback>
                     </View>
                     <View style={tw`mt-2`}>
-                        <View style={tw`flex flex-row items-center h-13 justify-between bg-white p-3 rounded my-2`}>
-                            <Text style={tw`text-base`}>Who can see your posts?</Text>
-                            <TouchableOpacity>
-                                <MaterialIcons name='keyboard-arrow-down' size={23} />
-                            </TouchableOpacity>
-                        </View>
                         <View style={tw`flex flex-row items-center h-13 justify-between bg-white p-3 rounded `}>
-                            <Text style={tw`text-base`}>Comments are allowed</Text>
+                            <Text style={tw`text-base`}>Only me</Text>
                             <Switch
-                                trackColor={{ false: "#EC4899", true: "#EC4899" }}
+                                trackColor={{ false: "#bfbfbe", true: "#EC4899" }}
                                 thumbColor={isEnabled ? "#fff" : "#fff"}
                                 ios_backgroundColor="#3e3e3e"
                                 onValueChange={toggleSwitch}

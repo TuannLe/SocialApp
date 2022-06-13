@@ -12,6 +12,7 @@ import ProfileGuestScreen from '../Screen/ProfileGuestScreen'
 import UploadImageScreen from '../Screen/UploadImageScreen'
 import MessageScreen from '../Screen/MessageScreen'
 import EditPostScreen from '../Screen/EditPostScreen'
+import DetailPostScreen from '../Screen/DetailPostScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,7 @@ const StackNavigator = () => {
                     <Stack.Screen name="UploadImageStack" component={UploadImageScreen} />
                     <Stack.Screen name="MessageStack" component={MessageScreen} />
                     <Stack.Screen name="EditPostStack" component={EditPostScreen} />
+                    <Stack.Screen name="DetailPostStack" component={DetailPostScreen} />
                 </>
             ) : (
                 <Stack.Screen name="LoginStack" component={LoginScreen} />

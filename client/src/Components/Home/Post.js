@@ -99,22 +99,33 @@ const Post = ({ post, token, userId }) => {
                 </TouchableOpacity>
             </View>
             <View style={tw`my-2 px-3`}>
-                <Text
-                    style={tw`font-normal `}
-                    numberOfLines={showMore ? 99 : 2}
-                    onTextLayout={onTextLayout}
+                <TouchableOpacity
+                    // onPress={() => setShowMore(!showMore)}
+                    onPress={() => navigation.navigate('DetailPostStack', {
+                        image: post.item.images,
+                        content: post.item.content,
+                        postId: post.item.postId,
+                        author: post.item.author
+                    })}
                 >
-                    {post.item.content}
-                </Text>
-                {
+                    <Text
+                        style={tw`font-normal `}
+                        numberOfLines={showMore ? 99 : 2}
+                        onTextLayout={onTextLayout}
+                    >
+                        {post.item.content}
+                    </Text>
+                </TouchableOpacity>
+                {/* {
                     lengthMore ?
                         <TouchableOpacity
-                            onPress={() => setShowMore(!showMore)}
+                            // onPress={() => setShowMore(!showMore)}
+                            onPress={() => navigation.navigate('DetailPostStack')}
                         >
                             <Text style={tw`text-gray-400  mt-1`}>{showMore ? 'Hide' : 'See more'}</Text>
                         </TouchableOpacity>
                         : null
-                }
+                } */}
             </View>
             <View style={tw`relative`}>
                 <TapGestureHandler
