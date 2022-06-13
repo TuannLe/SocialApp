@@ -51,10 +51,9 @@ export const getPosts = async (req, res) => {
 }
 
 // Get post by userId
-export const getPostsByUserId = (req, res) => {
+export const getPostsByUserId = async (req, res) => {
     try {
-        const currentUser = await UserModel.findById(req.body.userId);
-        const userPosts = await PostModel.find({ author: currentUser._id })
+        const userPosts = await PostModel.find({ author: req.body.userId })
         res.status(200).json(userPosts)
     } catch (error) {
         res.status(500).json(error)

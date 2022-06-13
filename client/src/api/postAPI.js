@@ -19,6 +19,23 @@ export const fetchPosts = async ({ token, userId }) => {
     }
 }
 
+export const getPostsByUserId = async ({ token, userId }) => {
+    try {
+        const res = await AXIOS.post(`${url}/getPostsByUserId`,
+            {
+                userId: userId
+            },
+            {
+                headers: {
+                    'token': `Bearer ${token}`
+                }
+            })
+        return res
+    } catch (error) {
+        return error
+    }
+}
+
 export const createPost = async ({ token, formData }) => {
     try {
         const res = await AXIOS.post(`${url}/create`, formData, {
@@ -53,7 +70,6 @@ export const deletePost = async ({ token, postId }) => {
         const res = await AXIOS.delete(`${url}/${postId}`, {
             headers: {
                 'token': `Bearer ${token}`,
-                'Content-Type': `multipart/form-data`,
             }
         })
         return res

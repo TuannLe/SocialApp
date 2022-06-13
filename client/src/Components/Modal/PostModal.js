@@ -12,6 +12,7 @@ const PostModal = ({ handleVisible, isVisible, postId, images, content }) => {
 
     const handleDeletePost = () => {
         dispatch(actions.deletePostStart({ token, postId }))
+        handleVisible()
     }
 
     return (

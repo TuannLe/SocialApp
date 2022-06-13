@@ -9,11 +9,11 @@ const PostItem = ({ item, handleVisible, setIdPostSelected }) => {
                 activeOpacity={.7}
                 onLongPress={() => {
                     handleVisible()
-                    setIdPostSelected(item.item.postsId)
+                    setIdPostSelected(item.item._id)
                 }}
             >
                 <Image
-                    source={{ uri: item.item.image }}
+                    source={{ uri: `data:image/png;base64,${item.item.images}` }}
                     style={tw`h-full w-full`}
                     resizeMode={'cover'}
                 />

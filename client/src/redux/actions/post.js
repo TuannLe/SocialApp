@@ -44,6 +44,28 @@ export const getDetailPostFailure = (error) => {
     }
 }
 
+// Get posts by UserId
+export const getPostsByUserIdStart = (payload) => {
+    return {
+        type: TYPES.GET_POSTS_USER_ID_START,
+        payload
+    }
+}
+
+export const getPostsByUserIdSuccess = (payload) => {
+    return {
+        type: TYPES.GET_POSTS_USER_ID_SUCCESS,
+        payload
+    }
+}
+
+export const getPostsByUserIdFailure = (error) => {
+    return {
+        type: TYPES.GET_POSTS_USER_ID_FAILURE,
+        error
+    }
+}
+
 // Create post
 export const createPostStart = (payload) => {
     return {

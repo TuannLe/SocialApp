@@ -2,6 +2,7 @@ export const INIT_STATE = {
     posts: {
         isLoading: false,
         data: [],
+        listPostsUser: [],
         error: false
     },
     auth: {
@@ -12,7 +13,7 @@ export const INIT_STATE = {
         error: false
     },
     user: {
-        data: {},
+        data: [],
         isLoading: false,
         message: '',
         isFollow: '',

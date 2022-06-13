@@ -22,6 +22,23 @@ function* fetchPostSaga(action) {
     }
 }
 
+// Get posts by userId
+function* getPostsByUserIdSaga(action) {
+    try {
+        console.log('Get posts by userId running...')
+        const res = yield call(api.getPostsByUserId, {
+            token: action.payload.token,
+            userId: action.payload.userId
+        })
+        if (res.status == 200) {
+            console.log('Get posts by userId successfully')
+            yield put(actions.getPostsByUserIdSuccess(res.data))
+        }
+    } catch (error) {
+        yield put(actions.getPostsByUserIdFailure(error))
+    }
+}
+
 // Create post saga
 function* createPostSaga(action) {
     try {
@@ -34,6 +51,7 @@ function* createPostSaga(action) {
             console.log("Post success")
             yield put(actions.createPostSuccess(res.data))
             yield put(actions.getPostsStart({ userId: action.payload.UserId, token: action.payload.token }))
+            yield put(actions.getPostsByUserIdStart({ userId: action.payload.UserId, token: action.payload.token }))
         }
     } catch (error) {
         console.log(error)
@@ -69,7 +87,7 @@ function* deletePostSaga(action) {
         })
         if (res.status == 200) {
             console.log('Delete post succeeded')
-            yield put(actions.deletePostSuccess(res.data))
+            yield put(actions.deletePostSuccess({ postId: action.payload.postId }))
         }
     } catch (error) {
         console.log(error)
@@ -98,6 +116,7 @@ function* likePostSaga(action) {
 
 export default postSaga = [
     takeLatest(TYPES.GET_POSTS_START, fetchPostSaga),
+    takeLatest(TYPES.GET_POSTS_USER_ID_START, getPostsByUserIdSaga),
     takeLatest(TYPES.CREATE_POST_START, createPostSaga),
     takeLatest(TYPES.UPDATE_POST_START, editPostSaga),
     takeLatest(TYPES.DELETE_POST_START, deletePostSaga),

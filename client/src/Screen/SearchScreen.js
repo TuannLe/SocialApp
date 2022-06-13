@@ -1,4 +1,4 @@
-import { View, SafeAreaView, TextInput, FlatList } from 'react-native';
+import { View, SafeAreaView, TextInput, FlatList, Text } from 'react-native';
 import React, { useState, useEffect } from 'react'
 import tw from 'twrnc';
 import { Ionicons } from '@expo/vector-icons';
@@ -37,8 +37,9 @@ const SearchScreen = () => {
     const [input, setInput] = useState('')
 
     useEffect(() => {
-        console.log(input)
-        dispatch(actions.findUsersStart({ token, query: input }))
+        if (input) {
+            dispatch(actions.findUsersStart({ token, query: input }))
+        }
     }, [input])
 
     return (
@@ -52,12 +53,28 @@ const SearchScreen = () => {
                     onChangeText={val => setInput(val)}
                 />
             </View>
-            <FlatList
-                data={data}
-                renderItem={(item) => (<SearchItem item={item} />)}
-                keyExtractor={(item) => item._id}
-            />
-
+            {data.length ?
+                (
+                    <FlatList
+                        data={data}
+                        renderItem={(item) => (<SearchItem item={item} />)}
+                        keyExtractor={(item) => item._id}
+                    />
+                ) :
+                (
+                    input ?
+                        (
+                            <View style={tw`px-3 py-5 border-b border-gray-200 `}>
+                                <Text style={tw`font-light tracking-[.2]`}>
+                                    No result were found for '{input}'
+                                </Text>
+                            </View>
+                        ) :
+                        (
+                            <Text></Text>
+                        )
+                )
+            }
         </SafeAreaView>
     )
 }

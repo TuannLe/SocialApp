@@ -23,7 +23,25 @@ export default function postsReducers(state = INIT_STATE.posts, action) {
                 isLoading: false,
                 error: true
             }
-
+        // Get posts by userId
+        case TYPES.GET_POSTS_USER_ID_START:
+            return {
+                ...state,
+                isLoading: true,
+            }
+        case TYPES.GET_POSTS_USER_ID_SUCCESS:
+            return {
+                ...state,
+                listPostsUser: action.payload,
+                isLoading: false,
+                error: false
+            }
+        case TYPES.GET_POSTS_USER_ID_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: true
+            }
         // Create post
         case TYPES.CREATE_POST_START:
             return {
@@ -71,10 +89,16 @@ export default function postsReducers(state = INIT_STATE.posts, action) {
                 isLoading: true
             }
         case TYPES.DELETE_POST_SUCCESS:
+            const newListPost = [...state.data]
+            newListPost.splice(newListPost.findIndex((item) => {
+                console.log(item._id)
+                console.log(action.payload.postId)
+                return item._id == action.payload.postId
+            }), 1)
             return {
                 ...state,
                 isLoading: false,
-                data: action.payload,
+                data: newListPost,
                 error: false
             }
         case TYPES.DELETE_POST_FAILURE:
