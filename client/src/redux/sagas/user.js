@@ -87,6 +87,7 @@ function* unFollowUserSaga(action) {
 
 export default userSaga = [
     takeLatest(TYPES.FIND_USERS_START, findUsersSaga),
+    takeLatest(TYPES.GET_USER_BY_ID_START, getUserSaga),
     takeLatest(TYPES.CHECK_FOLLOW_USER_START, checkFollowSaga),
     takeLatest(TYPES.FOLLOW_USER_START, followUserSaga),
     takeLatest(TYPES.UNFOLLOW_USER_START, unFollowUserSaga)

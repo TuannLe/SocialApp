@@ -30,6 +30,7 @@ const UploadImageScreen = ({ navigation, route }) => {
         formData.append('images', image)
         formData.append('content', isCaption)
         formData.append('author', UserId)
+        formData.append('status', isEnabled)
 
         dispatch(actions.createPostStart({ formData, token, UserId }))
         // navigation.navigate('HomeStack')

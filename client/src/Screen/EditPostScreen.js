@@ -22,7 +22,7 @@ const EditPostScreen = ({ navigation, route }) => {
     const postId = route.params.postId
     const [isCaption, setCaption] = useState(content)
     const [image, setImage] = useState(Base64Image)
-    const [isEnabled, setIsEnabled] = useState(true);
+    const [isEnabled, setIsEnabled] = useState(false);
 
     const handleSelectPicture = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -44,6 +44,7 @@ const EditPostScreen = ({ navigation, route }) => {
         formData.append('_id', postId)
         formData.append('images', image)
         formData.append('content', isCaption)
+        formData.append('status', isEnabled)
         formData.append('userId', userId)
 
         dispatch(actions.updatePostStart({ token, formData }))
@@ -92,16 +93,10 @@ const EditPostScreen = ({ navigation, route }) => {
                         </TouchableWithoutFeedback>
                     </View>
                     <View style={tw`mt-2`}>
-                        <View style={tw`flex flex-row items-center h-13 justify-between bg-white p-3 rounded my-2`}>
-                            <Text style={tw`text-base`}>Who can see your posts?</Text>
-                            <TouchableOpacity>
-                                <MaterialIcons name='keyboard-arrow-down' size={23} />
-                            </TouchableOpacity>
-                        </View>
                         <View style={tw`flex flex-row items-center h-13 justify-between bg-white p-3 rounded `}>
-                            <Text style={tw`text-base`}>Comments are allowed</Text>
+                            <Text style={tw`text-base`}>Only me</Text>
                             <Switch
-                                trackColor={{ false: "#EC4899", true: "#EC4899" }}
+                                trackColor={{ false: "#bfbfbe", true: "#EC4899" }}
                                 thumbColor={isEnabled ? "#fff" : "#fff"}
                                 ios_backgroundColor="#3e3e3e"
                                 onValueChange={toggleSwitch}

@@ -11,7 +11,8 @@ export const createPost = async (req, res) => {
         const newPost = {
             images: req.body.images,
             author: req.body.author,
-            content: req.body.content
+            content: req.body.content,
+            status: req.body.status
         }
 
         const post = new PostModel(newPost)
@@ -66,7 +67,8 @@ export const updatePost = async (req, res) => {
         const updatePost = {
             _id: req.body._id,
             images: req.body.images,
-            content: req.body.content
+            content: req.body.content,
+            status: req.body.status
         }
         await PostModel.findOneAndUpdate({ _id: updatePost._id }, updatePost, { new: true })
 

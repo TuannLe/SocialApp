@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from 'react'
+import React, { useRef, useState, useCallback, useEffect } from 'react'
 import { View, Text, Image, Dimensions, TouchableOpacity, FlatList, Animated } from 'react-native'
 import tw from 'twrnc';
 import { MaterialCommunityIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
@@ -9,6 +9,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import RBSheet from 'react-native-raw-bottom-sheet'
 import { useSelector, useDispatch } from 'react-redux'
 import * as actions from '../../redux/actions/post'
+import { getUserByIdStart } from '../../redux/actions/user'
 import Paginator from './Paginator';
 import PostModel from '../Modal/PostModal'
 import ImageItem from './ImageItem'
@@ -43,7 +44,6 @@ const Post = ({ post, token, userId }) => {
     const { width: SCREEN_WIDTH } = Dimensions.get('window');
     const FRAMESIZE_W = SCREEN_WIDTH;
     const FRAMESIZE_H = SCREEN_WIDTH / 2 * 3;
-    // const { post } = props;
     const slidesRef = useRef(null);
     const scrollX = useRef(new Animated.Value(0)).current;
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -68,6 +68,12 @@ const Post = ({ post, token, userId }) => {
         heart ? setTotalHeart(totalHeart - 1) : setTotalHeart(totalHeart + 1)
     }
 
+    useEffect(() => {
+        dispatch(getUserByIdStart({ token, userId: post.item.author }))
+    }, [])
+
+    const user = useSelector((state) => state.user.data)
+
     const viewableItemsChanged = useRef(({ viewableItems }) => {
         setCurrentIndex(viewableItems[0].index);
     }).current;
@@ -88,7 +94,7 @@ const Post = ({ post, token, userId }) => {
                         source={require('../../images/avatar.jpeg')}
                     />
                     <View>
-                        <Text style={tw`text-base font-medium`}>{post.item.author}</Text>
+                        <Text style={tw`text-base font-medium`}>{user.firstName + ' ' + user.lastName}</Text>
                         <Text style={tw`text-xs text-gray-400`}>2 giờ trước</Text>
                     </View>
                 </View>

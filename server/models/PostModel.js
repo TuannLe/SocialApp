@@ -11,10 +11,10 @@ const schema = new mongoose.Schema({
     },
     images: Array,
     likes: Array,
-    comments: Object,
+    comments: Array,
     status: {
-        type: Number,
-        default: 0,
+        type: Boolean,
+        default: false,
     },
 }, { timestamps: true })
 
