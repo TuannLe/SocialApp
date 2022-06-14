@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import RBSheet from 'react-native-raw-bottom-sheet'
 import { useSelector, useDispatch } from 'react-redux'
+import { format } from 'timeago.js'
 import * as actions from '../../redux/actions/post'
 import { getUserByIdStart } from '../../redux/actions/user'
 import Paginator from './Paginator';
@@ -68,11 +69,11 @@ const Post = ({ post, token, userId }) => {
         heart ? setTotalHeart(totalHeart - 1) : setTotalHeart(totalHeart + 1)
     }
 
-    useEffect(() => {
-        dispatch(getUserByIdStart({ token, userId: post.item.author }))
-    }, [])
+    // useEffect(() => {
+    //     dispatch(getUserByIdStart({ token, userId: post.item.author }))
+    // }, [])
 
-    const user = useSelector((state) => state.user.data)
+    // const user = useSelector((state) => state.user.data)
 
     const viewableItemsChanged = useRef(({ viewableItems }) => {
         setCurrentIndex(viewableItems[0].index);
@@ -94,8 +95,8 @@ const Post = ({ post, token, userId }) => {
                         source={require('../../images/avatar.jpeg')}
                     />
                     <View>
-                        <Text style={tw`text-base font-medium`}>{user.firstName + ' ' + user.lastName}</Text>
-                        <Text style={tw`text-xs text-gray-400`}>2 giờ trước</Text>
+                        <Text style={tw`text-base font-medium`}>{post.item.author}</Text>
+                        <Text style={tw`text-xs text-gray-400`}>{format(post.item.createdAt)}</Text>
                     </View>
                 </View>
                 <TouchableOpacity

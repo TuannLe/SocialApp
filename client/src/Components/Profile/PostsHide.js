@@ -1,12 +1,22 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { FlatGrid } from 'react-native-super-grid';
-import PostItem from './PostItem'
 import tw from 'twrnc';
 import { useDispatch, useSelector } from 'react-redux'
+import PostItem from './PostItem'
+import DeletePost from './DeletePost';
 
 const Events = () => {
     const data = useSelector(state => state.posts.listPostsUser)
+
+    const [isVisibleDeleteModal, setVisibleDeleteModal] = useState(false)
+    const [isIdPostSelected, setIdPostSelected] = useState(null)
+
+    const handleVisibleDeleteModal = () => {
+        setVisibleDeleteModal(!isVisibleDeleteModal)
+    }
+
+
     const newList = data.filter(post => {
         // if (post.status == true) {
         return post.status
@@ -20,7 +30,12 @@ const Events = () => {
                         <FlatGrid
                             data={newList}
                             itemDimension={100}
-                            renderItem={(item) => <PostItem item={item} />}
+                            renderItem={(item) =>
+                                <PostItem
+                                    item={item}
+                                    handleVisible={handleVisibleDeleteModal}
+                                    setIdPostSelected={setIdPostSelected}
+                                />}
                             style={tw`pt-2 bg-white`}
                             keyExtractor={item => item._id}
                             spacing={5}
@@ -36,6 +51,11 @@ const Events = () => {
 
                     )
             }
+            <DeletePost
+                handleVisible={handleVisibleDeleteModal}
+                isVisible={isVisibleDeleteModal}
+                isIdPostSelected={isIdPostSelected}
+            />
         </View>
     )
 }

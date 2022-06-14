@@ -91,13 +91,17 @@ export default function postsReducers(state = INIT_STATE.posts, action) {
         case TYPES.DELETE_POST_SUCCESS:
             const newListPost = [...state.data]
             newListPost.splice(newListPost.findIndex((item) => {
-                console.log(item._id)
-                console.log(action.payload.postId)
+                return item._id == action.payload.postId
+            }), 1)
+
+            const newListPostUser = [...state.listPostsUser]
+            newListPostUser.splice(newListPostUser.findIndex((item) => {
                 return item._id == action.payload.postId
             }), 1)
             return {
                 ...state,
                 isLoading: false,
+                listPostsUser: newListPostUser,
                 data: newListPost,
                 error: false
             }

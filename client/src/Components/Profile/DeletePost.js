@@ -1,8 +1,18 @@
 import { View, Text, Modal, TouchableOpacity } from 'react-native'
 import React from 'react'
 import tw from 'twrnc'
+import { useDispatch, useSelector } from 'react-redux'
+import * as actions from '../../redux/actions/post'
 
 const DeletePost = ({ handleVisible, isVisible, isIdPostSelected }) => {
+    const dispatch = useDispatch()
+    const token = useSelector((state) => state.auth.currentUser.accessToken)
+
+    const handleDeletePost = () => {
+        dispatch(actions.deletePostStart({ token, postId: isIdPostSelected }))
+        handleVisible()
+    }
+
     return (
         <Modal
             visible={isVisible}
@@ -17,6 +27,7 @@ const DeletePost = ({ handleVisible, isVisible, isIdPostSelected }) => {
                 <View style={tw`px-3 my-3 `}>
                     <View style={tw`bg-white rounded-lg my-2`}>
                         <TouchableOpacity
+                            onPress={handleDeletePost}
                             style={tw` items-center justify-center py-3 `}
                         >
                             <Text style={tw`text-red-500 text-base`}>Delete</Text>

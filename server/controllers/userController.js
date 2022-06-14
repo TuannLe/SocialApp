@@ -116,5 +116,41 @@ export const userController = {
             res.status(500).json(error);
         }
     },
+    getFollowers: async (req, res) => {
+        try {
+            const user = await UserModel.findById(req.params.userId)
+            const followers = await Promise.all(
+                user.followers.map(followerId => {
+                    return UserModel.findById(followerId)
+                })
+            )
+            let followerList = []
+            followers.map((follower) => {
+                const { password, ...other } = follower._doc
+                followerList.push({ ...other })
+            })
+            res.status(200).json(followerList)
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    },
+    getFollowings: async (req, res) => {
+        try {
+            const user = await UserModel.findById(req.params.userId)
+            const following = await Promise.all(
+                user.following.map(followingId => {
+                    return UserModel.findById(followingId)
+                })
+            )
+            let followingList = []
+            following.map((following) => {
+                const { password, ...other } = following._doc
+                followingList.push({ ...other })
+            })
+            res.status(200).json(followingList)
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    }
 
 }
