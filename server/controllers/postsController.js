@@ -10,6 +10,7 @@ export const createPost = async (req, res) => {
         // const image = fs.readFileSync(req.files[0].path, { encoding: 'base64' })
         const newPost = {
             images: req.body.images,
+            // images: image,
             author: req.body.author,
             content: req.body.content,
             status: req.body.status

@@ -1,4 +1,4 @@
-import { View, Text, Modal, TouchableOpacity } from 'react-native'
+import { View, Text, Modal, TouchableOpacity, Alert } from 'react-native'
 import React from 'react'
 import tw from 'twrnc'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,9 +10,32 @@ const PostModal = ({ handleVisible, isVisible, postId, images, content }) => {
     const dispatch = useDispatch()
     const token = useSelector((state) => state.auth.currentUser.accessToken)
 
+    const showConfirmDialog = () => {
+        return Alert.alert(
+            "Confirm",
+            "Are you sure you want to delete your post?",
+            [
+                {
+                    text: "Yes",
+                    onPress: () => {
+                        dispatch(actions.deletePostStart({ token, postId }))
+                        handleVisible()
+                        return
+                    }
+                },
+                {
+                    text: "No",
+                    onPress: () => {
+                        handleVisible()
+                        return
+                    }
+                }
+            ]
+        )
+    }
+
     const handleDeletePost = () => {
-        dispatch(actions.deletePostStart({ token, postId }))
-        handleVisible()
+        showConfirmDialog()
     }
 
     return (

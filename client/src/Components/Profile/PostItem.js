@@ -20,7 +20,7 @@ const PostItem = ({ item, handleVisible, setIdPostSelected }) => {
                     image: item.item.images,
                     content: item.item.content,
                     postId: item.item._id,
-                    comments: post.item.comments,
+                    comments: item.item.comments,
                     createdAt: item.item.createdAt,
                     author: currentUser,
                     totalHeart: item.item.likes.length
