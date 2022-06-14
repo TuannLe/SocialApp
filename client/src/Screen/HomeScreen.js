@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux'
 import Post from '../Components/Home/Post'
 import * as actions from '../redux/actions/post'
+import * as actionsUser from '../redux/actions/user'
 
 const Home = () => {
     const CONTAINER_HEIGHT = 45;
@@ -19,6 +20,22 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(actions.getPostsStart({ token, userId }))
+    }, [])
+
+    useEffect(() => {
+        dispatch(actionsUser.getAllUsersStart({ token }))
+    }, [])
+
+    useEffect(() => {
+        dispatch(actions.getPostsByUserIdStart({ token, userId }))
+    }, [])
+
+    useEffect(() => {
+        dispatch(actionsUser.getFollowersStart({ token, userId }))
+    }, [])
+
+    useEffect(() => {
+        dispatch(actionsUser.getFollowingsStart({ token, userId }))
     }, [])
 
     const data = useSelector(state => state.posts.data)

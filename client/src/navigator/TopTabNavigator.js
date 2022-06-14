@@ -2,12 +2,13 @@ import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import tw from 'twrnc';
 import { Ionicons } from '@expo/vector-icons';
+import { Text } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux'
 import Posts from '../Components/Profile/Posts'
 import Hearts from '../Components/Profile/Hearts'
 import PostsHide from '../Components/Profile/PostsHide'
 import Followers from '../Components/Menu/Followers';
 import Following from '../Components/Menu/Following';
-import { Text } from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();
 export const TopTabNavigator = () => {
@@ -71,6 +72,8 @@ export const TopTabNavigator = () => {
 }
 
 export const FollowNavigator = () => {
+    const totalFollowers = useSelector((state) => state.user.followers.length)
+    const totalFollowings = useSelector((state) => state.user.followings.length)
     return (
         <Tab.Navigator
             screenOptions={{
@@ -85,7 +88,7 @@ export const FollowNavigator = () => {
                 component={Followers}
                 options={{
                     tabBarLabel: (({ focused }) =>
-                        <Text style={focused ? tw`text-pink-500 font-bold` : tw`text-gray-400 font-bold`}>0 Followers</Text>
+                        <Text style={focused ? tw`text-pink-500 font-bold` : tw`text-gray-400 font-bold`}>{totalFollowers} Followers</Text>
                     ),
                 }}
             />
@@ -94,7 +97,7 @@ export const FollowNavigator = () => {
                 component={Following}
                 options={{
                     tabBarLabel: (({ focused }) =>
-                        <Text style={focused ? tw`text-pink-500 font-bold` : tw`text-gray-400 font-bold`}>100 Following</Text>
+                        <Text style={focused ? tw`text-pink-500 font-bold` : tw`text-gray-400 font-bold`}>{totalFollowings} Following</Text>
                     ),
                 }}
             />

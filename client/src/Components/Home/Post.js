@@ -51,12 +51,13 @@ const Post = ({ post, token, userId }) => {
 
     const [heart, setHeart] = useState(false);
     const [totalHeart, setTotalHeart] = useState(post.item.likes.length)
-    // const [totalHeart, setTotalHeart] = useState(0)
 
     const [showMore, setShowMore] = useState(false)
     const [lengthMore, setLengthMore] = useState(false);
 
     const [isVisibleModal, setVisibleModal] = useState(false)
+
+    const [author, setAuthor] = useState('')
 
     const handleVisibleModal = () => {
         setVisibleModal(!isVisibleModal)
@@ -69,11 +70,17 @@ const Post = ({ post, token, userId }) => {
         heart ? setTotalHeart(totalHeart - 1) : setTotalHeart(totalHeart + 1)
     }
 
-    // useEffect(() => {
-    //     dispatch(getUserByIdStart({ token, userId: post.item.author }))
-    // }, [])
+    useEffect(() => {
+        setHeart(post.item.likes.includes(userId))
+    }, [userId, post.item.likes])
 
-    // const user = useSelector((state) => state.user.data)
+    const listUser = useSelector((state) => state.user.listUser)
+    console.log(listUser)
+    listUser.map((user) => {
+        if (user._id == post.item.author) {
+            setAuthor(user)
+        }
+    })
 
     const viewableItemsChanged = useRef(({ viewableItems }) => {
         setCurrentIndex(viewableItems[0].index);
@@ -95,7 +102,7 @@ const Post = ({ post, token, userId }) => {
                         source={require('../../images/avatar.jpeg')}
                     />
                     <View>
-                        <Text style={tw`text-base font-medium`}>{post.item.author}</Text>
+                        <Text style={tw`text-base font-medium`}>{author.firstName}</Text>
                         <Text style={tw`text-xs text-gray-400`}>{format(post.item.createdAt)}</Text>
                     </View>
                 </View>

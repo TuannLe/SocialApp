@@ -14,6 +14,9 @@ export const INIT_STATE = {
     },
     user: {
         data: [],
+        followers: [],
+        followings: [],
+        listUser: [],
         isLoading: false,
         message: '',
         isFollow: '',

@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 import tw from 'twrnc';
 
-const FollowingItem = ({ item }) => {
+const FollowerItem = ({ item }) => {
     return (
         <View style={tw`flex`}>
             <TouchableOpacity
@@ -19,11 +19,11 @@ const FollowingItem = ({ item }) => {
                 <TouchableOpacity
                     style={tw`px-2.5 py-1.5 bg-white border border-gray-300 rounded-md`}
                 >
-                    <Text style={tw`text-black font-medium`}>Delete</Text>
+                    <Text style={tw`text-black font-medium`}>UnFollow</Text>
                 </TouchableOpacity>
             </TouchableOpacity>
         </View>
     )
 }
 
-export default FollowingItem
+export default FollowerItem

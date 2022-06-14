@@ -17,6 +17,7 @@ const ProfileScreen = () => {
 
     const navigation = useNavigation()
     const currentUser = useSelector((state) => state.auth.currentUser)
+    const totalPost = useSelector((state) => state.posts.listPostsUser.length)
 
 
     const [visible, setVisible] = useState(false)
@@ -67,17 +68,23 @@ const ProfileScreen = () => {
                     <View style={tw`px-3 flex-1`}>
                         <View style={tw`flex flex-row`}>
                             <View style={tw`flex-1 items-center`}>
-                                <Text style={tw`font-medium text-sm`}>12</Text>
+                                <Text style={tw`font-medium text-sm`}>{totalPost}</Text>
                                 <Text style={tw`text-gray-400 text-xs`}>Posts</Text>
                             </View>
-                            <View style={tw`flex-1 items-center`}>
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate('FollowStack')}
+                                style={tw`flex-1 items-center`}
+                            >
                                 <Text style={tw`font-medium text-sm`}>{currentUser.followers.length}</Text>
                                 <Text style={tw`text-gray-400 text-xs`}>Followers</Text>
-                            </View>
-                            <View style={tw`flex-1 items-center`}>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={tw`flex-1 items-center`}
+                                onPress={() => navigation.navigate('FollowStack')}
+                            >
                                 <Text style={tw`font-medium text-sm`}>{currentUser.following.length}</Text>
                                 <Text style={tw`text-gray-400 text-xs`}>Following</Text>
-                            </View>
+                            </TouchableOpacity>
                         </View>
                         <View style={tw`flex-1`}>
                             <TopTabNavigator />

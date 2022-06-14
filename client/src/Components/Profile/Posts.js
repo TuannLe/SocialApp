@@ -8,20 +8,12 @@ import * as actions from '../../redux/actions/post'
 import DeletePost from './DeletePost';
 
 const Posts = () => {
-    const dispatch = useDispatch()
-    const token = useSelector((state) => state.auth.currentUser.accessToken)
-    const userId = useSelector((state) => state.auth.currentUser._id)
-
     const [isVisibleDeleteModal, setVisibleDeleteModal] = useState(false)
     const [isIdPostSelected, setIdPostSelected] = useState(null)
 
     const handleVisibleDeleteModal = () => {
         setVisibleDeleteModal(!isVisibleDeleteModal)
     }
-
-    useEffect(() => {
-        dispatch(actions.getPostsByUserIdStart({ token, userId }))
-    }, [])
 
     const data = useSelector(state => state.posts.listPostsUser)
     const newList = data.filter(post => {

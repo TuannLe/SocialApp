@@ -41,6 +41,25 @@ export default function userReducers(state = INIT_STATE.user, action) {
                 isLoading: false,
                 error: true
             }
+        // Get all users
+        case TYPES.GET_ALL_USERS_START:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case TYPES.GET_ALL_USERS_SUCCESS:
+            return {
+                ...state,
+                listUser: action.payload,
+                isLoading: false,
+                error: false
+            }
+        case TYPES.GET_ALL_USERS_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: false
+            }
         // Check follow user
         case TYPES.CHECK_FOLLOW_USER_START:
             return {
@@ -92,6 +111,44 @@ export default function userReducers(state = INIT_STATE.user, action) {
                 error: false
             }
         case TYPES.UNFOLLOW_USER_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: true
+            }
+        // Get followers
+        case TYPES.GET_FOLLOWERS_START:
+            return {
+                ...state,
+                isLoading: true,
+            }
+        case TYPES.GET_FOLLOWERS_SUCCESS:
+            return {
+                ...state,
+                followers: action.payload,
+                isLoading: false,
+                error: false
+            }
+        case TYPES.GET_FOLLOWERS_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: true
+            }
+        // Get following
+        case TYPES.GET_FOLLOWINGS_START:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case TYPES.GET_FOLLOWINGS_SUCCESS:
+            return {
+                ...state,
+                followings: action.payload,
+                isLoading: false,
+                error: false
+            }
+        case TYPES.GET_FOLLOWINGS_FAILURE:
             return {
                 ...state,
                 isLoading: false,

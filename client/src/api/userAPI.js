@@ -33,6 +33,20 @@ export const getUserById = async ({ token, userId }) => {
     }
 }
 
+export const getAllUsers = async ({ token }) => {
+    try {
+        const res = await AXIOS.get(`${url}/`,
+            {
+                headers: {
+                    'token': `Bearer ${token}`
+                }
+            })
+        return res
+    } catch (error) {
+        return error
+    }
+}
+
 export const checkFollowUser = async ({ userId, currentUserId }) => {
     try {
         const res = await AXIOS.post(`${url}/${userId}/checkFollow`, {
@@ -67,6 +81,34 @@ export const unFollowUser = async ({ token, userId, currentUserId }) => {
             {
                 userId: currentUserId,
             },
+            {
+                headers: {
+                    'token': `Bearer ${token}`
+                }
+            })
+        return res
+    } catch (error) {
+        return error
+    }
+}
+
+export const getFollowers = async ({ token, userId }) => {
+    try {
+        const res = await AXIOS.get(`${url}/followers/${userId}`,
+            {
+                headers: {
+                    'token': `Bearer ${token}`
+                }
+            })
+        return res
+    } catch (error) {
+        return error
+    }
+}
+
+export const getFollowings = async ({ token, userId }) => {
+    try {
+        const res = await AXIOS.get(`${url}/following/${userId}`,
             {
                 headers: {
                     'token': `Bearer ${token}`

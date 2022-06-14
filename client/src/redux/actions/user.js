@@ -44,6 +44,28 @@ export const getUserByIdFailure = (error) => {
     }
 }
 
+// Get all users
+export const getAllUsersStart = (payload) => {
+    return {
+        type: TYPES.GET_ALL_USERS_START,
+        payload
+    }
+}
+
+export const getAllUsersSuccess = (payload) => {
+    return {
+        type: TYPES.GET_ALL_USERS_SUCCESS,
+        payload
+    }
+}
+
+export const getAllUsersFailure = (error) => {
+    return {
+        type: TYPES.GET_ALL_USERS_FAILURE,
+        error
+    }
+}
+
 // Check follow user
 export const checkFollowUserStart = (payload) => {
     return {
@@ -106,6 +128,50 @@ export const unFollowUserSuccess = (payload) => {
 export const unFollowUserFailure = (error) => {
     return {
         type: TYPES.UNFOLLOW_USER_FAILURE,
+        error
+    }
+}
+
+// Get followers
+export const getFollowersStart = (payload) => {
+    return {
+        type: TYPES.GET_FOLLOWERS_START,
+        payload
+    }
+}
+
+export const getFollowersSuccess = (payload) => {
+    return {
+        type: TYPES.GET_FOLLOWERS_SUCCESS,
+        payload
+    }
+}
+
+export const getFollowersFailure = (error) => {
+    return {
+        type: TYPES.GET_FOLLOWERS_FAILURE,
+        error
+    }
+}
+
+// Get followings
+export const getFollowingsStart = (payload) => {
+    return {
+        type: TYPES.GET_FOLLOWINGS_START,
+        payload
+    }
+}
+
+export const getFollowingsSuccess = (payload) => {
+    return {
+        type: TYPES.GET_FOLLOWINGS_SUCCESS,
+        payload
+    }
+}
+
+export const getFollowingsFailure = (error) => {
+    return {
+        type: TYPES.GET_FOLLOWINGS_FAILURE,
         error
     }
 }

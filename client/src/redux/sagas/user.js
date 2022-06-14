@@ -35,6 +35,21 @@ function* getUserSaga(action) {
     }
 }
 
+function* getAllUsersSaga(action) {
+    try {
+        console.log('Get all users successfully')
+        const res = yield call(apis.getAllUsers({
+            token: action.payload.token
+        }))
+        if (res.status == 200) {
+            console.log('Get all users successfully')
+            yield put(actions.getAllUsersSuccess(res.data))
+        }
+    } catch (error) {
+        yield put(actions.getAllUsersFailure(error))
+    }
+}
+
 function* checkFollowSaga(action) {
     try {
         console.log('Check follow running...')
@@ -85,10 +100,45 @@ function* unFollowUserSaga(action) {
     }
 }
 
+function* getFollowersSaga(action) {
+    try {
+        console.log('Getting followers running...')
+        const res = yield call(apis.getFollowers, {
+            token: action.payload.token,
+            userId: action.payload.userId
+        })
+        if (res.status == 200) {
+            console.log('Get followers successfully')
+            yield put(actions.getFollowersSuccess(res.data))
+        }
+    } catch (error) {
+        yield put(actions.getFollowersFailure(error))
+    }
+}
+
+function* getFollowingsSaga(action) {
+    try {
+        console.log('Getting following running...')
+        const res = yield call(apis.getFollowings, {
+            token: action.payload.token,
+            userId: action.payload.userId
+        })
+        if (res.status == 200) {
+            console.log('Getting followings successfully')
+            yield put(actions.getFollowingsSuccess(res.data))
+        }
+    } catch (error) {
+        yield put(actions.getFollowingsFailure(error))
+    }
+}
+
 export default userSaga = [
     takeLatest(TYPES.FIND_USERS_START, findUsersSaga),
     takeLatest(TYPES.GET_USER_BY_ID_START, getUserSaga),
+    takeLatest(TYPES.GET_ALL_USERS_START, getAllUsersSaga),
     takeLatest(TYPES.CHECK_FOLLOW_USER_START, checkFollowSaga),
     takeLatest(TYPES.FOLLOW_USER_START, followUserSaga),
-    takeLatest(TYPES.UNFOLLOW_USER_START, unFollowUserSaga)
+    takeLatest(TYPES.UNFOLLOW_USER_START, unFollowUserSaga),
+    takeLatest(TYPES.GET_FOLLOWERS_START, getFollowersSaga),
+    takeLatest(TYPES.GET_FOLLOWINGS_START, getFollowingsSaga),
 ]
