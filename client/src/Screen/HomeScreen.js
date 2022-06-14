@@ -20,23 +20,13 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(actions.getPostsStart({ token, userId }))
-    }, [])
-
-    useEffect(() => {
+        dispatch(actions.getPostsByUserIdStart({ token, userId }))
+        dispatch(actionsUser.getFollowersStart({ token, userId }))
+        dispatch(actionsUser.getFollowingsStart({ token, userId }))
         dispatch(actionsUser.getAllUsersStart({ token }))
     }, [])
 
-    useEffect(() => {
-        dispatch(actions.getPostsByUserIdStart({ token, userId }))
-    }, [])
-
-    useEffect(() => {
-        dispatch(actionsUser.getFollowersStart({ token, userId }))
-    }, [])
-
-    useEffect(() => {
-        dispatch(actionsUser.getFollowingsStart({ token, userId }))
-    }, [])
+    console.log('render')
 
     const data = useSelector(state => state.posts.data)
 

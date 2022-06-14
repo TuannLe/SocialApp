@@ -38,9 +38,9 @@ function* getUserSaga(action) {
 function* getAllUsersSaga(action) {
     try {
         console.log('Get all users successfully')
-        const res = yield call(apis.getAllUsers({
+        const res = yield call(apis.getAllUsers, {
             token: action.payload.token
-        }))
+        })
         if (res.status == 200) {
             console.log('Get all users successfully')
             yield put(actions.getAllUsersSuccess(res.data))

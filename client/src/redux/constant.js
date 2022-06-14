@@ -2,6 +2,7 @@ export const INIT_STATE = {
     posts: {
         isLoading: false,
         data: [],
+        comment: [],
         listPostsUser: [],
         error: false
     },

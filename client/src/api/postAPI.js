@@ -86,11 +86,31 @@ export const likePost = async ({ token, postId, userId }) => {
         const res = await AXIOS.put(`${url}/${postId}/like`,
             {
                 userId: userId,
-            }, {
-            headers: {
-                'token': `Bearer ${token}`,
-            }
-        })
+            },
+            {
+                headers: {
+                    'token': `Bearer ${token}`,
+                }
+            })
+        return res
+    } catch (error) {
+        return error
+    }
+}
+
+export const commentPost = async ({ token, postId, userId, comment }) => {
+    try {
+        const res = await AXIOS.post(`${url}/comment`,
+            {
+                postId: postId,
+                userId: userId,
+                comment: comment
+            },
+            {
+                headers: {
+                    'token': `Bearer ${token}`,
+                }
+            })
         return res
     } catch (error) {
         return error

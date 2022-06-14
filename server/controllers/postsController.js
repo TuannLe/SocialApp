@@ -111,3 +111,18 @@ export const likePost = async (req, res) => {
         res.status(500).json(error)
     }
 }
+
+export const commentPost = async (req, res) => {
+    try {
+        const comment = {
+            userId: req.body.userId,
+            comment: req.body.comment,
+        }
+        await PostModel.findByIdAndUpdate(req.body.postId, {
+            $push: { comments: comment }
+        })
+        res.status(200).json('Comment successfully')
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}

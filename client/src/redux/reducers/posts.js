@@ -129,6 +129,25 @@ export default function postsReducers(state = INIT_STATE.posts, action) {
                 isLoading: false,
                 error: true
             }
+        // Comment post
+        case TYPES.COMMENT_POST_START:
+            return {
+                ...state,
+                isLoading: true
+            }
+        case TYPES.COMMENT_POST_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                comment: action.payload,
+                error: false
+            }
+        case TYPES.COMMENT_POST_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: true
+            }
         default:
             return state
     }

@@ -6,6 +6,7 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useDispatch, useSelector } from 'react-redux'
+import { format } from 'timeago.js'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import WriteComment from '../Components/Comment/WriteComment'
@@ -22,6 +23,7 @@ const DetailPostScreen = ({ route }) => {
     const [isHeart, setIsHeart] = useState(false)
 
     const [isVisibleDeleteModal, setVisibleDeleteModal] = useState(false)
+
     const handleVisibleDeleteModal = () => {
         setVisibleDeleteModal(!isVisibleDeleteModal)
     }
@@ -41,13 +43,6 @@ const DetailPostScreen = ({ route }) => {
             totalComment: 19
         }
     ]
-    // const listCommentOfPost = [
-    //     {
-    //         postsCommentId: '1',
-
-    //     }
-    // ]
-
 
     return (
         <SafeAreaView edges={['bottom']} >
@@ -109,12 +104,11 @@ const DetailPostScreen = ({ route }) => {
                                 <View>
                                     <Image
                                         style={tw`w-14 h-14 rounded-full absolute -top-5 bg-gray-300 border border-2 border-white`}
-                                        // source={post?.postsUserList[0].image ? { uri: post?.postsUserList[0].image } : require('../assets/images/defaultAvatar.png')}
-                                        source={require('../images/defaultAvatar.png')}
+                                        source={route.params.author.avatar ? { uri: `data:image/png;base64,${route.params.author.avatar}` } : require('../images/defaultAvatar.png')}
                                     />
                                     <View style={tw`ml-15 flex`}>
-                                        <Text style={tw`font-bold text-base`}>{route.params.author}</Text>
-                                        <Text style={[{ fontSize: 11 }, tw`font-light`]}>3 munites ago</Text>
+                                        <Text style={tw`font-bold text-base`}>{route.params.author.firstName + ' ' + route.params.author.lastName}</Text>
+                                        <Text style={[{ fontSize: 11 }, tw`font-light`]}>{format(route.params.createdAt)}</Text>
                                     </View>
                                 </View>
 
@@ -128,7 +122,7 @@ const DetailPostScreen = ({ route }) => {
                                             style={isHeart ? tw`text-2xl text-[#ED4366] mr-2` : tw`text-2xl text-gray-300 mr-2 ml-1`}
                                             size={24}
                                         />
-                                        <Text style={tw`font-semibold text-gray-800 mr-3`}>100</Text>
+                                        <Text style={tw`font-semibold text-gray-800 mr-3`}>{route.params.totalHeart}</Text>
                                     </TouchableOpacity>
 
                                     <TouchableOpacity
@@ -154,18 +148,18 @@ const DetailPostScreen = ({ route }) => {
                             <Text style={tw`text-center text-gray-500 mb-4`}>
                                 {post.totalComment} comments
                             </Text>
-                            {/* {
-                                listCommentOfPost ? (
-                                    listCommentOfPost.map((item) => {
+                            {
+                                route.params.comments ? (
+                                    route.params.comments.map((item, i) => {
                                         return <Comments
                                             item={item}
-                                            key={item.postsCommentId}
-                                            setIdCommentSelected={setIdCommentSelected}
-                                            handleVisibleDeleteModal={handleVisibleDeleteModal}
+                                            key={i}
+                                        // setIdCommentSelected={setIdCommentSelected}
+                                        // handleVisibleDeleteModal={handleVisibleDeleteModal}
                                         />
                                     })
                                 ) : <></>
-                            } */}
+                            }
                         </View>
                     </View>
                 </ScrollView>
@@ -173,8 +167,10 @@ const DetailPostScreen = ({ route }) => {
                     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                     keyboardVerticalOffset={2}
                 >
-                    {/* <WriteComment postId={postsId} /> */}
-                    <WriteComment />
+                    <WriteComment
+                        postId={route.params.postId}
+                        avatar={route.params.author.avatar}
+                    />
                 </KeyboardAvoidingView>
             </View>
             <DeleteCommentModal

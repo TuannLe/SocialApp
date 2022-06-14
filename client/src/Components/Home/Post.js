@@ -16,27 +16,6 @@ import PostModel from '../Modal/PostModal'
 import ImageItem from './ImageItem'
 import CommentItem from './CommentItem';
 
-const data = [
-    {
-        id: '1',
-        image: 'https://indotech.vn/hinh-anh-cua-rose-black-pink/imager_2_12521_700.jpg',
-        name: 'Rose',
-        comment: 'hello hihih halo good morning hihi hyh hihd oshoi ohdoh hodho'
-    },
-    {
-        id: '2',
-        image: 'https://nguoinoitieng.tv/images/nnt/96/0/bbnh.jpg',
-        name: 'Cara',
-        comment: 'hello hihih halo good morning hihi hyh hihd oshoi ohdoh hodho'
-    },
-    {
-        id: '3',
-        image: 'https://1.bp.blogspot.com/-xoe-yLLhMsA/X3XmnozvxCI/AAAAAAAAPWE/Px6lNykKtiswyxWfgH_qgmqojUN__F4DwCLcBGAsYHQ/s1600/5a129327b91c191dcd7e2eed9c6b7d1d.jpg',
-        name: 'IU',
-        comment: 'hello hihih halo good morning hihi hyh hihd oshoi ohdoh hodho'
-    }
-]
-
 const Post = ({ post, token, userId }) => {
     const refRBSheet = useRef()
     const navigation = useNavigation()
@@ -75,12 +54,14 @@ const Post = ({ post, token, userId }) => {
     }, [userId, post.item.likes])
 
     const listUser = useSelector((state) => state.user.listUser)
-    console.log(listUser)
-    listUser.map((user) => {
-        if (user._id == post.item.author) {
-            setAuthor(user)
-        }
-    })
+    useEffect(() => {
+
+        listUser.map((user) => {
+            if (user._id == post.item.author) {
+                setAuthor(user)
+            }
+        })
+    }, [])
 
     const viewableItemsChanged = useRef(({ viewableItems }) => {
         setCurrentIndex(viewableItems[0].index);
@@ -99,10 +80,10 @@ const Post = ({ post, token, userId }) => {
                 <View style={tw`flex flex-row items-center`}>
                     <Image
                         style={tw`w-12 h-12 rounded-full mr-2.5`}
-                        source={require('../../images/avatar.jpeg')}
+                        source={author.avatar ? { uri: `data:image/png;base64,${author.avatar}` } : require('../../images/defaultAvatar.png')}
                     />
                     <View>
-                        <Text style={tw`text-base font-medium`}>{author.firstName}</Text>
+                        <Text style={tw`text-base font-medium`}>{author.firstName + ' ' + author.lastName}</Text>
                         <Text style={tw`text-xs text-gray-400`}>{format(post.item.createdAt)}</Text>
                     </View>
                 </View>
@@ -118,8 +99,11 @@ const Post = ({ post, token, userId }) => {
                     onPress={() => navigation.navigate('DetailPostStack', {
                         image: post.item.images,
                         content: post.item.content,
-                        postId: post.item.postId,
-                        author: post.item.author
+                        postId: post.item._id,
+                        comments: post.item.comments,
+                        createdAt: post.item.createdAt,
+                        author: author,
+                        totalHeart: totalHeart
                     })}
                 >
                     <Text
@@ -218,11 +202,11 @@ const Post = ({ post, token, userId }) => {
                 }}
             >
                 <View style={tw`flex flex-1`}>
-                    <Text style={tw`text-center font-medium text-pink-500`}>200 comments</Text>
+                    <Text style={tw`text-center font-medium text-pink-500`}>{post.item.comments.length} comments</Text>
                     <FlatList
-                        data={data}
+                        data={post.item.comments}
                         renderItem={(item) => (<CommentItem item={item} />)}
-                        keyExtractor={(item) => item.id}
+                        keyExtractor={(item, i) => i}
                     />
                 </View>
             </RBSheet>
@@ -234,7 +218,7 @@ const Post = ({ post, token, userId }) => {
                 content={post.item.content}
             />
 
-        </View>
+        </View >
     )
 }
 

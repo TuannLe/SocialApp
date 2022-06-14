@@ -2,9 +2,11 @@ import { View, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import tw from 'twrnc';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux'
 
 const PostItem = ({ item, handleVisible, setIdPostSelected }) => {
     const navigation = useNavigation()
+    const currentUser = useSelector((state) => state.auth.currentUser)
 
     return (
         <View style={tw`flex-1 h-40 `}>
@@ -17,8 +19,11 @@ const PostItem = ({ item, handleVisible, setIdPostSelected }) => {
                 onPress={() => navigation.navigate('DetailPostStack', {
                     image: item.item.images,
                     content: item.item.content,
-                    postId: item.item.postId,
-                    author: item.item.author
+                    postId: item.item._id,
+                    comments: post.item.comments,
+                    createdAt: item.item.createdAt,
+                    author: currentUser,
+                    totalHeart: item.item.likes.length
                 })}
             >
                 <Image

@@ -114,12 +114,33 @@ function* likePostSaga(action) {
     }
 }
 
+// Comment post
+function* commentPostSaga(action) {
+    try {
+        console.log('Comment post running...')
+        const res = yield call(api.commentPost, {
+            token: action.payload.token,
+            postId: action.payload.postId,
+            userId: action.payload.userId,
+            comment: action.payload.comment
+        })
+        if (res.status == 200) {
+            console.log('Comment post successfully')
+            yield put(actions.commentPostSuccess())
+            yield put(actions.getPostsStart({ userId: action.payload.userId, token: action.payload.token }))
+        }
+    } catch (error) {
+        yield put(actions.commentPostFailure(error))
+    }
+}
+
 export default postSaga = [
     takeLatest(TYPES.GET_POSTS_START, fetchPostSaga),
     takeLatest(TYPES.GET_POSTS_USER_ID_START, getPostsByUserIdSaga),
     takeLatest(TYPES.CREATE_POST_START, createPostSaga),
     takeLatest(TYPES.UPDATE_POST_START, editPostSaga),
     takeLatest(TYPES.DELETE_POST_START, deletePostSaga),
-    takeLatest(TYPES.LIKE_POST_START, likePostSaga)
+    takeLatest(TYPES.LIKE_POST_START, likePostSaga),
+    takeLatest(TYPES.COMMENT_POST_START, commentPostSaga),
 ]
 

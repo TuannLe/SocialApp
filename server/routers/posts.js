@@ -1,5 +1,5 @@
 import express from 'express';
-import { getPosts, createPost, updatePost, deletePost, likePost, getPostsByUserId } from '../controllers/postsController.js'
+import { getPosts, createPost, updatePost, deletePost, likePost, getPostsByUserId, commentPost } from '../controllers/postsController.js'
 import { middlewareController } from '../controllers/middlewareController.js'
 const router = express.Router();
 
@@ -18,6 +18,7 @@ router.post('/', middlewareController.verifyToken, getPosts)
 router.post('/getPostsByUserId', middlewareController.verifyToken, getPostsByUserId)
 router.post('/create', upload.array("images"), middlewareController.verifyToken, createPost)
 router.post('/update', upload.array("images"), middlewareController.verifyToken, updatePost)
+router.post('/comment', middlewareController.verifyToken, commentPost)
 router.delete('/:id', middlewareController.verifyToken, deletePost)
 router.put('/:id/like', middlewareController.verifyToken, likePost)
 

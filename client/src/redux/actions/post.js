@@ -153,3 +153,25 @@ export const likePostError = (error) => {
         error
     }
 }
+
+// Comment post
+export const commentPostStart = (payload) => {
+    return {
+        type: TYPES.COMMENT_POST_START,
+        payload
+    }
+}
+
+export const commentPostSuccess = (payload) => {
+    return {
+        type: TYPES.COMMENT_POST_SUCCESS,
+        payload
+    }
+}
+
+export const commentPostFailure = (error) => {
+    return {
+        type: TYPES.COMMENT_POST_FAILURE,
+        error
+    }
+}
