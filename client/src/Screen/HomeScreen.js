@@ -81,23 +81,30 @@ const Home = () => {
                         <AntDesign name="message1" size={22} color="black" />
                     </TouchableOpacity>
                 </View>
-                <Animated.FlatList
-                    data={data}
-                    renderItem={(post) => {
-                        return <Post post={post} token={token} userId={userId} />
-                    }}
-                    keyExtractor={post => post._id}
-                    showsHorizontalScrollIndicator={false}
-                    showsVerticalScrollIndicator={false}
-                    onScroll={Animated.event(
-                        [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-                        { useNativeDriver: true }
-                    )}
-                    onMomentumScrollBegin={onMomentumScrollBegin}
-                    onMomentumScrollEnd={onMomentumScrollEnd}
-                    onScrollEndDrag={onScrollEndDrag}
-                    scrollEventThrottle={1}
-                />
+                {data.length ? (
+                    <Animated.FlatList
+                        data={data}
+                        renderItem={(post) => {
+                            return <Post post={post} token={token} userId={userId} />
+                        }}
+                        keyExtractor={post => post._id}
+                        showsHorizontalScrollIndicator={false}
+                        showsVerticalScrollIndicator={false}
+                        onScroll={Animated.event(
+                            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                            { useNativeDriver: true }
+                        )}
+                        onMomentumScrollBegin={onMomentumScrollBegin}
+                        onMomentumScrollEnd={onMomentumScrollEnd}
+                        onScrollEndDrag={onScrollEndDrag}
+                        scrollEventThrottle={1}
+                    />
+                ) : (
+                    <View style={tw`flex justify-center h-full`}>
+                        <Text style={tw`text-base font-medium text-center`}>Share your first post</Text>
+                        <Text style={tw`text-gray-400 text-center`}>Upload a image with captions, sounds and more. Your posts will appear on your profile</Text>
+                    </View>
+                )}
             </View>
         </SafeAreaView>
     )
