@@ -33,7 +33,7 @@ const UploadImageScreen = ({ navigation, route }) => {
         formData.append('status', isEnabled)
 
         dispatch(actions.createPostStart({ formData, token, UserId }))
-        // navigation.navigate('HomeStack')
+        navigation.navigate('HomeStack')
     }
 
     return (

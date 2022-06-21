@@ -86,7 +86,10 @@ const SelectImageScreen = () => {
                     {
                         image ? (
                             <TouchableOpacity
-                                onPress={() => navigation.navigate('UploadImageStack', { image: image })}
+                                onPress={() => {
+                                    navigation.navigate('UploadImageStack', { image: image })
+                                    setImage('')
+                                }}
                                 style={tw`absolute right-3 top-0 flex flex-row items-center p-2`}
                                 activeOpacity={.8}
                             >

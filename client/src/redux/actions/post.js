@@ -175,3 +175,22 @@ export const commentPostFailure = (error) => {
         error
     }
 }
+
+// Delete comment
+export const deleteCommentStart = (payload) => {
+    return {
+
+    }
+}
+
+export const deleteCommentSuccess = (payload) => {
+    return {
+
+    }
+}
+
+export const deleteCommentFailure = (error) => {
+    return {
+
+    }
+}
