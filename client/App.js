@@ -4,12 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import StackNavigator from './src/navigator/StackNavigator'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
-import createSageMiddleware from 'redux-saga'
+import createSagaMiddleware from 'redux-saga'
 import reducers from './src/redux/reducers'
 import mySaga from './src/redux/sagas'
 
 
-const sagaMiddleware = createSageMiddleware()
+const sagaMiddleware = createSagaMiddleware()
 const store = createStore(reducers, applyMiddleware(sagaMiddleware))
 sagaMiddleware.run(mySaga)
 

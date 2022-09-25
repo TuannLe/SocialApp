@@ -6,27 +6,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as actions from '../redux/actions/user'
 import SearchItem from '../Components/Search/SearchItem'
 
-// const data = [
-//     {
-//         id: '1',
-//         image: 'https://indotech.vn/hinh-anh-cua-rose-black-pink/imager_2_12521_700.jpg',
-//         name: 'Rose',
-//         email: 'Rose@gmail.com'
-//     },
-//     {
-//         id: '2',
-//         image: 'https://nguoinoitieng.tv/images/nnt/96/0/bbnh.jpg',
-//         name: 'Cara',
-//         email: 'Cara@gmail.com'
-//     },
-//     {
-//         id: '3',
-//         image: 'https://1.bp.blogspot.com/-xoe-yLLhMsA/X3XmnozvxCI/AAAAAAAAPWE/Px6lNykKtiswyxWfgH_qgmqojUN__F4DwCLcBGAsYHQ/s1600/5a129327b91c191dcd7e2eed9c6b7d1d.jpg',
-//         name: 'IU',
-//         email: 'IU@gmail.com'
-//     }
-// ]
-
 const SearchScreen = () => {
     const dispatch = useDispatch()
     const token = useSelector((state) => state.auth.currentUser.accessToken)
